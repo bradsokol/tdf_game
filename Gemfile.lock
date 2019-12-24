@@ -56,13 +56,19 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2)
+    babel-source (5.8.35)
+    babel-transpiler (0.7.0)
+      babel-source (>= 4.0, < 6)
+      execjs (~> 2.0)
     bootsnap (1.4.5)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.0.1)
     concurrent-ruby (1.1.5)
+    connection_pool (2.2.2)
     crass (1.0.5)
     erubi (1.9.0)
+    execjs (2.7.0)
     ffi (1.11.3)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
@@ -92,6 +98,8 @@ GEM
     puma (4.3.1)
       nio4r (~> 2.0)
     rack (2.0.8)
+    rack-proxy (0.6.5)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.0.2.1)
@@ -124,6 +132,12 @@ GEM
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    react-rails (2.6.0)
+      babel-transpiler (>= 0.7.0)
+      connection_pool
+      execjs
+      railties (>= 3.2)
+      tilt
     ruby_dep (1.5.0)
     spring (2.1.0)
     spring-watcher-listen (2.0.1)
@@ -138,8 +152,13 @@ GEM
       sprockets (>= 3.0.0)
     thor (1.0.1)
     thread_safe (0.3.6)
+    tilt (2.0.10)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
+    webpacker (4.2.2)
+      activesupport (>= 4.2)
+      rack-proxy (>= 0.6.1)
+      railties (>= 4.2)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -155,9 +174,11 @@ DEPENDENCIES
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.2, >= 6.0.2.1)
+  react-rails
   spring
   spring-watcher-listen (~> 2.0.0)
   tzinfo-data
+  webpacker
 
 RUBY VERSION
    ruby 2.6.5p114
