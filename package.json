@@ -2,6 +2,8 @@
   "dependencies": {
     "@babel/preset-react": "^7.7.4",
     "@rails/webpacker": "4.2.2",
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-polyfill": "^6.26.0",
     "prop-types": "^15.7.2",
@@ -14,7 +16,9 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^0.88.2"
+    "semantic-ui-react": "^0.88.2",
+    "ts-loader": "^6.2.1",
+    "typescript": "^3.7.4"
   },
   "devDependencies": {
     "webpack-dev-server": "^3.10.1"

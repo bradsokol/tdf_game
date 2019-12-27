@@ -1,6 +1,11 @@
+interface Thing {
+  name: string,
+  guid: string
+};
+
 const initialState = [];
 
-export function thingsReducer(state = initialState, action) {
+export function thingsReducer(state = initialState, action): Thing[] {
   console.log("thingsReducer type:", action.type);
   switch (action.type) {
     case "GET_THINGS_SUCCESS":
