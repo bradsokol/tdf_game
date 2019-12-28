@@ -10,10 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_27_204649) do
+ActiveRecord::Schema.define(version: 2019_12_27_222042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "stages", force: :cascade do |t|
+    t.bigint "tour_id"
+    t.integer "number"
+    t.date "date"
+    t.string "start_town"
+    t.string "start_country", default: "France"
+    t.string "finish_town"
+    t.string "finish_country", default: "France"
+    t.integer "distance"
+    t.integer "stage_type"
+    t.boolean "game_stage"
+    t.datetime "results_downloaded_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tour_id"], name: "index_stages_on_tour_id"
+  end
 
   create_table "tours", force: :cascade do |t|
     t.integer "year"
