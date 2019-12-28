@@ -6,5 +6,6 @@ module Types
     field :year, Integer, null: false
     field :start_date, GraphQL::Types::ISO8601Date, null: false
     field :finish_date, GraphQL::Types::ISO8601Date, null: false
+    field :stages, [Types::StageType], null: false
   end
 end
