@@ -2,7 +2,7 @@
 
 module Types
   class StageTypeEnum < Types::BaseEnum
-    value 'FLAT', value: 'flag'
+    value 'FLAT', value: 'flat'
     value 'ITT', value: 'itt'
     value 'MOUNTAIN', value: 'mountain'
     value 'PROLOG', value: 'prolog'

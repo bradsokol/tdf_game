@@ -1,5 +1,23 @@
 tdf_2019_1:
   tour: tdf_2019
+  number: 1
+  date: '2019-07-06'
+  start_town: 'Bruxelles'
+  start_country: 'Belgium'
+  finish_town: 'Brussel'
+  finish_country: 'Belgium'
+  distance: 195
+  stage_type: 'flat'
+  game_stage: false
 
 tdf_2019_2:
   tour: tdf_2019
+  number: 2
+  date: '2019-07-07'
+  start_town: 'Bruxelles Palais Royal'
+  start_country: 'Belgium'
+  finish_town: 'Brussel Atomium'
+  finish_country: 'Belgium'
+  distance: 28
+  stage_type: 'ttt'
+  game_stage: false

@@ -10,7 +10,7 @@ module Types
     field :finish_town, String, null: false
     field :finish_country, String, null: false
     field :distance, Integer, null: false
-    field :stage_type, StageTypeEnum, null: false
+    field :stage_type, Types::StageTypeEnum, null: false
     field :game_stage, Boolean, null: false
   end
 end
