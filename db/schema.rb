@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 2019_12_27_222042) do
     t.string "finish_town"
     t.string "finish_country", default: "France"
     t.integer "distance"
-    t.integer "stage_type"
+    t.string "stage_type"
     t.boolean "game_stage"
     t.datetime "results_downloaded_at"
     t.datetime "created_at", precision: 6, null: false

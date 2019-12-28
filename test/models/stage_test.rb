@@ -81,6 +81,12 @@ class StageTest < ActiveSupport::TestCase
     refute_predicate stage, :valid?
   end
 
+  test '#game_stage can be false' do
+    stage = Stage.new(stage_input(game_stage: false))
+
+    assert_predicate stage, :valid?
+  end
+
   private
 
   def stage_input(inputs = {})

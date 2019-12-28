@@ -22,5 +22,5 @@ class Stage < ApplicationRecord
   validates :finish_town, presence: true
   validates :distance, presence: true, numericality: { only_integer: true }
   validates :stage_type, presence: true
-  validates :game_stage, presence: true
+  validates :game_stage, inclusion: { in: [true, false] }
 end
