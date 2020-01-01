@@ -23,19 +23,6 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Brad Sokol
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 const drawerWidth = 240;
 
 class Dashboard extends React.Component {
@@ -127,9 +114,6 @@ class Dashboard extends React.Component {
                     </Paper>
                   </Grid>
                 </Grid>
-                <Box pt={4}>
-                  <Copyright />
-                </Box>
               </Container>
             </main>
           </div>
