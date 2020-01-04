@@ -13,6 +13,20 @@ class TourQueryTest < ActionDispatch::IntegrationTest
     assert_equal 0, data['tours'][1]['stages'].length
   end
 
+  test 'query tours with game players' do
+    post('/graphql', params: { query: tours_query })
+
+    data = parse_graphql_response(response.body)
+
+    game_players = data['tours'][0]['gamePlayers']
+    assert_equal 2, game_players.length
+    assert_equal ['Jim Hopper', 'Will Byers'], game_players.map { |player| player['name'] }.sort
+
+    game_players = data['tours'][1]['gamePlayers']
+    assert_equal 1, game_players.length
+    assert_equal ['Jim Hopper'], game_players.map { |player| player['name'] }.sort
+  end
+
   private
 
   def parse_graphql_response(original_response)
@@ -27,6 +41,9 @@ class TourQueryTest < ActionDispatch::IntegrationTest
           year
           startDate
           finishDate
+          gamePlayers {
+            name
+          }
           stages {
             id
             number

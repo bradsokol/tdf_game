@@ -5,3 +5,7 @@ jim_hopper_2019:
 will_byers_2019:
   year: 2019
   player: will_byers
+
+jim_hopper_2020:
+  year: 2020
+  player: jim_hopper
