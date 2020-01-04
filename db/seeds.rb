@@ -197,3 +197,22 @@ tour_2019.stages.create!(
   stage_type: 'flat',
   game_stage: true,
 )
+
+Player.create!(name: 'Brad Sokol')
+Player.create!(name: 'Roger Partington')
+Player.create!(name: 'Brian Power')
+Player.create!(name: 'Bob LaBuik')
+Player.create!(name: 'Bill Mackenzie')
+Player.create!(name: 'Keven Fitzpatrick')
+Player.create!(name: 'Gord Coutts')
+Player.create!(name: 'Peter Zoras')
+Player.create!(name: 'Eli Lee')
+Player.create!(name: 'Ross Woolford')
+Player.create!(name: 'Malcolm Owen')
+Player.create!(name: 'G. Graveldog')
+Player.create!(name: 'Coco Colombiano')
+Player.create!(name: 'Kevin Blick')
+Player.create!(name: 'Shelagh McIvor')
+Player.create!(name: 'Brent Swanick')
+Player.create!(name: 'Marc Tohir')
+Player.all.each { |player| player.registrations.create!(year: 2019) }
