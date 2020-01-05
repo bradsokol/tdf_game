@@ -13,6 +13,25 @@ class TourQueryTest < ActionDispatch::IntegrationTest
     assert_equal 0, data['tours'][1]['stages'].length
   end
 
+  test 'query tour by year' do
+    query = <<~GRAPHQL
+      query {
+        tours(year: 2020) {
+          gamePlayers {
+            name
+          }
+        }
+      }
+    GRAPHQL
+
+    post('/graphql', params: { query: query })
+
+    data = parse_graphql_response(response.body)
+
+    assert_equal 1, data['tours'].length
+    assert_equal 1, data['tours'][0]['gamePlayers'].length
+  end
+
   test 'query tours with game players' do
     post('/graphql', params: { query: tours_query })
 
