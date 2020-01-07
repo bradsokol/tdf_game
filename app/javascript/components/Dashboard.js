@@ -1,10 +1,10 @@
-import Nav from "react-bootstrap/Nav"
 import React from "react"
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../stylesheets/dashboard.css'
 
 import PlayerList from './PlayerList';
+import SideNav from './SideNav';
 
 class Dashboard extends React.Component {
   render () {
@@ -16,17 +16,7 @@ class Dashboard extends React.Component {
 
         <div className="container-fluid">
           <div className="row">
-            <Nav activekey="Overall" className="flex-column col-md-2 d-done d-md-block bg-light sidebar">
-              <Nav.Item>
-                <Nav.Link eventKey="Overall">Overall</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="Stages">Stages</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="Teams">Teams</Nav.Link>
-              </Nav.Item>
-            </Nav>
+            <SideNav/>
           </div>
         </div>
 
