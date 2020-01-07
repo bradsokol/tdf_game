@@ -1,26 +1,31 @@
-import React from "react"
-import PropTypes from "prop-types"
-
+import { ApolloClient } from 'apollo-client';
+import { ApolloProvider } from 'react-apollo';
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { HttpLink } from 'apollo-link-http';
+import { InMemoryCache } from 'apollo-cache-inmemory';
+import React from "react"
 
-import { Provider } from 'react-redux'
+import Dashboard from './Dashboard';
 
-import HelloWorld from './HelloWorld'
-
-import configureStore from '../configureStore'
-const store = configureStore();
+const httpLink = new HttpLink({
+  uri: 'http://localhost:3000/graphql',
+});
+const cache = new InMemoryCache();
+const client = new ApolloClient({
+  link: httpLink,
+  cache,
+});
 
 class App extends React.Component {
   render () {
     return (
-      <Provider store={store}>
-        <BrowserRouter>
+      <BrowserRouter>
+        <ApolloProvider client={client}>
           <Switch>
-            <Route exact path="/" render={() => ("Home!")} />
-            <Route path="/hello" render={() => <HelloWorld greeting="Friend"/>} />
+            <Route exact path="/" render={() => <Dashboard/>} />
           </Switch>
-        </BrowserRouter>
-      </Provider>
+        </ApolloProvider>
+      </BrowserRouter>
     );
   }
 }
