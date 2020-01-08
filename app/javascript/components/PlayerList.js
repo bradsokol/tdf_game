@@ -31,23 +31,25 @@ class PlayerList extends React.Component {
             const { tours } = data;
             const players = tours[0].gamePlayers;
             return (
-              <div className="table-responsive">
-                <Table striped className="table table-striped table-sm">
-                  <thead>
-                    <tr><td/><td>Player</td></tr>
-                  </thead>
-                  <tbody>
-                    {players.map((player, index) => {
-                      return (
-                        <tr key={index}>
-                          <td className="text-right">{index + 1}</td>
-                          <td>{player.name}</td>
-                        </tr>
-                      )
-                    })}
-                  </tbody>
-                </Table>
-              </div>
+              <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div className="table-responsive">
+                  <Table striped className="table table-striped table-sm">
+                    <thead>
+                      <tr><td/><td>Player</td></tr>
+                    </thead>
+                    <tbody>
+                      {players.map((player, index) => {
+                        return (
+                          <tr key={index}>
+                            <td className="text-right">{index + 1}</td>
+                            <td>{player.name}</td>
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </Table>
+                </div>
+              </main>
             );
           }}
         </Query>
