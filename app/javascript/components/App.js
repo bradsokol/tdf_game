@@ -5,7 +5,9 @@ import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import React from "react"
 
-import Dashboard from './Dashboard';
+import Overall from './Overall';
+import Stages from './Stages';
+import Teams from './Teams';
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:3000/graphql',
@@ -22,7 +24,10 @@ class App extends React.Component {
       <BrowserRouter>
         <ApolloProvider client={client}>
           <Switch>
-            <Route exact path="/" render={() => <Dashboard/>} />
+            <Route exact path="/" render={() => <Overall/>} />
+            <Route path="/overall" render={() => <Overall/>} />
+            <Route path="/stages" render={() => <Stages/>} />
+            <Route path="/players" render={() => <Teams/>} />
           </Switch>
         </ApolloProvider>
       </BrowserRouter>

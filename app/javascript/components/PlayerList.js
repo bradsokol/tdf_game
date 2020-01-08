@@ -32,6 +32,7 @@ class PlayerList extends React.Component {
             const players = tours[0].gamePlayers;
             return (
               <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <h2>Overall Results</h2>
                 <div className="table-responsive">
                   <Table striped className="table table-striped table-sm">
                     <thead>
