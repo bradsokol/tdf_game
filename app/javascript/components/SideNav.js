@@ -10,13 +10,13 @@ class SideNav extends React.Component {
           <div className="row">
             <Nav activekey="Overall" className="flex-column col-md-2 d-done d-md-block bg-light sidebar">
               <Nav.Item>
-                <Nav.Link eventKey="Overall"><Link to='/overall'>Overall</Link></Nav.Link>
+                <Link className="nav-link" to='/overall'>Overall</Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="Stages"><Link to='/stages'>Stages</Link></Nav.Link>
+                <Link className="nav-link" to='/stages'>Stages</Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="Teams"><Link to='/players'>Teams</Link></Nav.Link>
+                <Link className="nav-link" to='/players'>Teams</Link>
               </Nav.Item>
             </Nav>
           </div>
