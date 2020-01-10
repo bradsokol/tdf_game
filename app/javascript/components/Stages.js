@@ -5,6 +5,8 @@ import { ApolloProvider } from 'react-apollo';
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 
+import StageSelector from './StageSelector'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../stylesheets/dashboard.css'
 
@@ -19,6 +21,7 @@ class Dashboard extends React.Component {
         <SideNav/>
         <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
           <h2>Stage Results</h2>
+          <StageSelector/>
         </main>
       </React.Fragment>
     );
