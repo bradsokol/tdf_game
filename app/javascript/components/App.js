@@ -10,7 +10,7 @@ import Stages from './Stages';
 import Teams from './Teams';
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://localhost:5000/graphql',
 });
 const cache = new InMemoryCache();
 const client = new ApolloClient({
