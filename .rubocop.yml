@@ -3,6 +3,8 @@ AllCops:
     - 'bin/**/*'
     - 'db/**/*'
     - 'node_modules/**/*'
+    - 'public/**/*'
+    - 'tmp/**/*'
 
 Layout/LineLength:
   Max: 120
