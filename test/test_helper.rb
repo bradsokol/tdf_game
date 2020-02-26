@@ -13,6 +13,11 @@ module ActiveSupport
     # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
     fixtures :all
 
-    # Add more helper methods to be used by all tests here...
+    private
+
+    def html_fixture(name)
+      file_path = Rails.root.join('test', 'fixtures', 'html', "#{name}.html")
+      File.read(file_path)
+    end
   end
 end
