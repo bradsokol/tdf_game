@@ -22,14 +22,18 @@ gem 'webpacker'
 
 group :development, :test do
   gem 'pry-byebug'
-  gem 'rubocop'
-  gem 'rubocop-rails'
 end
 
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.3'
+  gem 'rubocop'
+  gem 'rubocop-rails'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :test do
+  gem 'webmock'
 end
 
 gem 'graphiql-rails', group: :development
