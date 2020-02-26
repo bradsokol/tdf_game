@@ -64,6 +64,9 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.1)
+    clockwork (2.0.4)
+      activesupport
+      tzinfo
     coderay (1.1.2)
     concurrent-ruby (1.1.6)
     connection_pool (2.2.2)
@@ -186,6 +189,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.4.2)
+  clockwork
   graphiql-rails
   graphql
   listen (>= 3.0.5, < 3.3)
