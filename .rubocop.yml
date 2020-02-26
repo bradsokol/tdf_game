@@ -1,11 +1,29 @@
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'node_modules/**/*'
+
 Layout/LineLength:
   Max: 120
+
+Metrics/MethodLength:
+  Enabled: false
 
 Style/Documentation:
   Enabled: false
 
 Style/EmptyMethod:
   Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
+Style/HashEachMethods:
+  Enabled: true
 
 Style/TrailingCommaInArguments:
   Enabled: false

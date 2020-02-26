@@ -22,6 +22,8 @@ gem 'webpacker'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'rubocop'
+  gem 'rubocop-rails'
 end
 
 group :development do

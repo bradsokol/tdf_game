@@ -21,11 +21,7 @@ class GraphqlController < ApplicationController
   def ensure_hash(ambiguous_param)
     case ambiguous_param
     when String
-      if ambiguous_param.present?
-        ensure_hash(JSON.parse(ambiguous_param))
-      else
-        {}
-      end
+      string_params_to_hash(ambiguous_params)
     when Hash, ActionController::Parameters
       ambiguous_param
     when nil
@@ -40,5 +36,13 @@ class GraphqlController < ApplicationController
     logger.error exception.backtrace.join("\n")
 
     render json: { error: { message: exception.message, backtrace: exception.backtrace }, data: {} }, status: 500
+  end
+
+  def string_params_to_hash(ambiguous_param)
+    if ambiguous_param.present?
+      ensure_hash(JSON.parse(ambiguous_param))
+    else
+      {}
+    end
   end
 end

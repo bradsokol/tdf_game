@@ -14,9 +14,9 @@ class Stage < ApplicationRecord
   }
 
   validates :number,
-    inclusion: 1..21,
-    numericality: { only_integer: true, allow_nil: true },
-    uniqueness: { scope: :tour }
+            inclusion: 1..21,
+            numericality: { only_integer: true, allow_nil: true },
+            uniqueness: { scope: :tour }
   validates :date, presence: true
   validates :start_town, presence: true
   validates :finish_town, presence: true
