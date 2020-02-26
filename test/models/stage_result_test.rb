@@ -53,12 +53,18 @@ class StageResultTest < ActiveSupport::TestCase
     assert_predicate stage_result, :valid?
   end
 
+  test 'must be unique per player and stage' do
+    stage_result = StageResult.new(stage_result_input(stage: stages(:tdf_2019_1)))
+
+    refute_predicate stage_result, :valid?
+  end
+
   private
 
   def stage_result_input(inputs = {})
     {
       player: players(:jim_hopper),
-      stage: stages(:tdf_2019_1),
+      stage: stages(:tdf_2019_2),
       overall_rank: 23,
       points: 12,
     }.merge(inputs)
