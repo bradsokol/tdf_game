@@ -54,7 +54,7 @@ class StageResultTest < ActiveSupport::TestCase
   end
 
   test 'must be unique per player and stage' do
-    stage_result = StageResult.new(stage_result_input(stage: stages(:tdf_2019_1)))
+    stage_result = StageResult.new(stage_result_input(stage: stages(:tdf_2019_3)))
 
     refute_predicate stage_result, :valid?
   end
