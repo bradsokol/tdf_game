@@ -25,4 +25,7 @@ class Stage < ApplicationRecord
   validates :distance, presence: true, numericality: { only_integer: true }
   validates :stage_type, presence: true
   validates :game_stage, inclusion: { in: [true, false] }
+
+  scope :game_stages, -> { where(game_stage: true) }
+  scope :need_results, -> { where(game_stage: true, results_downloaded_at: nil) }
 end

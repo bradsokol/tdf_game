@@ -21,3 +21,35 @@ tdf_2019_2:
   distance: 28
   stage_type: 'ttt'
   game_stage: false
+
+tdf_2019_3:
+  tour: tdf_2019
+  number: 3
+  date: '2019-07-08'
+  start_town: 'Binche'
+  start_country: 'Belgium'
+  finish_town: 'Épernay'
+  distance: 215
+  stage_type: 'rolling'
+  game_stage: true
+  results_downloaded_at: '2020-02-26'
+
+tdf_2019_4:
+  tour: tdf_2019
+  number: 4
+  date: '2019-07-09'
+  start_town: 'Reims'
+  finish_town: 'Nancy'
+  distance: 214
+  stage_type: 'flat'
+  game_stage: true
+
+tdf_2019_5:
+  tour: tdf_2019
+  number: 5
+  date: '2019-07-10'
+  start_town: 'Saint-Dié-des-Vosges'
+  finish_town: 'Colmar'
+  distance: 176
+  stage_type: 'rolling'
+  game_stage: true

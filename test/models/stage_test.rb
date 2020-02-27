@@ -87,19 +87,25 @@ class StageTest < ActiveSupport::TestCase
     assert_predicate stage, :valid?
   end
 
+  test 'game_stages returns only game stages' do
+    assert_equal 3, Stage.game_stages.count
+  end
+
+  test 'need_results returns stages that need results' do
+    assert_equal 2, Stage.need_results.count
+  end
+
   private
 
   def stage_input(inputs = {})
     {
       tour: tours(:tdf_2019),
-      number: 3,
-      date: '2019-07-08',
-      start_town: 'Binche',
-      start_country: 'Belgium',
-      finish_town: 'Épernay',
-      finish_country: 'France',
-      distance: 215,
-      stage_type: :rolling,
+      number: 6,
+      date: '2019-07-11',
+      start_town: 'Mulhouse',
+      finish_town: 'La Planche des Belles Filles',
+      distance: 161,
+      stage_type: 'mountain',
       game_stage: true,
       results_downloaded_at: nil,
     }.merge(inputs)
