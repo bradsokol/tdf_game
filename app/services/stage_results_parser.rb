@@ -2,10 +2,12 @@
 
 class StageResultsParser
   class << self
-    def perform(html:)
+    def perform(html:, stage_result:)
       data = html.xpath('//pre').text.split("\n")[2]
-      stage_rank, stage_points = /^ *([\d]+)\. *([\d]+) /.match(data).to_a[1..-1].map(&:to_i)
-      StageResult.new(overall_rank: stage_rank, points: stage_points)
+      rank, points = /^ *([\d]+)\. *([\d]+) /.match(data).to_a[1..-1].map(&:to_i)
+      stage_result.overall_rank = rank
+      stage_result.points = points
+      stage_result
     end
   end
 end

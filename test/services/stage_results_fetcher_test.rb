@@ -4,13 +4,16 @@ require 'test_helper'
 
 class StageResultsFetcherTest < ActiveSupport::TestCase
   setup do
+    @stage_result = StageResult.new
     stub_stage_results
   end
 
   test 'perform returns stage results' do
-    results = StageResultsFetcher.perform(stage_date: date, player_name: 'Eddie Merckx')
+    results = StageResultsFetcher.perform(stage_date: date, player_name: 'Eddie Merckx', stage_result: @stage_result)
 
     assert_instance_of(StageResult, results)
+    assert_not_nil results.overall_rank
+    assert_not_nil results.points
   end
 
   private

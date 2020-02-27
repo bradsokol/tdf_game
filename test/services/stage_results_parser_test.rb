@@ -4,14 +4,15 @@ require 'test_helper'
 
 class StageResultsParserTest < ActiveSupport::TestCase
   setup do
+    @stage_result = StageResult.new
     stub_stage_results
   end
 
   test 'perform parses points and rank' do
-    result = StageResultsParser.perform(html: Nokogiri::HTML(html_fixture('stage_results')))
+    StageResultsParser.perform(html: Nokogiri::HTML(html_fixture('stage_results')), stage_result: @stage_result)
 
-    assert_equal 38, result.overall_rank
-    assert_equal 53, result.points
+    assert_equal 38, @stage_result.overall_rank
+    assert_equal 53, @stage_result.points
   end
 
   private
