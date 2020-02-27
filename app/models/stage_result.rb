@@ -16,7 +16,7 @@ class StageResult < ApplicationRecord
 
   def one_result_per_stage_and_player
     return unless player && stage
-    return unless StageResult.exists?(player_id: player.id, stage_id: stage.id)
+    return unless StageResult.default_scoped.exists?(player_id: player.id, stage_id: stage.id)
 
     errors.add(:base, 'One stage result per player and stage')
   end
