@@ -9,7 +9,7 @@ class TourQueryTest < ActionDispatch::IntegrationTest
     data = parse_graphql_response(response.body)
 
     assert_equal 2, data['tours'].length
-    assert_equal 2, data['tours'][0]['stages'].length
+    assert_equal 5, data['tours'][0]['stages'].length
     assert_equal 0, data['tours'][1]['stages'].length
   end
 
