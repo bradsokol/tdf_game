@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_26_161123) do
+ActiveRecord::Schema.define(version: 2020_02_29_155203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "overall_results", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "tour_id"
+    t.integer "overall_rank"
+    t.integer "previous_rank"
+    t.integer "points"
+    t.integer "gap"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_overall_results_on_player_id"
+    t.index ["tour_id"], name: "index_overall_results_on_tour_id"
+  end
 
   create_table "players", force: :cascade do |t|
     t.string "name"
