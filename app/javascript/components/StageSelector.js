@@ -8,6 +8,8 @@ import { Query } from 'react-apollo';
 import React from "react"
 import Row from 'react-bootstrap/Row'
 
+import StageResults from './StageResults'
+
 const GET_STAGES = gql`
   {
     tours(year: 2019) {
@@ -72,9 +74,8 @@ class StageSelector extends React.Component {
 
             const { tours } = data;
             this.state.stages = tours[0].stages;
-            // this.setState(() => ({ stages: tours[0].stages }));
 
-            console.log("Rendering " + this.state.stageIndex)
+            const stage = this.state.stages[this.state.stageIndex];
             return(
               <Container>
                 <Row>
@@ -88,8 +89,11 @@ class StageSelector extends React.Component {
                     </DropdownButton>
                   </Col>
                   <Col>
-                    <StageDescription stage={this.state.stages[this.state.stageIndex]}/>
+                    <StageDescription stage={stage}/>
                   </Col>
+                </Row>
+                <Row>
+                  <StageResults stage={stage}/>
                 </Row>
               </Container>
             );
