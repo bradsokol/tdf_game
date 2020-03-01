@@ -17,8 +17,15 @@ class StageResultsFetchJob < ApplicationJob
   private
 
   def update_stage_result(player, stage)
+    overall_result = OverallResult.find_or_create_by(player_id: player.id, tour_id: stage.tour.id)
     stage_result = StageResult.find_or_create_by(player_id: player.id, stage_id: stage.id)
-    StageResultsFetcher.perform(stage_date: stage.date, player_name: player.name, stage_result: stage_result)
+    StageResultsFetcher.perform(
+      stage_date: stage.date,
+      player_name: player.name,
+      overall_result: overall_result,
+      stage_result: stage_result
+    )
+    overall_result.save!
     stage_result.save!
   end
 
