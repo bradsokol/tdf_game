@@ -15,6 +15,7 @@ class StageResult < ApplicationRecord
   private
 
   def one_result_per_stage_and_player
+    return unless new_record?
     return unless player && stage
     return unless StageResult.default_scoped.exists?(player_id: player.id, stage_id: stage.id)
 

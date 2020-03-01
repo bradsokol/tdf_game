@@ -21,6 +21,7 @@ class OverallResult < ApplicationRecord
   private
 
   def one_result_per_tour_and_player
+    return unless new_record?
     return unless player && tour
     return unless OverallResult.default_scoped.exists?(player_id: player.id, tour_id: tour.id)
 

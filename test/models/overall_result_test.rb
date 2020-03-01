@@ -81,6 +81,12 @@ class OverallResultTest < ActiveSupport::TestCase
     refute_predicate overall_result, :valid?
   end
 
+  test 'player tour uniqueness does not apply to persisted records' do
+    overall_result = overall_results(:tdf_2019_jim_hopper)
+
+    assert_predicate overall_result, :valid?
+  end
+
   private
 
   def overall_result_input(inputs = {})

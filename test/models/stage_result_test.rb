@@ -59,6 +59,12 @@ class StageResultTest < ActiveSupport::TestCase
     refute_predicate stage_result, :valid?
   end
 
+  test 'stage player uniqueness does not apply to persisted records' do
+    stage_result = stage_results(:tdf_2019_3_jim_hopper)
+
+    assert_predicate stage_result, :valid?
+  end
+
   private
 
   def stage_result_input(inputs = {})
