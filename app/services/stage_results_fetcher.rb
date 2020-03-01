@@ -8,6 +8,7 @@ class StageResultsFetcher
       query_date = stage_date.strftime('%Y%m%d')
       url = "https://ifarm.nl/cgi-bin/getlines.cgi?DATE=#{query_date}&SEARCH=#{CGI.escape(player_name)}"
       html = Nokogiri::HTML(URI.parse(url).open)
+      overall_result.date = stage_date
 
       PlayerResults.new(
         OverallResultsParser.perform(html: html, overall_result: overall_result),

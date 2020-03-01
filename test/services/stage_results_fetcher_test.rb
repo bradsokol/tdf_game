@@ -24,10 +24,24 @@ class StageResultsFetcherTest < ActiveSupport::TestCase
     assert_not_nil results.points
   end
 
+  test 'perform returns overall results' do
+    results = StageResultsFetcher
+              .perform(
+                stage_date: date,
+                player_name: 'Eddie Merckx',
+                overall_result: @overall_result,
+                stage_result: @stage_result
+              )
+              .overall_result
+
+    assert_instance_of(OverallResult, results)
+    assert_equal date, results.date
+  end
+
   private
 
   def date
-    @date ||= Time.new(2020, 2, 26)
+    @date ||= Date.new(2020, 2, 26)
   end
 
   def stub_stage_results
