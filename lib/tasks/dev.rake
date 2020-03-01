@@ -8,6 +8,7 @@ namespace :dev do
     tour = Tour.find_by!(year: ENV['YEAR'])
     tour.overall_results.delete_all
     tour.stages.each { |stage| stage.stage_results.delete_all }
+    tour.stages.update_all(results_downloaded_at: nil)
   end
 
   desc 'Force reload of all results'
