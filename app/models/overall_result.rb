@@ -16,6 +16,7 @@ class OverallResult < ApplicationRecord
   validates :gap,
             presence: true,
             numericality: { only_integer: true }
+  validates :date, presence: true
   validate :one_result_per_tour_and_player
 
   private

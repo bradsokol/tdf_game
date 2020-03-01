@@ -75,6 +75,12 @@ class OverallResultTest < ActiveSupport::TestCase
     refute_predicate overall_result, :valid?
   end
 
+  test '#date is required' do
+    overall_result = OverallResult.new(overall_result_input(date: nil))
+
+    refute_predicate overall_result, :valid?
+  end
+
   test 'must be unique per player and tour' do
     overall_result = OverallResult.new(overall_result_input(tour: tours(:tdf_2019)))
 
@@ -97,6 +103,7 @@ class OverallResultTest < ActiveSupport::TestCase
       previous_rank: 23,
       points: 45,
       gap: -56,
+      date: '2019-07-11',
     }.merge(inputs)
   end
 end
