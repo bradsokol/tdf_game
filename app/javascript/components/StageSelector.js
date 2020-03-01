@@ -20,6 +20,7 @@ const GET_STAGES = gql`
         finishTown
         distance
         stageType
+        gameStage
       }
     }
   }
@@ -73,7 +74,7 @@ class StageSelector extends React.Component {
             }
 
             const { tours } = data;
-            this.state.stages = tours[0].stages;
+            this.state.stages = tours[0].stages.filter(stage => stage.gameStage == true);
 
             const stage = this.state.stages[this.state.stageIndex];
             return(
