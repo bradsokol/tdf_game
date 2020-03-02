@@ -25,6 +25,7 @@ group :development, :test do
 end
 
 group :development do
+  gem 'graphiql-rails'
   gem 'listen', '>= 3.0.5', '< 3.3'
   gem 'rubocop'
   gem 'rubocop-rails'
@@ -36,5 +37,3 @@ group :test do
   gem 'mocha'
   gem 'webmock'
 end
-
-gem 'graphiql-rails', group: :development
