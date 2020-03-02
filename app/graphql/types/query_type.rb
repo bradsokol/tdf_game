@@ -2,6 +2,15 @@
 
 module Types
   class QueryType < Types::BaseObject
+    field :overall_results, [Types::OverallResultType], null: false do
+      argument :year, Integer, required: true
+    end
+
+    def overall_results(year:)
+      tour = Tour.find_by(year: year)
+      tour ? tour.overall_results : []
+    end
+
     field :stage_results, [Types::StageResultType], null: false do
       argument :date, GraphQL::Types::ISO8601Date, required: true
     end
