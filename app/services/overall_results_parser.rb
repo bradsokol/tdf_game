@@ -8,10 +8,10 @@ class OverallResultsParser
       line = data[4 + offset]
       if line
         #   29. (37) 265(+75,-47)  Brad Sokol (Canada)
-        regex = /^ *([\d]+)\. ?\(([\d]+)\) *([\d]+) *\(([+-]?[\d]+),([-]?[\d]+)\)/
+        regex = /^ *([\d]+)\. +?\((\-|[\d]+)\) *([\d]+) *\(([+-]?[\d]+),([-]?[\d]+)\)/
         overall_rank, previous_rank, points, _delta, behind, _name = regex.match(line).to_a[1..-1].map(&:to_i)
         overall_result.overall_rank = overall_rank
-        overall_result.previous_rank = previous_rank
+        overall_result.previous_rank = previous_rank == 0 ? nil : previous_rank
         overall_result.points = points
         overall_result.gap = behind
       end

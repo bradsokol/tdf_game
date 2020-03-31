@@ -27,12 +27,6 @@ class OverallResultTest < ActiveSupport::TestCase
     refute_predicate overall_result, :valid?
   end
 
-  test '#previous_rank is required' do
-    overall_result = OverallResult.new(overall_result_input(previous_rank: nil))
-
-    refute_predicate overall_result, :valid?
-  end
-
   test '#previous_rank must be an integer' do
     overall_result = OverallResult.new(overall_result_input(previous_rank: 1.23))
 

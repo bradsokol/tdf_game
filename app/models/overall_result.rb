@@ -8,7 +8,7 @@ class OverallResult < ApplicationRecord
             presence: true,
             numericality: { only_integer: true, greater_than: 0 }
   validates :previous_rank,
-            presence: true,
+            allow_nil: true,
             numericality: { only_integer: true, greater_than: 0 }
   validates :points,
             presence: true,

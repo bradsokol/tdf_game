@@ -39,7 +39,7 @@ class StageResultsFetchJob < ApplicationJob
     end
     true
   rescue StandardError => e
-    Rails.logger.error("Failed to update stage result: #{e.message}")
+    Rails.logger.error("Failed to update stage result: #{e.message}\n#{e.backtrace.join("\n")}")
     false
   end
 end

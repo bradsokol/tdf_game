@@ -43,8 +43,8 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
 
   test '#perform logs on error' do
     StageResultsFetcher.expects(:perform).raises(StandardError, 'Boom!')
-    message = 'Failed to update stage result: Boom!'
-    Rails.logger.expects(:error).with(message)
+    message = /^Failed to update stage result: Boom!.*/
+    Rails.logger.expects(:error).with(regexp_matches(message))
 
     StageResultsFetchJob.new.perform(@stage.id)
   end
