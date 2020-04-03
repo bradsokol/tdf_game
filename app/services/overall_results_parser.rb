@@ -11,7 +11,7 @@ class OverallResultsParser
         regex = /^ *([\d]+)\. +?\((\-|[\d]+)\) *([\d]+) *\(([+-]?[\d]+),([-]?[\d]+)\)/
         overall_rank, previous_rank, points, _delta, behind, _name = regex.match(line).to_a[1..-1].map(&:to_i)
         overall_result.overall_rank = overall_rank
-        overall_result.previous_rank = previous_rank == 0 ? nil : previous_rank
+        overall_result.previous_rank = previous_rank.zero? ? nil : previous_rank
         overall_result.points = points
         overall_result.gap = behind
       end
