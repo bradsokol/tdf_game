@@ -29,6 +29,16 @@
     "typescript": "^3.8.3"
   },
   "devDependencies": {
+    "jest": "^25.3.0",
     "webpack-dev-server": "^3.10.3"
+  },
+  "scripts": {
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "jest": {
+    "roots": [
+      "test/javascript"
+    ]
   }
 }
