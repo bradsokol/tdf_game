@@ -12,8 +12,11 @@
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.4.1",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
+    "jest-enzyme": "^7.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-apollo": "^3.1.4",
@@ -31,6 +34,7 @@
   "devDependencies": {
     "babel-jest": "^25.3.0",
     "jest": "^25.3.0",
+    "jest-message-util": "^25.3.0",
     "regenerator-runtime": "^0.13.5",
     "webpack-dev-server": "^3.10.3"
   },
@@ -41,6 +45,9 @@
   "jest": {
     "roots": [
       "test/javascript"
+    ],
+    "setupFilesAfterEnv": [
+      "./node_modules/jest-enzyme/lib/index.js"
     ]
   }
 }
