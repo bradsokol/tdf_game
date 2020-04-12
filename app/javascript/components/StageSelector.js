@@ -10,9 +10,9 @@ import Row from 'react-bootstrap/Row'
 
 import StageResults from './StageResults'
 
-const GET_STAGES = gql`
-  {
-    tours(year: 2019) {
+export const GET_STAGES_QUERY = gql`
+  query getStages($year: Int!) {
+    tours(year: $year) {
       stages {
         number
         date
@@ -60,9 +60,10 @@ class StageSelector extends React.Component {
   }
 
   render () {
+    const year = 2019;
     return (
       <React.Fragment>
-        <Query query={GET_STAGES}>
+        <Query query={GET_STAGES_QUERY} variables={{ year }}>
           {({ data, loading, error }) => {
 
             if (error) {
