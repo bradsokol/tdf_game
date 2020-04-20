@@ -9,6 +9,9 @@ AllCops:
 Layout/LineLength:
   Max: 120
 
+Layout/SpaceAroundMethodCallOperator:
+  Enabled: true
+
 Lint/RaiseException:
   Enabled: true
 
@@ -26,6 +29,9 @@ Style/Documentation:
 
 Style/EmptyMethod:
   Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: true
 
 Style/HashTransformKeys:
   Enabled: true
