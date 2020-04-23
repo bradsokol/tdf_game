@@ -103,4 +103,8 @@ class StageResults extends React.Component {
   }
 }
 
+StageResults.propTypes = {
+  stage: PropTypes.object,
+};
+
 export default StageResults

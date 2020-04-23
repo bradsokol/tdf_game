@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container'
 import Dropdown from 'react-bootstrap/Dropdown'
 import DropdownButton from 'react-bootstrap/DropdownButton'
 import gql from 'graphql-tag';
-import PropTypes from "prop-types"
+import PropTypes from "prop-types";
 import { Query } from 'react-apollo';
 import React from "react"
 import Row from 'react-bootstrap/Row'
@@ -42,6 +42,10 @@ function StageDescription({ stage }) {
   )
 }
 
+StageDescription.propTypes = {
+  stage: PropTypes.object,
+};
+
 class StageSelector extends React.Component {
   constructor() {
     super();
@@ -75,7 +79,7 @@ class StageSelector extends React.Component {
             }
 
             const { tours } = data;
-            this.state.stages = tours[0].stages.filter(stage => stage.gameStage == true);
+            this.setState({stages: tours[0].stages.filter(stage => stage.gameStage == true)});
 
             const stage = this.state.stages[this.state.stageIndex];
             return(
