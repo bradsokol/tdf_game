@@ -1,12 +1,9 @@
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
-import Dropdown from 'react-bootstrap/Dropdown'
-import DropdownButton from 'react-bootstrap/DropdownButton'
 import gql from 'graphql-tag';
-import PropTypes from "prop-types";
-import { Query } from 'react-apollo';
-import React from "react"
+import React, { useState } from "react"
 import Row from 'react-bootstrap/Row'
+import { useQuery } from '@apollo/react-hooks';
 
 import StageResults from './StageResults'
 
@@ -14,6 +11,7 @@ export const GET_STAGES_QUERY = gql`
   query getStages($year: Int!) {
     tours(year: $year) {
       stages {
+        id
         number
         date
         startTown
@@ -26,88 +24,56 @@ export const GET_STAGES_QUERY = gql`
   }
 `
 
-function StageDescription({ stage }) {
-  var text = ''
-  if (stage != null) {
-    const date = new Date(Date.parse(stage.date + "T06:00:00Z"))
-    const options = { month: 'short', day: 'numeric' }
-    text = "Stage " + stage.number + " - " +
-      date.toLocaleDateString(date, options) + " - " +
-      stage.startTown + " to " + stage.finishTown + " - " +
-      stage.distance + " km"
+function StageSelector() {
+  const [stageIndex, setStageIndex] = useState(0);
+  const [stages, setStages] = useState([]);
+
+  function onStageSelected(event) {
+    setStageIndex(event.target.value);
   }
+
+  function stageDescription(stage) {
+    const date = new Date(Date.parse(stage.date + "T06:00:00Z"))
+    const options = { month: 'long', day: 'numeric' }
+    return `Stage ${stage.number} - ${date.toLocaleDateString(date, options)} - ` +
+      `${stage.startTown} to ${stage.finishTown} - ${stage.distance} km`
+  }
+
+  const year = 2019;
+  const { loading, error, data } = useQuery(
+    GET_STAGES_QUERY,
+    { variables: { year } }
+  );
+
+  if (loading) return <div><p>Loading...</p></div>;
+  if (error) return <div><strong>Error:</strong> {error.toString()}</div>;
+
+  const { tours } = data;
+  if (stages.length == 0) {
+    setStages(tours[0].stages.filter(stage => stage.gameStage == true));
+  }
+  const stage = stages[stageIndex];
 
   return (
-    <p>{text}</p>
-  )
-}
-
-StageDescription.propTypes = {
-  stage: PropTypes.object,
-};
-
-class StageSelector extends React.Component {
-  constructor() {
-    super();
-    this.state = { stages: [], stageIndex: -1 };
-    this.onStageSelected = this.onStageSelected.bind(this);
-  }
-
-  formatStage(stage) {
-    const options = { weekday: 'short', month: 'short', day: 'numeric' };
-    const date = new Date(Date.parse(stage.date + "T06:00:00Z"))
-    return stage.number + " - " + date.toLocaleDateString(date, options);
-  }
-
-  onStageSelected(index) {
-    this.setState(() => ({ stageIndex: index }));
-  }
-
-  render () {
-    const year = 2019;
-    return (
-      <React.Fragment>
-        <Query query={GET_STAGES_QUERY} variables={{ year }}>
-          {({ data, loading, error }) => {
-
-            if (error) {
-              return <div><strong>Error:</strong> {error.toString()}</div>
-            }
-
-            if (loading || !data) {
-              return <div/>
-            }
-
-            const { tours } = data;
-            this.setState({stages: tours[0].stages.filter(stage => stage.gameStage == true)});
-
-            const stage = this.state.stages[this.state.stageIndex];
-            return(
-              <Container>
-                <Row>
-                  <Col lg={1}>
-                    <DropdownButton id="stage-selector" size="sm" title="Stage" onSelect={this.onStageSelected}>
-                      {this.state.stages.map((stage, index) => {
-                        return (
-                          <Dropdown.Item eventKey={index} key={index}>{this.formatStage(stage)}</Dropdown.Item>
-                        )
-                      })}
-                    </DropdownButton>
-                  </Col>
-                  <Col>
-                    <StageDescription stage={stage}/>
-                  </Col>
-                </Row>
-                <Row>
-                  <StageResults stage={stage}/>
-                </Row>
-              </Container>
-            );
-          }}
-        </Query>
-      </React.Fragment>
-    );
-  }
+    <Container>
+      <Row>
+        <Col lg={1}>
+          <p>
+            <select name="stages" onChange={onStageSelected}>
+              {stages.map((stage, index) => {
+                return(
+                  <option name={`stage${stage.number}`} key={index} value={index}>{stageDescription(stage)}</option>
+                )
+              })}
+            </select>
+          </p>
+        </Col>
+      </Row>
+      <Row>
+        <StageResults stage={stage}/>
+      </Row>
+    </Container>
+  );
 }
 
 export default StageSelector
