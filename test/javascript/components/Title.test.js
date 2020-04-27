@@ -13,4 +13,10 @@ describe('Title', () => {
 
     expect(wrapper.find('a').text()).toBe('Avondale Tour de France Pool');
   });
+
+  it('links to the overall results', () => {
+    const wrapper = mount(<Title/>);
+
+    expect(wrapper.find('a').props()['href']).toBe('/overall');
+  });
 });
