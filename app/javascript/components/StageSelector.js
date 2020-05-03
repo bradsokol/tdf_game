@@ -1,9 +1,9 @@
 import Col from 'react-bootstrap/Col'
 import Container from 'react-bootstrap/Container'
 import gql from 'graphql-tag';
+import PropTypes from "prop-types"
 import React, { useState } from "react"
 import Row from 'react-bootstrap/Row'
-import { useQuery } from '@apollo/react-hooks';
 
 import StageResults from './StageResults'
 
@@ -24,9 +24,8 @@ export const GET_STAGES_QUERY = gql`
   }
 `
 
-function StageSelector() {
+function StageSelector(props) {
   const [stageIndex, setStageIndex] = useState(0);
-  const [stages, setStages] = useState([]);
 
   function onStageSelected(event) {
     setStageIndex(event.target.value);
@@ -39,20 +38,7 @@ function StageSelector() {
       `${stage.startTown} to ${stage.finishTown} - ${stage.distance} km`
   }
 
-  const year = 2019;
-  const { loading, error, data } = useQuery(
-    GET_STAGES_QUERY,
-    { variables: { year } }
-  );
-
-  if (loading) return <div><p>Loading...</p></div>;
-  if (error) return <div><strong>Error:</strong> {error.toString()}</div>;
-
-  const { tours } = data;
-  if (stages.length == 0) {
-    setStages(tours[0].stages.filter(stage => stage.gameStage == true));
-  }
-  const stage = stages[stageIndex];
+  const stage = props.stages[stageIndex];
 
   return (
     <Container>
@@ -60,7 +46,7 @@ function StageSelector() {
         <Col lg={1}>
           <p>
             <select name="stages" onChange={onStageSelected}>
-              {stages.map((stage, index) => {
+              {props.stages.map((stage, index) => {
                 return(
                   <option name={`stage${stage.number}`} key={index} value={index}>{stageDescription(stage)}</option>
                 )
@@ -75,5 +61,9 @@ function StageSelector() {
     </Container>
   );
 }
+
+StageSelector.propTypes = {
+  stages: PropTypes.arrayOf(PropTypes.object),
+};
 
 export default StageSelector
