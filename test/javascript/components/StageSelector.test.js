@@ -20,6 +20,27 @@ describe('StageSelector', () => {
         return option.prop('name') === 'stage4';
     }).text()).toBe('Stage 4 - July 9 - Reims to Nancy - 214 km');
   });
+
+  it('lifts stage index when stage selected', () => {
+    let actualStageIndex = -1
+    function handleStageSelected(stageIndex) {
+      actualStageIndex = stageIndex;
+    }
+
+    const wrapper = shallow(
+      <StageSelector
+        stages={stages}
+        onStageSelected={handleStageSelected}
+      />
+    );
+
+    const select = wrapper.find('select');
+    select.simulate("change", {
+          target: { value: 1, selectedIndex: 1 }
+    });
+
+    expect(actualStageIndex).toBe(1);
+  });
 });
 
 const stages= [

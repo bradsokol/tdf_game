@@ -28,6 +28,7 @@ export const GET_STAGES_QUERY = gql`
 `
 
 function Stages() {
+  const [stageIndex, setStageIndex] = useState(0);
   const [stages, setStages] = useState([]);
 
   const year = 2019;
@@ -35,6 +36,10 @@ function Stages() {
     GET_STAGES_QUERY,
     { variables: { year } }
   );
+
+  function handleStageSelection(selectedStageIndex) {
+    setStageIndex(selectedStageIndex);
+  }
 
   if (loading) return <div><p>Loading...</p></div>;
   if (error) return <div><strong>Error:</strong> {error.toString()}</div>;
@@ -50,7 +55,10 @@ function Stages() {
       <SideNav/>
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
         <h2>Stage Results</h2>
-        <StageSelector stages={stages}/>
+        <StageSelector
+          stages={stages}
+          onStageSelected={handleStageSelection}
+        />
       </main>
     </>
   );

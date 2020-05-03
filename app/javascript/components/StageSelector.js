@@ -29,6 +29,7 @@ function StageSelector(props) {
 
   function onStageSelected(event) {
     setStageIndex(event.target.value);
+    props.onStageSelected(event.target.value);
   }
 
   function stageDescription(stage) {
@@ -64,6 +65,7 @@ function StageSelector(props) {
 
 StageSelector.propTypes = {
   stages: PropTypes.arrayOf(PropTypes.object),
+  onStageSelected: PropTypes.func,
 };
 
 export default StageSelector
