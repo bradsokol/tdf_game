@@ -44,6 +44,7 @@
     "react-test-renderer": "^16.13.1",
     "regenerator-runtime": "^0.13.5",
     "waait": "^1.0.5",
+    "wait-for-expect": "^3.0.2",
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
