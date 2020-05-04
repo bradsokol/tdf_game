@@ -2,6 +2,11 @@ import React, { useState } from "react";
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 
+import Col from 'react-bootstrap/Col'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+
+import StageResults from './StageResults';
 import StageSelector from './StageSelector';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -28,7 +33,7 @@ export const GET_STAGES_QUERY = gql`
 `
 
 function Stages() {
-  const [stageIndex, setStageIndex] = useState(0);
+  const [selectedStage, setSelectedStage] = useState(-1);
   const [stages, setStages] = useState([]);
 
   const year = 2019;
@@ -37,8 +42,8 @@ function Stages() {
     { variables: { year } }
   );
 
-  function handleStageSelection(selectedStageIndex) {
-    setStageIndex(selectedStageIndex);
+  function handleStageSelection(selectedStage) {
+    setSelectedStage(selectedStage);
   }
 
   if (loading) return <div><p>Loading...</p></div>;
@@ -46,7 +51,14 @@ function Stages() {
 
   const { tours } = data;
   if (stages.length == 0) {
-    setStages(tours[0].stages.filter(stage => stage.gameStage == true));
+    const gameStages = tours[0].stages.filter(stage => stage.gameStage == true);
+    setStages(gameStages);
+    setSelectedStage(0);
+  }
+
+  let stageResults = <p>Select a stage</p>
+  if (selectedStage != -1) {
+    stageResults = <StageResults stage={stages[selectedStage]}/>
   }
 
   return (
@@ -55,10 +67,21 @@ function Stages() {
       <SideNav/>
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
         <h2>Stage Results</h2>
-        <StageSelector
-          stages={stages}
-          onStageSelected={handleStageSelection}
-        />
+        <Container>
+          <Row>
+            <Col lg={1}>
+              <p>
+                <StageSelector
+                  stages={stages}
+                  onStageSelected={handleStageSelection}
+                />
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            {stageResults}
+          </Row>
+        </Container>
       </main>
     </>
   );

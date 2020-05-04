@@ -102,6 +102,23 @@ describe('Stages', () => {
       });
     });
   });
+
+  it('renders stage results', async () => {
+    await act(async () => {
+      const wrapper = mount(
+        <BrowserRouter>
+          <MockedProvider mocks={[stagesMock]} addTypename={false}>
+            <Stages/>
+          </MockedProvider>,
+        </BrowserRouter>
+      );
+
+      await waitForExpect(() => {
+        wrapper.update();
+        expect(wrapper.find('Row').at(1).find('StageResults')).toHaveLength(1);
+      });
+    });
+  });
 });
 
 const stagesMock = {
