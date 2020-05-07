@@ -29,7 +29,7 @@ function StageResults(props) {
   if (error) return <div><strong>Error:</strong> {error.toString()}</div>;
 
   const { stageResults } = data;
-  if (stageResults.length == 0) {
+  if (stageResults.length === 0) {
     return <div><p>Results not available.</p></div>;
   }
 

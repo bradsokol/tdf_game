@@ -50,8 +50,8 @@ function Stages() {
   if (error) return <div><strong>Error:</strong> {error.toString()}</div>;
 
   const { tours } = data;
-  if (stages.length == 0) {
-    const gameStages = tours[0].stages.filter(stage => stage.gameStage == true);
+  if (stages.length === 0) {
+    const gameStages = tours[0].stages.filter(stage => stage.gameStage === true);
     setStages(gameStages);
     setSelectedStage(0);
   }
