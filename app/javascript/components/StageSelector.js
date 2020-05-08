@@ -1,23 +1,5 @@
-import gql from 'graphql-tag';
-import PropTypes from "prop-types"
 import React from "react"
-
-export const GET_STAGES_QUERY = gql`
-  query getStages($year: Int!) {
-    tours(year: $year) {
-      stages {
-        id
-        number
-        date
-        startTown
-        finishTown
-        distance
-        stageType
-        gameStage
-      }
-    }
-  }
-`
+import PropTypes from "prop-types"
 
 function StageSelector(props) {
   function onStageSelected(event) {

@@ -1,13 +1,11 @@
+import React from 'react';
 import { ApolloClient } from 'apollo-client';
 import { ApolloProvider } from 'react-apollo';
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import { HttpLink } from 'apollo-link-http';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import React from "react"
 
-import Overall from './Overall';
-import Stages from './Stages';
-import Teams from './Teams';
+import Routes from './Routes';
 
 const httpLink = new HttpLink({
   uri: 'http://localhost:5000/graphql',
@@ -18,21 +16,14 @@ const client = new ApolloClient({
   cache,
 });
 
-class App extends React.Component {
-  render () {
-    return (
-      <BrowserRouter>
-        <ApolloProvider client={client}>
-          <Switch>
-            <Route exact path="/" render={() => <Overall/>} />
-            <Route path="/overall/2019" render={() => <Overall/>} />
-            <Route path="/stages/2019/:stage_number" render={() => <Stages/>} />
-            <Route path="/players/2019" render={() => <Teams/>} />
-          </Switch>
-        </ApolloProvider>
-      </BrowserRouter>
-    );
-  }
+function App() {
+  return (
+    <BrowserRouter>
+      <ApolloProvider client={client}>
+        <Routes/>
+      </ApolloProvider>
+    </BrowserRouter>
+  );
 }
 
 export default App

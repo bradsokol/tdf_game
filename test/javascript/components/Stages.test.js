@@ -8,7 +8,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { MockedProvider } from '@apollo/react-testing';
 
 import Stages from '../../../app/javascript/components/Stages';
-import { GET_STAGES_QUERY } from '../../../app/javascript/components/StageSelector';
+import { GET_STAGES_QUERY } from '../../../app/javascript/components/Stages';
 
 const waitForExpect = require('wait-for-expect');
 
