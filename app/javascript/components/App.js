@@ -25,9 +25,9 @@ class App extends React.Component {
         <ApolloProvider client={client}>
           <Switch>
             <Route exact path="/" render={() => <Overall/>} />
-            <Route path="/overall" render={() => <Overall/>} />
-            <Route path="/stages" render={() => <Stages/>} />
-            <Route path="/players" render={() => <Teams/>} />
+            <Route path="/overall/2019" render={() => <Overall/>} />
+            <Route path="/stages/2019/:stage_number" render={() => <Stages/>} />
+            <Route path="/players/2019" render={() => <Teams/>} />
           </Switch>
         </ApolloProvider>
       </BrowserRouter>

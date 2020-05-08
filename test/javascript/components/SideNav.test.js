@@ -29,7 +29,7 @@ describe('SideNav', () => {
       </MemoryRouter>
     );
 
-    const linkPaths = ['/overall', '/stages', '/players'];
+    const linkPaths = ['/overall/2019', '/stages/2019', '/players/2019'];
     expect(wrapper.find(Link).map(link => link.props().to)).toStrictEqual(linkPaths);
   });
 });
