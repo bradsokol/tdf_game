@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 describe('StageSelector', () => {
   it('renders select button with stages', () => {
     const wrapper = shallow(
-      <StageSelector stages={stages} />
+      <StageSelector stages={stages} selectedStageIndex={0} />
     );
 
     const select = wrapper.find('select');
@@ -19,6 +19,16 @@ describe('StageSelector', () => {
     expect(select.find('option').filterWhere((option) => {
         return option.prop('name') === 'stage4';
     }).text()).toBe('Stage 4 - July 9 - Reims to Nancy - 214 km');
+  });
+
+  it('selects the selected stage', () => {
+    const wrapper = shallow(
+      <StageSelector stages={stages} selectedStageIndex={1} />
+    );
+
+    expect(wrapper.find('select').filterWhere((select) => {
+      return select.prop('value') === 1;
+    })).toHaveLength(1);
   });
 
   it('lifts stage index when stage selected', () => {

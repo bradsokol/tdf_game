@@ -15,11 +15,11 @@ function StageSelector(props) {
   }
 
   return (
-    <select name="stages" onChange={onStageSelected}>
+    <select value={props.selectedStageIndex} name="stages" onChange={onStageSelected}>
       {props.stages.map((stage, index) => {
         return(
           <option name={`stage${stage.number}`} key={index} value={index}>{stageDescription(stage)}</option>
-        )
+        );
       })}
     </select>
   );
@@ -27,6 +27,7 @@ function StageSelector(props) {
 
 StageSelector.propTypes = {
   stages: PropTypes.arrayOf(PropTypes.object),
+  selectedStageIndex: PropTypes.number,
   onStageSelected: PropTypes.func,
 };
 
