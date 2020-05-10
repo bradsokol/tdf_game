@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import gql from 'graphql-tag';
+import { useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/react-hooks';
 
 import Col from 'react-bootstrap/Col'
@@ -8,6 +9,8 @@ import Row from 'react-bootstrap/Row'
 
 import StageResults from './StageResults';
 import StageSelector from './StageSelector';
+
+import history from './history';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../stylesheets/dashboard.css'
@@ -33,8 +36,10 @@ export const GET_STAGES_QUERY = gql`
 `
 
 function Stages() {
-  const [selectedStage, setSelectedStage] = useState(-1);
+  const [selectedStageIndex, setSelectedStageIndex] = useState(-1);
   const [stages, setStages] = useState([]);
+
+  const { stageNumber } = useParams();
 
   const year = 2019;
   const { loading, error, data } = useQuery(
@@ -42,8 +47,8 @@ function Stages() {
     { variables: { year } }
   );
 
-  function handleStageSelection(selectedStage) {
-    setSelectedStage(selectedStage);
+  function handleStageSelection(stageIndex) {
+    setSelectedStageIndex(stageIndex);
   }
 
   if (loading) return <div><p>Loading...</p></div>;
@@ -53,12 +58,14 @@ function Stages() {
   if (stages.length === 0) {
     const gameStages = tours[0].stages.filter(stage => stage.gameStage === true);
     setStages(gameStages);
-    setSelectedStage(0);
+    const index = gameStages.findIndex((stage) => stage.number == stageNumber);
+    setSelectedStageIndex(index);
   }
 
   let stageResults = <p>Select a stage</p>
-  if (selectedStage != -1) {
-    stageResults = <StageResults stage={stages[selectedStage]}/>
+  if (selectedStageIndex != -1) {
+    stageResults = <StageResults stage={stages[selectedStageIndex]}/>
+    history.push(`/stages/2019/${stages[selectedStageIndex].number}`);
   }
 
   return (
@@ -73,6 +80,7 @@ function Stages() {
               <p>
                 <StageSelector
                   stages={stages}
+                  selectedStageIndex={selectedStageIndex}
                   onStageSelected={handleStageSelection}
                 />
               </p>
