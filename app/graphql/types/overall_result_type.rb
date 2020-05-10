@@ -7,7 +7,7 @@ module Types
     field :tour, Types::TourType, null: false
     field :date, GraphQL::Types::ISO8601Date, null: false
     field :overall_rank, Integer, null: false
-    field :previous_rank, Integer, null: false
+    field :previous_rank, Integer, null: true
     field :points, Integer, null: false
     field :gap, Integer, null: false
   end
