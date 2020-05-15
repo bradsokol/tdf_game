@@ -31,8 +31,8 @@ class OverallResultsParserTest < ActiveSupport::TestCase
     html = Nokogiri::HTML(html_fixture('stage_results_invalid_format'))
 
     Rails.logger
-      .expects(:error)
-      .with('[OverallResults] Failed to parse overall results:   THIS IS INVALID')
+         .expects(:error)
+         .with('[OverallResults] Failed to parse overall results:   THIS IS INVALID')
 
     assert_raises do
       OverallResultsParser.perform(html: html, overall_result: @overall_result)

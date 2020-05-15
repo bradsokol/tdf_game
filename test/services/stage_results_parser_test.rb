@@ -19,8 +19,8 @@ class StageResultsParserTest < ActiveSupport::TestCase
     html = Nokogiri::HTML(html_fixture('stage_results_invalid_format'))
 
     Rails.logger
-      .expects(:error)
-      .with('[StageResults] Failed to parse stage results:   THIS IS INVALID')
+         .expects(:error)
+         .with('[StageResults] Failed to parse stage results:   THIS IS INVALID')
 
     assert_raises do
       StageResultsParser.perform(html: html, stage_result: @stage_result)
