@@ -48,7 +48,7 @@ function Stages() {
   );
 
   function handleStageSelection(stageIndex) {
-    setSelectedStageIndex(stageIndex);
+    setSelectedStageIndex(parseInt(stageIndex));
   }
 
   if (loading) return <div><p>Loading...</p></div>;
