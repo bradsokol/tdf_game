@@ -3,20 +3,18 @@ import React from "react"
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../stylesheets/dashboard.css'
 
-import PlayerList from './PlayerList';
+import OverallResults from './OverallResults';
 import SideNav from './SideNav';
 import Title from './Title';
 
-class Dashboard extends React.Component {
-  render () {
-    return (
-      <React.Fragment>
-        <Title/>
-        <SideNav/>
-        <PlayerList/>
-      </React.Fragment>
-    );
-  }
+function Dashboard() {
+  return (
+    <>
+      <Title/>
+      <SideNav/>
+      <OverallResults/>
+    </>
+  );
 }
 
 export default Dashboard
