@@ -26,4 +26,16 @@ class OverallResultsParserTest < ActiveSupport::TestCase
     assert_equal 48, @overall_result.points
     assert_equal(-32, @overall_result.gap)
   end
+
+  test 'performs logs an error if parsing fails' do
+    html = Nokogiri::HTML(html_fixture('stage_results_invalid_format'))
+
+    Rails.logger
+      .expects(:error)
+      .with('[OverallResults] Failed to parse overall results:   THIS IS INVALID')
+
+    assert_raises do
+      OverallResultsParser.perform(html: html, overall_result: @overall_result)
+    end
+  end
 end
