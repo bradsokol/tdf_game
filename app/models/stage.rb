@@ -26,6 +26,6 @@ class Stage < ApplicationRecord
   validates :stage_type, presence: true
   validates :game_stage, inclusion: { in: [true, false] }
 
-  scope :game_stages, -> { where(game_stage: true) }
-  scope :need_results, -> { where(game_stage: true, results_downloaded_at: nil) }
+  scope :game_stages, -> { where(game_stage: true).order(:date) }
+  scope :need_results, -> { game_stages.where(results_downloaded_at: nil) }
 end

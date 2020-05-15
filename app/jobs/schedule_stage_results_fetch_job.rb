@@ -13,7 +13,7 @@ class ScheduleStageResultsFetchJob < ApplicationJob
 
   def stages_needing_results
     today = Date.today
-    Stage.game_stages.need_results.select do |stage|
+    Stage.need_results.select do |stage|
       if stage.date > today
         false
       elsif stage.date < today
