@@ -74,22 +74,20 @@ function Stages() {
       <SideNav/>
       <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-4">
         <h2>Stage Results</h2>
-        <Container>
-          <Row>
-            <Col lg={1}>
-              <p>
-                <StageSelector
-                  stages={stages}
-                  selectedStageIndex={selectedStageIndex}
-                  onStageSelected={handleStageSelection}
-                />
-              </p>
-            </Col>
-          </Row>
-          <Row>
-            {stageResults}
-          </Row>
-        </Container>
+        <Row>
+          <Col lg={1}>
+            <p>
+              <StageSelector
+                stages={stages}
+                selectedStageIndex={selectedStageIndex}
+                onStageSelected={handleStageSelection}
+              />
+            </p>
+          </Col>
+        </Row>
+        <Row>
+          {stageResults}
+        </Row>
       </main>
     </>
   );
