@@ -13,6 +13,10 @@ export const GET_STAGES_QUERY = gql`
         number
         gameStage
       }
+      gamePlayers {
+        id
+        name
+      }
     }
   }
 `
@@ -32,6 +36,9 @@ function SideNav() {
     .sort((a, b) => a.number - b.number )[0];
   const stagePath = `/stages/2019/${firstGameStage.number}`;
 
+  const firstTeam = tours[0].gamePlayers.sort((a, b) => a.name.localeCompare(b.name))[0];
+  const teamPath = `/players/2019/${firstTeam.id}`;
+
   return (
     <React.Fragment>
       <div className="container-fluid">
@@ -44,7 +51,7 @@ function SideNav() {
               <Link className="nav-link" to={stagePath}>Stages</Link>
             </Nav.Item>
             <Nav.Item>
-              <Link className="nav-link" to='/players/2019'>Teams</Link>
+              <Link className="nav-link" to={teamPath}>Teams</Link>
             </Nav.Item>
           </Nav>
         </div>

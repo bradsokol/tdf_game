@@ -50,7 +50,7 @@ describe('SideNav', () => {
         wrapper.update();
       });
 
-      const linkPaths = ['/overall/2019', '/stages/2019/3', '/players/2019'];
+      const linkPaths = ['/overall/2019', '/stages/2019/3', '/players/2019/1'];
       expect(wrapper.find(Link).map(link => link.props().to)).toStrictEqual(linkPaths);
     });
   });
@@ -87,6 +87,20 @@ const stagesMock = {
               id: 4,
               number: 4,
               gameStage: true,
+            },
+          ],
+          gamePlayers: [
+            {
+              id: 1,
+              name: "Brad Sokol"
+            },
+            {
+              id: 3,
+              name: "Roger Partington"
+            },
+            {
+              id: 2,
+              name: "Brian Power"
             },
           ],
         },

@@ -9,7 +9,7 @@ configure({ adapter: new Adapter() });
 describe('TeamSelector', () => {
   it('renders select button with teams', () => {
     const wrapper = shallow(
-      <TeamSelector teams={players} selectedTeamIndex={0} />
+      <TeamSelector teams={players} selectedTeamId={0} />
     );
 
     const select = wrapper.find('select');
@@ -26,7 +26,7 @@ describe('TeamSelector', () => {
 
   it('selects the selected team', () => {
     const wrapper = shallow(
-      <TeamSelector teams={players} selectedTeamIndex={1} />
+      <TeamSelector teams={players} selectedTeamId={1} />
     );
 
     expect(wrapper.find('select').filterWhere((select) => {

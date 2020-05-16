@@ -3,12 +3,12 @@ import PropTypes from "prop-types"
 
 function TeamSelector(props) {
   function onTeamSelected(event) {
-    const team_id = event.target.value;
-    props.onTeamSelected(team_id);
+    const teamId = event.target.value;
+    props.onTeamSelected(teamId);
   }
 
   return (
-    <select value={props.selectedTeamIndex} name="teams" onChange={onTeamSelected}>
+    <select value={props.selectedTeamId} name="teams" onChange={onTeamSelected}>
       {props.teams.map((team, index) => {
         return(
           <option name={`team${index + 1}`} key={index} value={team.id}>{team.name}</option>
@@ -20,7 +20,7 @@ function TeamSelector(props) {
 
 TeamSelector.propTypes = {
   teams: PropTypes.arrayOf(PropTypes.object),
-  selectedTeamIndex: PropTypes.number,
+  selectedTeamId: PropTypes.number,
   onTeamSelected: PropTypes.func,
 };
 

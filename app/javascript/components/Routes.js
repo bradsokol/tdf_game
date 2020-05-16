@@ -11,7 +11,7 @@ function Routes() {
       <Route exact path="/" render={() => <Overall/>} />
       <Route path="/overall/2019" render={() => <Overall/>} />
       <Route path="/stages/2019/:stageNumber" render={() => <Stages/>} />
-      <Route path="/players/2019" render={() => <Teams/>} />
+      <Route path="/players/2019/:teamId" render={() => <Teams/>} />
     </Switch>
   );
 }
