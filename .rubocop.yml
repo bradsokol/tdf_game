@@ -6,6 +6,9 @@ AllCops:
     - 'public/**/*'
     - 'tmp/**/*'
 
+Layout/EmptyLinesAroundAttributeAccessor:
+  Enabled: true
+
 Layout/LineLength:
   Max: 120
 
@@ -43,6 +46,9 @@ Style/HashTransformValues:
   Enabled: true
 
 Style/HashEachMethods:
+  Enabled: true
+
+Style/SlicingWithRange:
   Enabled: true
 
 Style/TrailingCommaInArguments:
