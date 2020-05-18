@@ -75,6 +75,24 @@ class OverallResultTest < ActiveSupport::TestCase
     refute_predicate overall_result, :valid?
   end
 
+  test '#percentile must be an integer' do
+    overall_result = OverallResult.new(overall_result_input(percentile: 'foo'))
+
+    refute_predicate overall_result, :valid?
+  end
+
+  test '#percentile must be at least 0' do
+    overall_result = OverallResult.new(overall_result_input(percentile: -1))
+
+    refute_predicate overall_result, :valid?
+  end
+
+  test '#percentile must be no more than 100' do
+    overall_result = OverallResult.new(overall_result_input(percentile: 101))
+
+    refute_predicate overall_result, :valid?
+  end
+
   test 'must be unique per player and tour' do
     overall_result = OverallResult.new(overall_result_input(tour: tours(:tdf_2019)))
 
@@ -98,6 +116,7 @@ class OverallResultTest < ActiveSupport::TestCase
       points: 45,
       gap: -56,
       date: '2019-07-11',
+      percentile: 50,
     }.merge(inputs)
   end
 end

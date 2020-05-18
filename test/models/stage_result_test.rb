@@ -53,6 +53,24 @@ class StageResultTest < ActiveSupport::TestCase
     assert_predicate stage_result, :valid?
   end
 
+  test '#percentile must be an integer' do
+    stage_result = StageResult.new(stage_result_input(percentile: 'foo'))
+
+    refute_predicate stage_result, :valid?
+  end
+
+  test '#percentile must be at least 0' do
+    stage_result = StageResult.new(stage_result_input(percentile: -1))
+
+    refute_predicate stage_result, :valid?
+  end
+
+  test '#percentile must be no more than 100' do
+    stage_result = StageResult.new(stage_result_input(percentile: 101))
+
+    refute_predicate stage_result, :valid?
+  end
+
   test 'must be unique per player and stage' do
     stage_result = StageResult.new(stage_result_input(stage: stages(:tdf_2019_3)))
 
@@ -73,6 +91,7 @@ class StageResultTest < ActiveSupport::TestCase
       stage: stages(:tdf_2019_2),
       overall_rank: 23,
       points: 12,
+      percentile: 50,
     }.merge(inputs)
   end
 end

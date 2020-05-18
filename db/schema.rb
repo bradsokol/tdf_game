@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_15_145435) do
+ActiveRecord::Schema.define(version: 2020_05_17_190700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_145435) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "date"
+    t.integer "percentile"
     t.index ["player_id"], name: "index_overall_results_on_player_id"
     t.index ["tour_id"], name: "index_overall_results_on_tour_id"
   end
@@ -43,6 +44,17 @@ ActiveRecord::Schema.define(version: 2020_05_15_145435) do
     t.index ["player_id"], name: "index_registrations_on_player_id"
   end
 
+  create_table "rider_results", force: :cascade do |t|
+    t.bigint "player_id"
+    t.bigint "stage_id"
+    t.string "rider_name"
+    t.integer "points"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["player_id"], name: "index_rider_results_on_player_id"
+    t.index ["stage_id"], name: "index_rider_results_on_stage_id"
+  end
+
   create_table "stage_results", force: :cascade do |t|
     t.bigint "player_id"
     t.bigint "stage_id"
@@ -50,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_05_15_145435) do
     t.integer "overall_rank"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "percentile"
     t.index ["player_id"], name: "index_stage_results_on_player_id"
     t.index ["stage_id"], name: "index_stage_results_on_stage_id"
   end

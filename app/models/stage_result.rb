@@ -10,6 +10,9 @@ class StageResult < ApplicationRecord
   validates :points,
             presence: true,
             numericality: { only_integer: true, greater_than_or_equal_to: 0 }
+  validates :percentile,
+            allow_nil: true,
+            numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 100 }
   validate :one_result_per_stage_and_player
 
   private
