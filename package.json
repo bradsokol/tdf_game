@@ -38,7 +38,7 @@
     "eslint": "^7.1.0",
     "eslint-plugin-jest": "^23.13.1",
     "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^4.0.2",
+    "eslint-plugin-react-hooks": "^4.0.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^26.0.1",
     "jest-message-util": "^26.0.1",
