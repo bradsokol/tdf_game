@@ -20,7 +20,7 @@ class OverallResultsParser
 
     def parse_line(line)
       #   29. (37) 265(+75,-47)  Brad Sokol (Canada)
-      regex = /^ *([\d]+)\. *?\((\-|[\d]+)\) *([\d]+) *\(([+-]?[\d]+),([-]?[\d]+)\)/
+      regex = /^ *(\d+)\. *?\((-|\d+)\) *(\d+) *\(([+-]?\d+),(-?\d+)\)/
       regex.match(line).to_a[1..].map(&:to_i)
     rescue StandardError
       Rails.logger.error("[OverallResults] Failed to parse overall results: #{line}")

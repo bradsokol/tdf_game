@@ -13,7 +13,7 @@ class StageResultsParser
     private
 
     def parse_line(line)
-      /^ *([\d]+)\. *([\d]+) /.match(line).to_a[1..].map(&:to_i)
+      /^ *(\d+)\. *(\d+) /.match(line).to_a[1..].map(&:to_i)
     rescue StandardError
       Rails.logger.error("[StageResults] Failed to parse stage results: #{line}")
       raise

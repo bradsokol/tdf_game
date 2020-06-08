@@ -64,7 +64,7 @@ class TeamResultsParserTest < ActiveSupport::TestCase
   end
 
   test 'perform logs an error if parsing percentiles fails' do
-    html = fixture_with_invalid_line(/[ ]*Percentiles:.*$/)
+    html = fixture_with_invalid_line(/ *Percentiles:.*$/)
 
     Rails.logger
          .expects(:error)

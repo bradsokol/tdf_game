@@ -31,7 +31,7 @@ class TeamResultsParser
     end
 
     def parse_rider(line)
-      ordinal, name, total_points, daily_points = /^ *([\d]+)\. ([^\d]+)([\d]+) (.+)$/.match(line).to_a[1..]
+      ordinal, name, total_points, daily_points = /^ *(\d+)\. ([^\d]+)(\d+) (.+)$/.match(line).to_a[1..]
 
       daily_points = daily_points
                      .gsub(/\s+/m, ' ')
