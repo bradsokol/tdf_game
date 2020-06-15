@@ -16,7 +16,7 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
-    "history": "^4.10.1",
+    "history": "^5.0.0",
     "jest-enzyme": "^7.1.2",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
