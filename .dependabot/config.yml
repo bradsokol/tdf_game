@@ -3,6 +3,12 @@ update_configs:
   - package_manager: "javascript"
     directory: "/"
     update_schedule: "weekly"
+    automerged_updates:
+    - match:
+        update_type: "semver:minor"
   - package_manager: "ruby:bundler"
     directory: "/"
     update_schedule: "weekly"
+    automerged_updates:
+    - match:
+        update_type: "semver:minor"
