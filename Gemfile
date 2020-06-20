@@ -27,6 +27,7 @@ end
 group :development do
   gem 'graphiql-rails'
   gem 'listen', '>= 3.0.5', '< 3.3'
+  gem 'railroady'
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'spring'
