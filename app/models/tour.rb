@@ -2,6 +2,7 @@
 
 class Tour < ApplicationRecord
   has_many :overall_results
+  has_many :player_rider_points, class_name: 'PlayerRiderPoints'
   has_many :stages, -> { order 'date' }
   has_and_belongs_to_many :riders
 
