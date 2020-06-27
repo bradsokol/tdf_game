@@ -6,9 +6,7 @@ require './config/environment'
 require 'clockwork'
 
 module Clockwork
-  if Rails.env.development?
-    every(10.seconds, 'Get stage results') { ScheduleStageResultsFetchJob.perform_later }
-  else
-    every(15.minutes, 'Get stage results') { ScheduleStageResultsFetchJob.perform_later }
-  end
+  interval = Rails.env.development? ? 10.seconds : 15.minutes
+
+  every(interval, 'Get stage results') { ScheduleStageResultsFetchJob.perform_later }
 end
