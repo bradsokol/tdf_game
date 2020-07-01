@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_201554) do
+ActiveRecord::Schema.define(version: 2020_07_01_131529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_201554) do
     t.bigint "rider_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "percentile", null: false
     t.index ["player_id"], name: "index_player_rider_points_on_player_id"
     t.index ["rider_id"], name: "index_player_rider_points_on_rider_id"
     t.index ["tour_id"], name: "index_player_rider_points_on_tour_id"
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_201554) do
     t.bigint "rider_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "percentile", null: false
     t.index ["player_id"], name: "index_player_rider_stage_points_on_player_id"
     t.index ["rider_id"], name: "index_player_rider_stage_points_on_rider_id"
     t.index ["stage_id"], name: "index_player_rider_stage_points_on_stage_id"
