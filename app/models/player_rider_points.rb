@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 class PlayerRiderPoints < ApplicationRecord
-  table_name = 'player_rider_points'
-
   belongs_to :tour
   belongs_to :player
   belongs_to :rider
