@@ -15,6 +15,36 @@ class PlayerRiderPointsTest < ActiveSupport::TestCase
     assert_predicate player_rider_points, :valid?
   end
 
+  test '#ordinal is required' do
+    player_rider_points = PlayerRiderPoints.new(player_rider_points_input(ordinal: nil))
+
+    refute_predicate player_rider_points, :valid?
+  end
+
+  test '#ordinal must be numeric' do
+    player_rider_points = PlayerRiderPoints.new(player_rider_points_input(ordinal: 'not a number'))
+
+    refute_predicate player_rider_points, :valid?
+  end
+
+  test '#ordinal must be an integer' do
+    player_rider_points = PlayerRiderPoints.new(player_rider_points_input(ordinal: 3.1415))
+
+    refute_predicate player_rider_points, :valid?
+  end
+
+  test '#ordinal must be at least 1' do
+    player_rider_points = PlayerRiderPoints.new(player_rider_points_input(ordinal: 0))
+
+    refute_predicate player_rider_points, :valid?
+  end
+
+  test '#ordinal must be no more than 15' do
+    player_rider_points = PlayerRiderPoints.new(player_rider_points_input(ordinal: 16))
+
+    refute_predicate player_rider_points, :valid?
+  end
+
   test '#percentile is required' do
     player_rider_points = PlayerRiderPoints.new(player_rider_points_input(percentile: nil))
 
@@ -76,6 +106,7 @@ class PlayerRiderPointsTest < ActiveSupport::TestCase
       tour: @tour,
       player: @player,
       rider: @rider,
+      ordinal: 2,
       percentile: 90,
       points: 12,
     }.merge(input)
