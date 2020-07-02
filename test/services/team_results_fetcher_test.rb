@@ -12,8 +12,8 @@ class TeamResultsFetcherTest < ActiveSupport::TestCase
 
     assert_instance_of(TeamResultsParser::TeamResults, results)
     assert_equal 15, results.riders.length
-    assert_equal 20, results.total_points.length
-    assert_equal 20, results.percentiles.length
+    assert_equal 19, results.stage_points.length
+    assert_equal 19, results.stage_percentiles.length
   end
 
   private
