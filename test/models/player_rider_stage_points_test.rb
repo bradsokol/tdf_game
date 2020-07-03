@@ -15,12 +15,6 @@ class PlayerRiderStagePointsTest < ActiveSupport::TestCase
     assert_predicate player_rider_points, :valid?
   end
 
-  test '#points is required' do
-    player_rider_points = PlayerRiderStagePoints.new(player_rider_stage_points_input(points: nil))
-
-    refute_predicate player_rider_points, :valid?
-  end
-
   test '#points must be numeric' do
     player_rider_points = PlayerRiderStagePoints.new(player_rider_stage_points_input(points: 'not a number'))
 
