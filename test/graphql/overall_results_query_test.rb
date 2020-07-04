@@ -16,6 +16,7 @@ class OverallResultsQueryTest < ActionDispatch::IntegrationTest
     assert_equal 12, overall_result['overallRank']
     assert_equal 34, overall_result['previousRank']
     assert_equal 56, overall_result['points']
+    assert_equal 40, overall_result['percentile']
     assert_equal(-64, overall_result['gap'])
   end
 
@@ -43,6 +44,7 @@ class OverallResultsQueryTest < ActionDispatch::IntegrationTest
           overallRank
           previousRank
           points
+          percentile
           gap
         }
       }

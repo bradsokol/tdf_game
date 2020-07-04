@@ -9,6 +9,7 @@ module Types
     field :overall_rank, Integer, null: false
     field :previous_rank, Integer, null: true
     field :points, Integer, null: false
+    field :percentile, Integer, null: true
     field :gap, Integer, null: false
   end
 end
