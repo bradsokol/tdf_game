@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_155358) do
+ActiveRecord::Schema.define(version: 2020_07_10_180217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,14 +43,12 @@ ActiveRecord::Schema.define(version: 2020_07_10_155358) do
 
   create_table "player_rider_stage_points", force: :cascade do |t|
     t.integer "points"
-    t.bigint "stage_id"
-    t.bigint "player_id"
     t.bigint "rider_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["player_id"], name: "index_player_rider_stage_points_on_player_id"
+    t.bigint "stage_result_id", null: false
     t.index ["rider_id"], name: "index_player_rider_stage_points_on_rider_id"
-    t.index ["stage_id"], name: "index_player_rider_stage_points_on_stage_id"
+    t.index ["stage_result_id"], name: "index_player_rider_stage_points_on_stage_result_id"
   end
 
   create_table "players", force: :cascade do |t|

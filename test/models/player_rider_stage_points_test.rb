@@ -4,9 +4,8 @@ require 'test_helper'
 
 class PlayerRiderStagePointsTest < ActiveSupport::TestCase
   setup do
-    @stage = stages(:tdf_2019_3)
-    @player = players(:jim_hopper)
     @rider = riders(:e_merckx)
+    @stage_result = stage_results(:tdf_2019_3_jim_hopper)
   end
 
   test '.new creates valid player rider points' do
@@ -37,8 +36,7 @@ class PlayerRiderStagePointsTest < ActiveSupport::TestCase
 
   def player_rider_stage_points_input(input = {})
     {
-      stage: @stage,
-      player: @player,
+      stage_result: @stage_result,
       rider: @rider,
       points: 12,
     }.merge(input)

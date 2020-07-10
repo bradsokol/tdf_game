@@ -7,13 +7,13 @@ namespace :dev do
       abort 'YEAR must be specified' unless ENV['YEAR']
 
       tour = Tour.find_by!(year: ENV['YEAR'])
-      tour.overall_results.each { |result| result.player_rider_points.delete_all }
-      tour.overall_results.delete_all
       tour.stages.each do |stage|
+        stage.stage_results.each { |result| result.player_rider_stage_points.each(&:delete) }
         stage.stage_results.delete_all
-        stage.player_rider_stage_points.delete_all
       end
       tour.riders.delete_all
+      tour.overall_results.each { |result| result.player_rider_points.each(&:delete) }
+      tour.overall_results.delete_all
       tour.stages.update_all(results_downloaded_at: nil)
 
       OverallResult.where(tour: nil).delete_all

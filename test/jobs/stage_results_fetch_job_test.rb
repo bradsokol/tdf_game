@@ -14,14 +14,17 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
   test '#perform fetches results for stage' do
     player_count = Registration.where(year: @tour.year).count
     player_rider_points_counter = lambda do
-      @tour.overall_results.reduce(0) { |count, result| count + result.player_rider_points.count }
+      @tour.reload.overall_results.reduce(0) { |count, result| count + result.player_rider_points.count }
+    end
+    player_rider_stage_points_counter = lambda do
+      @stage.reload.stage_results.reduce(0) { |count, result| count + result.player_rider_stage_points.count }
     end
 
     record_counts = {
       -> { @stage.stage_results.count } => 2,
       -> { @tour.overall_results.count } => 1,
-      player_rider_points_counter => @tour.overall_results.count * 15,
-      -> { @stage.player_rider_stage_points.count } => player_count * 15,
+      player_rider_points_counter => player_count * 15,
+      player_rider_stage_points_counter => player_count * 15,
       -> { @tour.riders.count } => 15
     }
 
@@ -65,9 +68,8 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
   test '#perform saves player rider stage points' do
     StageResultsFetchJob.new.perform(@stage.id)
 
-    points = @stage.player_rider_stage_points.last
+    points = @stage.stage_results.first.player_rider_stage_points.last
     assert_equal 0, points.points
-    assert_equal 'Will Byers', points.player.name
     assert_equal 'D. Martin', points.rider.name
   end
 
@@ -131,7 +133,7 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
   test '#perform creates player rider stage points when need' do
     player_count = Registration.where(year: @tour.year).count
 
-    assert_difference -> { @stage.player_rider_stage_points.count } => player_count * 15 do
+    assert_difference -> { PlayerRiderStagePoints.count } => player_count * 15 do
       StageResultsFetchJob.perform_now(@stage.id)
     end
   end
@@ -139,9 +141,11 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
   test '#perform does not create player rider stage points when it exists' do
     player_count = Registration.where(year: @tour.year).count
     rider = @tour.riders.create!(name: 'P. Sagan')
-    @stage.player_rider_stage_points.create!(player: players(:jim_hopper), points: 1, rider: rider)
 
-    assert_difference -> { @stage.player_rider_stage_points.count } => (player_count * 15 - 1) do
+    StageResultsFetchJob.perform_now(@stage.id)
+    @stage.stage_results.first.player_rider_stage_points.first.destroy
+
+    assert_difference -> { PlayerRiderStagePoints.count } => 1 do
       StageResultsFetchJob.perform_now(@stage.id)
     end
   end

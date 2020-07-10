@@ -4,7 +4,6 @@ class Stage < ApplicationRecord
   belongs_to :tour
 
   has_many :stage_results
-  has_many :player_rider_stage_points, class_name: 'PlayerRiderStagePoints'
 
   enum stage_type: {
     flat: 'flat',

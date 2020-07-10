@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class PlayerRiderStagePoints < ApplicationRecord
-  belongs_to :stage
-  belongs_to :player
+  belongs_to :stage_result
   belongs_to :rider
 
   validates :points,

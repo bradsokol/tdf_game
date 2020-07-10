@@ -29,11 +29,9 @@ class StageResultsFetchJob < ApplicationJob
       stage_result: stage_result
     )
     overall_result.save!
+    stage_result.save!
 
     update_team_result(player, stage_result, overall_result)
-
-    overall_result.save!
-    stage_result.save!
   end
 
   def update_stage_results(players, stage)
@@ -58,11 +56,11 @@ class StageResultsFetchJob < ApplicationJob
       player_rider_points = overall_result.player_rider_points.find_or_create_by(rider: rider)
       player_rider_points.update!(ordinal: rider_results.ordinal, points: rider_results.total_points)
 
-      player_rider_stage_points = stage.player_rider_stage_points.find_or_create_by(player: player, rider: rider)
+      player_rider_stage_points = stage_result.player_rider_stage_points.find_or_create_by(rider: rider)
       player_rider_stage_points.update!(points: rider_results.stage_points[stage.number])
     end
 
-    stage_result.percentile = results.stage_percentiles[stage.number]
-    overall_result.percentile = results.overall_percentile
+    stage_result.update!(percentile: results.stage_percentiles[stage.number])
+    overall_result.update!(percentile: results.overall_percentile)
   end
 end
