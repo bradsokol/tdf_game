@@ -4,8 +4,7 @@ require 'test_helper'
 
 class PlayerRiderPointsTest < ActiveSupport::TestCase
   setup do
-    @tour = tours(:tdf_2019)
-    @player = players(:jim_hopper)
+    @overall_result = overall_results(:tdf_2019_jim_hopper)
     @rider = riders(:e_merckx)
   end
 
@@ -73,8 +72,7 @@ class PlayerRiderPointsTest < ActiveSupport::TestCase
 
   def player_rider_points_input(input = {})
     {
-      tour: @tour,
-      player: @player,
+      overall_result: @overall_result,
       rider: @rider,
       ordinal: 2,
       points: 12,

@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 class PlayerRiderPoints < ApplicationRecord
-  belongs_to :tour
-  belongs_to :player
+  belongs_to :overall_result
   belongs_to :rider
 
   validates :ordinal,

@@ -3,6 +3,7 @@
 class OverallResult < ApplicationRecord
   belongs_to :player
   belongs_to :tour
+  has_many :player_rider_points, class_name: 'PlayerRiderPoints'
 
   validates :overall_rank,
             presence: true,

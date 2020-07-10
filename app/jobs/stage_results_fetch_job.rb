@@ -28,6 +28,7 @@ class StageResultsFetchJob < ApplicationJob
       overall_result: overall_result,
       stage_result: stage_result
     )
+    overall_result.save!
 
     update_team_result(player, stage_result, overall_result)
 
@@ -54,11 +55,10 @@ class StageResultsFetchJob < ApplicationJob
 
     results.riders.each do |rider_results|
       rider = stage.tour.riders.find_or_create_by(name: rider_results.name)
-      player_rider_points = stage.tour.player_rider_points.find_or_create_by(player: player, rider: rider)
+      player_rider_points = overall_result.player_rider_points.find_or_create_by(rider: rider)
       player_rider_points.update!(ordinal: rider_results.ordinal, points: rider_results.total_points)
 
       player_rider_stage_points = stage.player_rider_stage_points.find_or_create_by(player: player, rider: rider)
-      # binding.pry if rider_results.stage_points[stage.number].nil?
       player_rider_stage_points.update!(points: rider_results.stage_points[stage.number])
     end
 
