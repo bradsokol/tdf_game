@@ -22,6 +22,7 @@ gem 'webpacker'
 
 group :development, :test do
   gem 'pry-byebug'
+  gem 'pry-rails'
 end
 
 group :development do
