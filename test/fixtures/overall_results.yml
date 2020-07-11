@@ -7,3 +7,13 @@ tdf_2019_jim_hopper:
   percentile: 40
   gap: -64
   date: '2019-07-11'
+
+tdf_2019_will_byers:
+  player: will_byers
+  tour: tdf_2019
+  overall_rank: 1
+  previous_rank: 2
+  points: 156
+  percentile: 99
+  gap: 0
+  date: '2019-07-11'

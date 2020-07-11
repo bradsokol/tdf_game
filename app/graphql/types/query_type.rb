@@ -4,11 +4,16 @@ module Types
   class QueryType < Types::BaseObject
     field :overall_results, [Types::OverallResultType], null: false do
       argument :year, Integer, required: true
+      argument :player_id, Integer, required: false
     end
 
-    def overall_results(year:)
+    def overall_results(year:, player_id: nil)
       tour = Tour.find_by(year: year)
-      tour ? tour.overall_results : []
+      if player_id.present?
+        tour.overall_results.where(player_id: player_id)
+      else
+        tour ? tour.overall_results : []
+      end
     end
 
     field :stage_results, [Types::StageResultType], null: false do

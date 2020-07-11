@@ -3,3 +3,9 @@ tdf_2019_jim_hopper_e_merckx:
   rider: e_merckx
   ordinal: 1
   points: 123
+
+tdf_2019_will_byers_e_merckx:
+  overall_result: tdf_2019_will_byers
+  rider: e_merckx
+  ordinal: 1
+  points: 123

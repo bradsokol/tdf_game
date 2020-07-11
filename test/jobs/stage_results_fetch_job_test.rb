@@ -22,7 +22,7 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
 
     record_counts = {
       -> { @stage.stage_results.count } => 2,
-      -> { @tour.overall_results.count } => 1,
+      -> { @tour.overall_results.count } => 0,
       player_rider_points_counter => player_count * 15,
       player_rider_stage_points_counter => player_count * 15,
       -> { @tour.riders.count } => 15
@@ -112,9 +112,7 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
   end
 
   test '#perform creates player rider points when need' do
-    overall_result = overall_results(:tdf_2019_jim_hopper)
-
-    assert_difference -> { overall_result.player_rider_points.count } => @tour.overall_results.count * 15 do
+    assert_difference -> { PlayerRiderPoints.count } => @tour.overall_results.count * 15 do
       StageResultsFetchJob.perform_now(@stage.id)
     end
   end
@@ -125,7 +123,7 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
 
     overall_result.player_rider_points.create!(ordinal: 1, points: 1, rider: rider)
 
-    assert_difference -> { overall_result.player_rider_points.count } => (@tour.overall_results.count * 15) - 1 do
+    assert_difference -> { PlayerRiderPoints.count } => (@tour.overall_results.count * 15) - 1 do
       StageResultsFetchJob.perform_now(@stage.id)
     end
   end
@@ -139,9 +137,6 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
   end
 
   test '#perform does not create player rider stage points when it exists' do
-    player_count = Registration.where(year: @tour.year).count
-    rider = @tour.riders.create!(name: 'P. Sagan')
-
     StageResultsFetchJob.perform_now(@stage.id)
     @stage.stage_results.first.player_rider_stage_points.first.destroy
 
