@@ -18,6 +18,7 @@ class OverallResultsQueryTest < ActionDispatch::IntegrationTest
     assert_equal 56, overall_result['points']
     assert_equal 40, overall_result['percentile']
     assert_equal(-64, overall_result['gap'])
+    assert_equal({ 'ordinal' => 1, 'name' => 'E. Merckx', 'points' => 123 }, overall_result['riders'].first)
   end
 
   test 'query for results for non-existant tour returns empty array' do
@@ -46,6 +47,11 @@ class OverallResultsQueryTest < ActionDispatch::IntegrationTest
           points
           percentile
           gap
+          riders {
+            ordinal
+            name
+            points
+          }
         }
       }
     GRAPHQL

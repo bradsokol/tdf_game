@@ -11,5 +11,10 @@ module Types
     field :points, Integer, null: false
     field :percentile, Integer, null: true
     field :gap, Integer, null: false
+    field :riders, [Types::PlayerRiderPointsType], null: false
+
+    def riders
+      object.player_rider_points
+    end
   end
 end
