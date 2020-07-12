@@ -15,6 +15,8 @@ class StageResultsQueryTest < ActionDispatch::IntegrationTest
     assert_equal '2019-07-08', stage_result['stage']['date']
     assert_equal 12, stage_result['overallRank']
     assert_equal 34, stage_result['points']
+    assert_equal 44, stage_result['percentile']
+    assert_equal({ 'name' => 'E. Merckx', 'points' => 89 }, stage_result['riders'].first)
   end
 
   test 'query for results for stage with none returns empty array' do
@@ -51,6 +53,11 @@ class StageResultsQueryTest < ActionDispatch::IntegrationTest
           }
           overallRank
           points
+          percentile
+          riders {
+            name
+            points
+          }
         }
       }
     GRAPHQL
