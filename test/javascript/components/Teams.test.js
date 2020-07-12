@@ -7,7 +7,7 @@ import { MemoryRouter } from 'react-router-dom'
 
 import { MockedProvider } from '@apollo/react-testing';
 
-import Teams, { GET_TEAMS_QUERY } from '../../../app/javascript/components/Teams';
+import Teams, { GET_TEAM_RESULTS_QUERY } from '../../../app/javascript/components/Teams';
 
 const waitForExpect = require('wait-for-expect');
 
@@ -32,9 +32,10 @@ describe('Teams', () => {
     await act(async () => {
       const errorMock = {
         request: {
-          query: GET_TEAMS_QUERY,
+          query: GET_TEAM_RESULTS_QUERY,
           variables: {
             year: 2019,
+            playerId: null,
           },
         },
         error: new Error('Boom!'),
@@ -137,9 +138,10 @@ describe('Teams', () => {
 
 const teamsMock = {
   request: {
-    query: GET_TEAMS_QUERY,
+    query: GET_TEAM_RESULTS_QUERY,
     variables: {
       year: 2019,
+      playerId: 1,
     },
   },
   result: {

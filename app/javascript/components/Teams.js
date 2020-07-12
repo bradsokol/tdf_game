@@ -12,30 +12,41 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../stylesheets/dashboard.css'
 
 import SideNav from './SideNav';
+import TeamResults from './TeamResults';
 import TeamSelector from './TeamSelector';
 import Title from './Title';
 
-export const GET_TEAMS_QUERY = gql`
-  query getTeams($year: Int!) {
+export const GET_TEAM_RESULTS_QUERY = gql`
+  query getTeamResults($year: Int!, $playerId: Int!) {
     tours(year: $year) {
       gamePlayers {
         id
         name
       }
     }
+    overallResults(year: $year, playerId: $playerId) {
+      points
+      percentile
+      riders {
+        ordinal
+        name
+        points
+      }
+    }
   }
 `
 
 function Teams() {
+  const [overallResult, setOverallResult] = useState(null);
   const [selectedTeamId, setSelectedTeamId] = useState(-1);
   const [teams, setTeams] = useState([]);
 
-  const { teamId } = useParams();
+  const teamId = parseInt(useParams().teamId);
 
   const year = 2019;
   const { loading, error, data } = useQuery(
-    GET_TEAMS_QUERY,
-    { variables: { year } }
+    GET_TEAM_RESULTS_QUERY,
+    { variables: { year: year, playerId: teamId } }
   );
 
   function handleTeamSelection(teamId) {
@@ -49,13 +60,19 @@ function Teams() {
     setSelectedTeamId(parseInt(teamId));
   }
 
+  if (overallResult == null) {
+    setOverallResult(data.overallResults[0]);
+  }
+
   if (teams.length === 0) {
     data.tours[0].gamePlayers.sort((a, b) => a.name.localeCompare(b.name));
     setTeams(data.tours[0].gamePlayers);
   }
 
-  if (selectedTeamId != -1) {
-    history.push(`/players/2019/${selectedTeamId}`);
+  let teamResults = <p>Team results go here</p>;
+  if (overallResult != null) {
+    teamResults = <TeamResults overallResult={overallResult}/>
+    history.push(`/players/${year}/${selectedTeamId}`);
   }
 
   return (
@@ -76,7 +93,7 @@ function Teams() {
           </Col>
         </Row>
         <Row>
-          <p>Team results for team {selectedTeamId} go here</p>
+          {teamResults}
         </Row>
       </main>
     </>
