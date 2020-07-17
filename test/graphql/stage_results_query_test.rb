@@ -8,7 +8,7 @@ class StageResultsQueryTest < ActionDispatch::IntegrationTest
 
     data = parse_graphql_response(response.body)
 
-    assert_equal 1, data['stageResults'].length
+    assert_equal 2, data['stageResults'].length
 
     stage_result = data['stageResults'].first
     assert_equal 'Jim Hopper', stage_result['player']['name']
@@ -35,6 +35,16 @@ class StageResultsQueryTest < ActionDispatch::IntegrationTest
     assert_equal 0, data['stageResults'].length
   end
 
+  test 'query for stage results for player returns filtered stage results' do
+    player = players(:jim_hopper)
+
+    post('/graphql', params: { query: stage_results_for_player_query(player_id: player.id) })
+
+    data = parse_graphql_response(response.body)
+
+    assert_equal 1, data['stageResults'].length
+  end
+
   private
 
   def parse_graphql_response(original_response)
@@ -45,6 +55,28 @@ class StageResultsQueryTest < ActionDispatch::IntegrationTest
     <<~GRAPHQL
       query {
         stageResults(date: "#{date}") {
+          player {
+            name
+          }
+          stage {
+            date
+          }
+          overallRank
+          points
+          percentile
+          riders {
+            name
+            points
+          }
+        }
+      }
+    GRAPHQL
+  end
+
+  def stage_results_for_player_query(date: '2019-07-08', player_id:)
+    <<~GRAPHQL
+      query {
+        stageResults(date: "#{date}", playerId: #{player_id}) {
           player {
             name
           }

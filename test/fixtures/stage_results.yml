@@ -4,3 +4,10 @@ tdf_2019_3_jim_hopper:
   overall_rank: 12
   points: 34
   percentile: 44
+
+tdf_2019_3_will_byers:
+  player: will_byers
+  stage: tdf_2019_3
+  overall_rank: 13
+  points: 33
+  percentile: 43

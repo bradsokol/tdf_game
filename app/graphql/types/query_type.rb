@@ -18,11 +18,18 @@ module Types
 
     field :stage_results, [Types::StageResultType], null: false do
       argument :date, GraphQL::Types::ISO8601Date, required: true
+      argument :player_id, Integer, required: false
     end
 
-    def stage_results(date:)
+    def stage_results(date:, player_id: nil)
       stage = Stage.find_by(date: date)
-      stage ? stage.stage_results : []
+      return [] unless stage&.game_stage?
+
+      if player_id.present?
+        stage.stage_results.where(player_id: player_id)
+      else
+        stage.stage_results
+      end
     end
 
     field :tours, [Types::TourType], null: false do

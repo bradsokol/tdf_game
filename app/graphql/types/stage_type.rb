@@ -12,5 +12,12 @@ module Types
     field :distance, Integer, null: false
     field :stage_type, Types::StageTypeEnum, null: false
     field :game_stage, Boolean, null: false
+    field :stage_results, [Types::StageResultType], null: false do
+      argument :player_id, Integer, required: true
+    end
+
+    def stage_results(player_id:)
+      object.stage_results.where(player_id: player_id)
+    end
   end
 end
