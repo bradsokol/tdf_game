@@ -43,10 +43,14 @@ function Teams() {
 
   const teamId = parseInt(useParams().teamId);
 
+  if (selectedTeamId === -1) {
+    setSelectedTeamId(parseInt(teamId));
+  }
+
   const year = 2019;
   const { loading, error, data } = useQuery(
     GET_TEAM_RESULTS_QUERY,
-    { variables: { year: year, playerId: teamId } }
+    { variables: { year: year, playerId: selectedTeamId } }
   );
 
   function handleTeamSelection(teamId) {
@@ -55,10 +59,6 @@ function Teams() {
 
   if (loading) return <div><p>Loading...</p></div>;
   if (error) return <div><strong>Error:</strong> {error.toString()}</div>;
-
-  if (selectedTeamId === -1) {
-    setSelectedTeamId(parseInt(teamId));
-  }
 
   if (overallResult == null) {
     setOverallResult(data.overallResults[0]);
