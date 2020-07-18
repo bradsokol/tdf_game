@@ -28,7 +28,7 @@ function TeamResults(props) {
             {stages.map((stage, index) => {
               return (
                 <th className="text-right" key={index}>
-                  <a href={`http://localhost:5000/stages/2019/${stage.id}`}>Stage {stage.number}</a>
+                  <a href={`/stages/2019/${stage.number}`}>Stage {stage.number}</a>
                 </th>
               )
             })}
