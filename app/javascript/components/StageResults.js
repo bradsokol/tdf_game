@@ -10,6 +10,7 @@ export const GET_STAGE_RESULTS_QUERY = gql`
     stageResults(date: $date) {
       id
       player {
+        id
         name
       }
       points
@@ -64,7 +65,9 @@ function StageResults(props) {
             return (
               <tr key={index}>
                 <td className="text-right">{result.poolRank}</td>
-                <td className="text-left">{result.player.name}</td>
+                <td className="text-left">
+                  <a href={`/players/2019/${result.player.id}`}>{result.player.name}</a>
+                </td>
                 <td className="text-right">{result.points}</td>
                 <td className="text-right">{winnerPoints - result.points}</td>
                 <td className="text-right">{result.overallRank}</td>

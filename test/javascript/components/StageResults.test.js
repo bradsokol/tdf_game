@@ -120,6 +120,7 @@ const mockStageResults = {
     {
       id: 630,
       player: {
+        id: 1,
         name: "Brad Sokol"
       },
       points: 75,
@@ -128,6 +129,7 @@ const mockStageResults = {
     {
       id: 631,
       player: {
+        id: 2,
         name: "Roger Partington"
       },
       points: 51,
@@ -136,6 +138,7 @@ const mockStageResults = {
     {
       id: 632,
       player: {
+        id: 3,
         name: "Brian Power"
       },
       points: 52,
