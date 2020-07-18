@@ -52,6 +52,20 @@ describe('TeamResults', () => {
     expect(row.find('td').at(4).text()).toBe('45');
   });
 
+  it('shows nothing if rider has zero points for a stage', () => {
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
+
+    const row = wrapper.find('tr').slice(2);
+    expect(row.find('td').at(3).text()).toBe('');
+  });
+
+  it('indicates if the rider has abandoned', () => {
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
+
+    const row = wrapper.find('tr').slice(2);
+    expect(row.find('td').at(4).text()).toBe('-');
+  });
+
   it('shows the total stage points', () => {
     const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
 
@@ -106,7 +120,7 @@ const mockStages = [
         percentile: 3,
         riders: [
           { points: 23 },
-          { points: 23 },
+          { points: 0 },
         ]
       }
     ]
@@ -120,7 +134,7 @@ const mockStages = [
         percentile: 5,
         riders: [
           { points: 45 },
-          { points: 45 },
+          { points: null },
         ]
       }
     ]

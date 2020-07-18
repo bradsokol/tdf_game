@@ -7,6 +7,16 @@ function TeamResults(props) {
   const overallResult = props.overallResult;
   const stages = props.stages.filter(stage => stage.gameStage);
 
+  function formatPoints(points) {
+    if (points == null) {
+      return '-';
+    } else if (points === 0) {
+      return '';
+    } else {
+      return points;
+    }
+  }
+
   return (
     <div className="table-responsive">
       <Table striped className="table table-striped table-sm">
@@ -33,7 +43,7 @@ function TeamResults(props) {
                 <td className="text-right">{rider.points}</td>
                 {stages.map((stage, stageIndex) => {
                   return (
-                    <td className="text-right" key={stageIndex}>{stage.stageResults[0].riders[riderIndex].points}</td>
+                    <td className="text-right" key={stageIndex}>{formatPoints(stage.stageResults[0].riders[riderIndex].points)}</td>
                   )
                 })}
               </tr>
