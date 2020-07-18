@@ -54,7 +54,8 @@ class TeamResultsParserTest < ActiveSupport::TestCase
     assert_equal 7, rider.ordinal
     assert_equal 'J. Fuglsang', rider.name
     assert_equal 18, rider.total_points
-    expected_stage_points = @stage_numbers.zip([0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, nil, nil, nil, nil, nil]).to_h
+    points = [0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 9, 0, nil, nil, nil, nil, nil, nil]
+    expected_stage_points = @stage_numbers.zip(points).to_h
     assert_equal expected_stage_points, rider.stage_points
   end
 

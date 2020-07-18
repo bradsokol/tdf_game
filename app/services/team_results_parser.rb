@@ -23,6 +23,16 @@ class TeamResultsParser
 
     private
 
+    def format_points(points)
+      if points == '.'
+        0
+      elsif points == '*'
+        nil
+      else
+        points.to_i
+      end
+    end
+
     def parse_percentiles(line)
       /^.*Percentiles: *(.+)$/.match(line).to_a[1].split.map(&:to_i)
     rescue StandardError
@@ -44,7 +54,7 @@ class TeamResultsParser
                      .gsub(/\s+/m, ' ')
                      .strip
                      .split(' ')
-                     .map { |p| p == '.' ? 0 : p.to_i }
+                     .map { |p| format_points(p) }
 
       Rider.new(
         ordinal.to_i,
