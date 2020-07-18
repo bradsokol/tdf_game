@@ -23,6 +23,18 @@ export const GET_TEAM_RESULTS_QUERY = gql`
         id
         name
       }
+      stages {
+        id
+        number
+        gameStage
+        stageResults(playerId: $playerId) {
+          points
+          percentile
+          riders {
+            points
+          }
+        }
+      }
     }
     overallResults(year: $year, playerId: $playerId) {
       points
@@ -38,6 +50,7 @@ export const GET_TEAM_RESULTS_QUERY = gql`
 
 function Teams() {
   const [overallResult, setOverallResult] = useState(null);
+  const [stages, setStages] = useState([]);
   const [selectedTeamId, setSelectedTeamId] = useState(-1);
   const [teams, setTeams] = useState([]);
 
@@ -57,11 +70,12 @@ function Teams() {
     setSelectedTeamId(parseInt(teamId));
   }
 
-  if (loading) return <div><p>Loading...</p></div>;
   if (error) return <div><strong>Error:</strong> {error.toString()}</div>;
+  if (!data || loading) return <div><p>Loading...</p></div>;
 
-  if (overallResult == null) {
+  if (overallResult !== data.overallResults[0]) {
     setOverallResult(data.overallResults[0]);
+    setStages(data.tours[0].stages);
   }
 
   if (teams.length === 0) {
@@ -71,7 +85,7 @@ function Teams() {
 
   let teamResults = <p>Team results go here</p>;
   if (overallResult != null) {
-    teamResults = <TeamResults overallResult={overallResult}/>
+    teamResults = <TeamResults overallResult={overallResult} stages={stages}/>
     history.push(`/players/${year}/${selectedTeamId}`);
   }
 

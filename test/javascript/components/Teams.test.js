@@ -162,8 +162,35 @@ const teamsMock = {
               name: "Brian Power"
             },
           ],
+          stages: [
+            {
+              id: 1,
+              number: 1,
+              gameStage: true,
+              stageResults: [
+                {
+                  points: 1,
+                  percentile: 2,
+                  riders: [
+                    { points: 3 }
+                  ]
+                }
+              ]
+            }
+          ],
         },
       ],
+      overallResults: [{
+        points: 44,
+        percentile: 55,
+        riders: [
+          {
+            ordinal: 1,
+            name: 'E. Merckx',
+            points: 66
+          }
+        ]
+      }]
     },
   },
 }

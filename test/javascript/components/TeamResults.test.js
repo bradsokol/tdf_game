@@ -9,7 +9,7 @@ import TeamResults from '../../../app/javascript/components/TeamResults';
 
 describe('TeamResults', () => {
   it('shows the riders results', () => {
-    const wrapper = mount(<TeamResults overallResult={mockOverallResult}/>);
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
 
     let row = wrapper.find('tr').slice(1);
     expect(row.find('td').at(0).text()).toBe('1');
@@ -23,17 +23,49 @@ describe('TeamResults', () => {
   });
 
   it('shows the players overall total', () => {
-    const wrapper = mount(<TeamResults overallResult={mockOverallResult}/>);
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
 
     const row = wrapper.find('tr').slice(-2, -1)
     expect(row.find('td').at(2).text()).toBe('670');
   });
 
   it('shows the players overall percentile', () => {
-    const wrapper = mount(<TeamResults overallResult={mockOverallResult}/>);
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
 
     const row = wrapper.find('tr').slice(-1)
     expect(row.find('td').at(2).text()).toBe('40');
+  });
+
+  it('shows stages', () => {
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
+
+    const row = wrapper.find('tr').slice(0);
+    expect(row.find('th').at(3).text()).toBe('Stage 2');
+    expect(row.find('th').at(4).text()).toBe('Stage 3');
+  });
+
+  it('shows rider points', () => {
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
+
+    const row = wrapper.find('tr').slice(1);
+    expect(row.find('td').at(3).text()).toBe('23');
+    expect(row.find('td').at(4).text()).toBe('45');
+  });
+
+  it('shows the total stage points', () => {
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
+
+    const row = wrapper.find('tr').slice(3);
+    expect(row.find('td').at(3).text()).toBe('2');
+    expect(row.find('td').at(4).text()).toBe('4');
+  });
+
+  it('shows the stage percentile', () => {
+    const wrapper = mount(<TeamResults overallResult={mockOverallResult} stages={mockStages}/>);
+
+    const row = wrapper.find('tr').slice(4);
+    expect(row.find('td').at(3).text()).toBe('3');
+    expect(row.find('td').at(4).text()).toBe('5');
   });
 });
 
@@ -52,3 +84,45 @@ const mockOverallResult = {
     { ordinal: 2, name: 'Rider 2', points: 22 },
   ],
 };
+
+const mockStages = [
+  {
+    number: 1,
+    gameStage: false,
+    stageResults: [
+      {
+        points: 1,
+        percentile: 2,
+        riders: []
+      }
+    ]
+  },
+  {
+    number: 2,
+    gameStage: true,
+    stageResults: [
+      {
+        points: 2,
+        percentile: 3,
+        riders: [
+          { points: 23 },
+          { points: 23 },
+        ]
+      }
+    ]
+  },
+  {
+    number: 3,
+    gameStage: true,
+    stageResults: [
+      {
+        points: 4,
+        percentile: 5,
+        riders: [
+          { points: 45 },
+          { points: 45 },
+        ]
+      }
+    ]
+  },
+];
