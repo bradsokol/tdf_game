@@ -44,10 +44,12 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
   end
 
   test '#perform saves overall results' do
+    stub_stage_results(date: '20190712')
+    @stage.update!(date: Date.new(2019, 7, 12))
     StageResultsFetchJob.new.perform(@stage.id)
 
     results = @tour.overall_results.last
-    assert_equal Date.new(2019, 7, 9), results.date
+    assert_equal Date.new(2019, 7, 12), results.date
     assert_equal(-41, results.gap)
     assert_equal 28, results.overall_rank
     assert_equal 28, results.previous_rank
@@ -172,10 +174,10 @@ class StageResultsFetchJobTest < ActiveJob::TestCase
 
   private
 
-  def stub_stage_results
-    stub_request(:get, 'https://ifarm.nl/cgi-bin/getlines.cgi?DATE=20190709&SEARCH=Jim%20Hopper')
+  def stub_stage_results(date: '20190709')
+    stub_request(:get, "https://ifarm.nl/cgi-bin/getlines.cgi?DATE=#{date}&SEARCH=Jim%20Hopper")
       .to_return(status: 200, body: html_fixture('stage_results'))
-    stub_request(:get, 'https://ifarm.nl/cgi-bin/getlines.cgi?DATE=20190709&SEARCH=Will%20Byers')
+    stub_request(:get, "https://ifarm.nl/cgi-bin/getlines.cgi?DATE=#{date}&SEARCH=Will%20Byers")
       .to_return(status: 200, body: html_fixture('stage_results'))
   end
 

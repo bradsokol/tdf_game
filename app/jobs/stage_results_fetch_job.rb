@@ -21,6 +21,10 @@ class StageResultsFetchJob < ApplicationJob
 
   def update_stage_result(player, stage)
     overall_result = OverallResult.find_or_create_by(player_id: player.id, tour_id: stage.tour.id)
+
+    # TODO: Fix this hack
+    @save_overall = stage.date > overall_result.date
+
     stage_result = StageResult.find_or_create_by(player_id: player.id, stage_id: stage.id)
     StageResultsFetcher.perform(
       stage_date: stage.date,
@@ -28,7 +32,7 @@ class StageResultsFetchJob < ApplicationJob
       overall_result: overall_result,
       stage_result: stage_result
     )
-    overall_result.save!
+    overall_result.save! if @save_overall
     stage_result.save!
 
     update_team_result(player, stage_result, overall_result)
@@ -61,6 +65,6 @@ class StageResultsFetchJob < ApplicationJob
     end
 
     stage_result.update!(percentile: results.stage_percentiles[stage.number])
-    overall_result.update!(percentile: results.overall_percentile)
+    overall_result.update!(percentile: results.overall_percentile) if @save_overall
   end
 end
