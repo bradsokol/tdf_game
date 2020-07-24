@@ -5,27 +5,10 @@ AllCops:
     - 'node_modules/**/*'
     - 'public/**/*'
     - 'tmp/**/*'
-
-Layout/EmptyLinesAroundAttributeAccessor:
-  Enabled: true
+  NewCops: enable
 
 Layout/LineLength:
   Max: 120
-
-Layout/SpaceAroundMethodCallOperator:
-  Enabled: true
-
-Lint/DeprecatedOpenSSLConstant:
-  Enabled: true
-
-Lint/MixedRegexpCaptureTypes:
-  Enabled: true
-
-Lint/RaiseException:
-  Enabled: true
-
-Lint/StructNewOverride:
-  Enabled: true
 
 Metrics/AbcSize:
   Enabled: false
@@ -39,44 +22,11 @@ Metrics/ClassLength:
 Metrics/MethodLength:
   Enabled: false
 
-Style/AccessorGrouping:
-  Enabled: true
-
-Style/BisectedAttrAccessor:
-  Enabled: true
-
 Style/Documentation:
   Enabled: false
 
 Style/EmptyMethod:
   Enabled: false
-
-Style/ExponentialNotation:
-  Enabled: true
-
-Style/HashTransformKeys:
-  Enabled: true
-
-Style/HashTransformValues:
-  Enabled: true
-
-Style/HashEachMethods:
-  Enabled: true
-
-Style/RedundantAssignment:
-  Enabled: true
-
-Style/RedundantFetchBlock:
-  Enabled: true
-
-Style/RedundantRegexpCharacterClass:
-  Enabled: true
-
-Style/RedundantRegexpEscape:
-  Enabled: true
-
-Style/SlicingWithRange:
-  Enabled: true
 
 Style/TrailingCommaInArguments:
   Enabled: false
