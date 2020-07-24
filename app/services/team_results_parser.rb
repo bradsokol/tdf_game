@@ -24,9 +24,10 @@ class TeamResultsParser
     private
 
     def format_points(points)
-      if points == '.'
+      case points
+      when '.'
         0
-      elsif points == '*'
+      when '*'
         nil
       else
         points.to_i
