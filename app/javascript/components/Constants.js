@@ -4,8 +4,8 @@ const development = {
   api_url: 'http://localhost:5000/graphql'
 };
 
-const production = {
-  api_url: 'https://gentle-wildwood-88781.herokuapp.com/graphql'
-};
+// const production = {
+//   api_url: 'https://gentle-wildwood-88781.herokuapp.com/graphql'
+// };
 
-export const config = process.env.NODE_ENV === 'development' ? development : production;
+export const config = process.env.NODE_ENV === 'development' ? development : development;
