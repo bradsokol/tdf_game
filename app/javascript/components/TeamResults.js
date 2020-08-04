@@ -42,9 +42,13 @@ function TeamResults(props) {
                 <td className="text-left">{rider.name}</td>
                 <td className="text-right">{rider.points}</td>
                 {stages.map((stage, stageIndex) => {
-                  return (
-                    <td className="text-right" key={stageIndex}>{formatPoints(stage.stageResults[0].riders[riderIndex].points)}</td>
-                  )
+                  if (stage.stageResults.length > 0) {
+                    return (
+                      <td className="text-right" key={stageIndex}>{formatPoints(stage.stageResults[0].riders[riderIndex].points)}</td>
+                    )
+                  } else {
+                    return(<td key={stageIndex}/>)
+                  }
                 })}
               </tr>
             )
@@ -54,9 +58,13 @@ function TeamResults(props) {
             <td className="text-left"><strong>Total</strong></td>
             <td className="text-right"><strong>{overallResult.points}</strong></td>
             {stages.map((stage, stageIndex) => {
-              return (
-                <td className="text-right" key={stageIndex}><strong>{stage.stageResults[0].points}</strong></td>
-              )
+              if (stage.stageResults.length > 0) {
+                return (
+                  <td className="text-right" key={stageIndex}><strong>{stage.stageResults[0].points}</strong></td>
+                )
+              } else {
+                return(<td key={stageIndex}/>)
+              }
             })}
           </tr>
           <tr key="17">
@@ -64,9 +72,13 @@ function TeamResults(props) {
             <td className="text-left"><strong>Percentile</strong></td>
             <td className="text-right"><strong>{overallResult.percentile}</strong></td>
             {stages.map((stage, stageIndex) => {
-              return (
-                <td className="text-right" key={stageIndex}><strong>{stage.stageResults[0].percentile}</strong></td>
-              )
+              if (stage.stageResults.length > 0) {
+                return (
+                  <td className="text-right" key={stageIndex}><strong>{stage.stageResults[0].percentile}</strong></td>
+                )
+              } else {
+                return(<td key={stageIndex}/>)
+              }
             })}
           </tr>
         </tbody>

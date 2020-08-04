@@ -21,7 +21,7 @@ class StageResultsUpdater
     overall_result = OverallResult.find_or_create_by(player_id: player.id, tour_id: stage.tour.id)
 
     # TODO: Fix this hack
-    @save_overall = stage.date > overall_result.date
+    @save_overall = overall_result.new_record? || stage.date > overall_result.date
 
     stage_result = StageResult.find_or_create_by(player_id: player.id, stage_id: stage.id)
     StageResultsFetcher.perform(
