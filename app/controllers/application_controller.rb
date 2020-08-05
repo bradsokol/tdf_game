@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def set_year
     @year = params[:year]
   end
+
+  def most_recent_tour_with_results
+    Tour.all.order(year: :desc).select { |tour| tour.overall_results.present? }.first
+  end
 end

@@ -18,10 +18,6 @@ class OverallController < ApplicationController
 
   private
 
-  def most_recent_tour_with_results
-    Tour.all.order(year: :desc).select { |tour| tour.overall_results.present? }.first
-  end
-
   def redirect_to_default_year
     redirect_to action: 'index', year: most_recent_tour_with_results.year
   end

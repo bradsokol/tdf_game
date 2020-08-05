@@ -1,0 +1,24 @@
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th/>
+        <th class="text-left">Player</th>
+        <th class="text-right">Points</th>
+        <th class="text-right">Pool Behind</th>
+        <th class="text-right">Overall Rank</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stage_results.each_with_index do |result, index| %>
+        <tr>
+          <td class="text-right"><%= index + 1 %></td>
+          <td class="text-left"><%= result.player.name %></td>
+          <td class="text-right"><%= result.points %></td>
+          <td class="text-right"><%= @winner_points - result.points %></td>
+          <td class="text-right"><%= result.overall_rank %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
