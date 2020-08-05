@@ -28,7 +28,7 @@
         <td class="text-right"><%= result.overall_rank %></td>
         <td class="text-right"><%= result.previous_rank %></td>
         <td class="text-right"><%= result.previous_rank - result.overall_rank %></td>
-        <td class="text-right"><%= result.gap %></td>
+        <td class="text-right"><%= -1 * result.gap %></td>
       </tr>
     <% end %>
   </tbody>
