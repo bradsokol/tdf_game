@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  root to: 'overall#index'
+
   get 'overall', to: 'overall#default'
   get 'overall/:year', to: 'overall#index'
 
