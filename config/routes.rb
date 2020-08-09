@@ -7,4 +7,8 @@ Rails.application.routes.draw do
   get 'stages', to: 'stages#default'
   get 'stages/:year', to: 'stages#index'
   get 'stages/:year/:stage', to: 'stages#index'
+
+  get 'teams', to: 'teams#default'
+  get 'teams/:year', to: 'teams#index'
+  get 'teams/:year/:player', to: 'teams#index'
 end
