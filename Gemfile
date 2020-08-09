@@ -7,7 +7,6 @@ ruby '2.7.1'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clockwork'
-gem 'graphql'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 4.3'
 gem 'rack-cors'
@@ -27,7 +26,6 @@ group :development, :test do
 end
 
 group :development do
-  gem 'graphiql-rails'
   gem 'listen', '>= 3.0.5', '< 3.3'
   gem 'railroady'
   gem 'rubocop'
