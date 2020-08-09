@@ -1,66 +1,15 @@
 {
+  "name": "wtf",
+  "private": true,
   "dependencies": {
-    "@babel/preset-react": "^7.10.4",
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
-    "@rails/webpacker": "5.1.1",
-    "@types/react": "^16.9.44",
-    "@types/react-dom": "^16.9.8",
-    "apollo-cache-inmemory": "^1.6.6",
-    "apollo-client": "^2.6.10",
-    "apollo-link-http": "^1.5.17",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "babel-polyfill": "^6.26.0",
-    "bootstrap": "^4.5.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
-    "graphql": "^14.7.0",
-    "graphql-tag": "^2.11.0",
-    "history": "^5.0.0",
-    "jest-enzyme": "^7.1.2",
-    "prop-types": "^15.7.2",
-    "react": "^16.13.1",
-    "react-apollo": "^3.1.4",
-    "react-bootstrap": "^1.3.0",
-    "react-dom": "^16.13.1",
-    "react-redux": "^7.2.1",
-    "react-router-dom": "^5.2.0",
-    "react_ujs": "^2.6.1",
-    "redux": "^4.0.5",
-    "redux-thunk": "^2.3.0",
-    "reselect": "^4.0.0",
-    "ts-loader": "^8.0.2",
-    "typescript": "^3.9.7"
+    "@rails/actioncable": "^6.0.0",
+    "@rails/activestorage": "^6.0.0",
+    "@rails/ujs": "^6.0.0",
+    "@rails/webpacker": "4.2.2",
+    "turbolinks": "^5.2.0"
   },
+  "version": "0.1.0",
   "devDependencies": {
-    "@apollo/react-testing": "^3.1.4",
-    "babel-jest": "^26.2.2",
-    "eslint": "^7.6.0",
-    "eslint-plugin-jest": "^23.20.0",
-    "eslint-plugin-react": "^7.20.5",
-    "eslint-plugin-react-hooks": "^4.0.8",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^26.2.2",
-    "jest-message-util": "^26.2.0",
-    "react-test-renderer": "^16.13.1",
-    "regenerator-runtime": "^0.13.7",
-    "waait": "^1.0.5",
-    "wait-for-expect": "^3.0.2",
     "webpack-dev-server": "^3.11.0"
-  },
-  "scripts": {
-    "test": "jest",
-    "test-watch": "jest --watch"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "\\.(css|less)$": "identity-obj-proxy"
-    },
-    "roots": [
-      "test/javascript"
-    ],
-    "setupFilesAfterEnv": [
-      "./node_modules/jest-enzyme/lib/index.js"
-    ]
   }
 }
