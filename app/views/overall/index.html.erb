@@ -22,7 +22,7 @@
     <% @overall_results.each_with_index do |result, index| %>
       <tr>
         <td class="text-right"><%= index + 1 %></td>
-        <td><%= result.player.name %></td>
+        <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
         <td class="text-right"><%= result.points %></td>
         <td class="text-right"><%= leading_score - result.points %></td>
         <td class="text-right"><%= result.overall_rank %></td>
