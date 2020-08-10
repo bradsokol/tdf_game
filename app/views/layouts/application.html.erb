@@ -13,6 +13,9 @@
     <div class="container-fluid">
       <div class="row">
         <ul class="nav flex-column col-md-2 d-done d-md-block bg-light sidebar">
+          <li class="nav-item" style="padding: 10px 16px 10px 16px;">
+            <%= select_tag('tour', options_for_select(@tours.map { |tour| [tour.year, tour.year] }, @year), :onchange => 'tourSelected(this);') %>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="/overall/<%= @year %>">Overall</a>
           </li>
@@ -28,5 +31,12 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <%= yield %>
     </main>
+
+    <script>
+      function tourSelected(selectedObject) {
+        const year = <%= @year %>;
+        window.location = window.location.replace(year, selectedObject.value);
+      }
+    </script>
   </body>
 </html>
