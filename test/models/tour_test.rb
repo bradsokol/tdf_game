@@ -39,6 +39,12 @@ class TourTest < ActiveSupport::TestCase
     refute_predicate tour, :valid?
   end
 
+  test '.game_stages returns only game stages' do
+    game_stages = tours(:tdf_2019).game_stages
+
+    assert_equal 3, game_stages.count
+  end
+
   private
 
   def tour_input(inputs = {})
