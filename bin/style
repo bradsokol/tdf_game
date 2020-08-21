@@ -1,5 +1,3 @@
 #! /bin/bash
 
 bundle exec rubocop
-
-yarn run eslint app/javascript test/javascript
