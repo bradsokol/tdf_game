@@ -53,3 +53,33 @@ tdf_2019_5:
   distance: 176
   stage_type: 'rolling'
   game_stage: true
+
+tdf_2020_1:
+  tour: tdf_2020
+  number: 1
+  date: '2019-08-29'
+  start_town: 'Nice Moyen Pays'
+  finish_town: 'Nice'
+  distance: 156
+  stage_type: 'flat'
+  game_stage: false
+
+tdf_2020_2:
+  tour: tdf_2020
+  number: 2
+  date: '2019-08-30'
+  start_town: 'Nice Haut Pays'
+  finish_town: 'Nice'
+  distance: 187
+  stage_type: 'mountain'
+  game_stage: false
+
+tdf_2020_3:
+  tour: tdf_2020
+  number: 3
+  date: '2019-08-31'
+  start_town: 'Nice'
+  finish_town: 'Sisteron'
+  distance: 198
+  stage_type: 'flat'
+  game_stage: true

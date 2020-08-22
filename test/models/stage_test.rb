@@ -88,11 +88,11 @@ class StageTest < ActiveSupport::TestCase
   end
 
   test 'game_stages returns only game stages' do
-    assert_equal 3, Stage.game_stages.count
+    assert_equal 4, Stage.game_stages.count
   end
 
   test 'need_results returns stages that need results' do
-    assert_equal 2, Stage.need_results.count
+    assert_equal 3, Stage.need_results.count
   end
 
   private

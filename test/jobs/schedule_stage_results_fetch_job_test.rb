@@ -6,6 +6,7 @@ class ScheduleStageResultsFetchJobTest < ActiveJob::TestCase
   test 'perform queues stage results fetch job if stage does not have results' do
     StageResultsFetchJob.expects(:perform_later).with(stages(:tdf_2019_4).id)
     StageResultsFetchJob.expects(:perform_later).with(stages(:tdf_2019_5).id)
+    StageResultsFetchJob.expects(:perform_later).with(stages(:tdf_2020_3).id)
 
     ScheduleStageResultsFetchJob.perform_now
   end
@@ -33,6 +34,7 @@ class ScheduleStageResultsFetchJobTest < ActiveJob::TestCase
 
     stages(:tdf_2019_4).update!(results_downloaded_at: Time.now.utc)
     stages(:tdf_2019_5).update!(results_downloaded_at: Time.now.utc)
+    stages(:tdf_2020_3).update!(results_downloaded_at: Time.now.utc)
 
     travel_to(Time.zone.local(2020, 2, 28, 10, 59, 59).utc) do
       StageResultsFetchJob.expects(:perform_later).never
