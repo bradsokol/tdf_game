@@ -1,7 +1,9 @@
 <% content_for :title, 'Team Results' %>
 
 <h2>Team Results</h2>
-<p><%= select_tag('team', options_for_select(options_from_players(@players), @player.id), :onchange => 'playerSelected(this);') %></p>
+<% if @player %>
+  <p><%= select_tag('team', options_for_select(options_from_players(@players), @player.id), :onchange => 'playerSelected(this);') %></p>
+<% end %>
 
 <% if @overall_results %>
   <%= render 'index',  overall_results: @overall_results, player: @player, stages: @stages %>

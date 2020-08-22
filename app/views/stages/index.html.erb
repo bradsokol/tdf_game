@@ -7,7 +7,7 @@
   <% if @stage_results.present? %>
     <%= render partial: 'stage_results', locals: { stage_results: @stage_results, winner_points: @winner_points } %>
   <% else %>
-    <p>Stage results are not available. Check back later.</p>
+    <p><%= time_to_stage_results(@stage) %></p>
   <% end %>
 <% else %>
   <p>This stage is not part of the game.</p>

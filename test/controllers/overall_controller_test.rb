@@ -3,10 +3,10 @@
 require 'test_helper'
 
 class OverallControllerTest < ActionDispatch::IntegrationTest
-  test '#default redirects to the default year' do
+  test '#default redirects to the most recent year' do
     get '/overall'
 
-    assert_redirected_to '/overall/2019'
+    assert_redirected_to '/overall/2020'
   end
 
   test '#index returns response' do
@@ -25,9 +25,9 @@ class OverallControllerTest < ActionDispatch::IntegrationTest
     assert_select 'p', 'The tour starts on August 29. Check back in 7 days.'
   end
 
-  test '#index redirects to default year if requested tour not found' do
+  test '#index redirects to most recent year if requested tour not found' do
     get '/overall/1900'
 
-    assert_redirected_to '/overall/2019'
+    assert_redirected_to '/overall/2020'
   end
 end

@@ -8,10 +8,11 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     @first_player = Registration.where(year: @tour.year).joins(:player).order(:name).first.player
   end
 
-  test '#default redirects to the first stage with results in default year' do
+  test '#default redirects to the first stage with results in most recent year' do
     get '/teams'
 
-    assert_redirected_to "/teams/#{@tour.year}/#{@first_player.id}"
+    most_recent_tour = Tour.all.order(:year).last
+    assert_redirected_to "/teams/#{most_recent_tour.year}/#{@first_player.id}"
   end
 
   test '#index returns response' do
@@ -23,10 +24,11 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test '#index redirects to default when tour not found' do
+  test '#index redirects to most recent when tour not found' do
     get '/teams/1900/1'
 
-    assert_redirected_to "/teams/#{@tour.year}/#{@first_player.id}"
+    most_recent_tour = Tour.all.order(:year).last
+    assert_redirected_to "/teams/#{most_recent_tour.year}/#{@first_player.id}"
   end
 
   test '#index redirects to default when player not found' do

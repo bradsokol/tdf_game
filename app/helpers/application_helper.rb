@@ -19,7 +19,7 @@ module ApplicationHelper
     days = (tour.start_date - Date.today).numerator
     if days.negative?
       days_to_game_stage = (tour.game_stages.first.date - Date.today).numerator
-      if days_to_game_stage.zero?
+      if days_to_game_stage <= 0
         'Results should be available shortly.'
       else
         "The tour has started but the first game stage is in #{pluralize(days_to_game_stage, 'day')}."

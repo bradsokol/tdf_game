@@ -9,21 +9,35 @@ class TeamsController < ApplicationController
     @tour = Tour.find_by(year: @year)
     @player = Player.find_by(id: params[:player])
 
-    if @tour.nil? || @player.nil?
+    if @tour.nil?
       redirect_to_default
       return
     end
 
-    @overall_results = @tour.overall_results.find_by(player_id: params[:player])
+    if @player.nil?
+      @player = first_player(@tour)
+      redirect_to action: 'index', year: @tour.year, player: @player.id
+      return
+    end
+
+    @overall_results = @tour.overall_results.find_by(player_id: @player.id) if @player
     @players = Registration.where(year: @year).map(&:player).sort { |a, b| a.name <=> b.name }
     @stages = @tour.stages.select(&:game_stage?)
   end
 
   private
 
+  def first_player(tour)
+    Registration.where(year: tour.year).joins(:player).order(:name).first&.player
+  end
+
   def redirect_to_default
-    tour = most_recent_tour_with_results
-    player = Registration.where(year: tour.year).joins(:player).order(:name).first.player
-    redirect_to action: 'index', year: tour.year, player: player.id
+    tour = Tour.all.order(:year).last
+    player = first_player(tour)
+    if player
+      redirect_to action: 'index', year: tour.year, player: player.id
+    else
+      redirect_to action: 'index', year: tour.year
+    end
   end
 end

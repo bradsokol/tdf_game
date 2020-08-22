@@ -6,7 +6,7 @@ class StagesControllerTest < ActionDispatch::IntegrationTest
   test '#default redirects to the first stage with results in default year' do
     get '/stages'
 
-    assert_redirected_to '/stages/2019/3'
+    assert_redirected_to '/stages/2020/3'
   end
 
   test '#index returns response' do
@@ -18,16 +18,16 @@ class StagesControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
-  test '#index redirects to first stage with results in default year when tour not found' do
+  test '#index redirects to first stage with results in most recent year when tour not found' do
     get '/stages/1900/1'
 
-    assert_redirected_to '/stages/2019/3'
+    assert_redirected_to '/stages/2020/3'
   end
 
-  test '#index redirects to first stage with results in default year when stage not found' do
+  test '#index redirects to first stage with results in most recent year when stage not found' do
     get '/stages/2020/99'
 
-    assert_redirected_to '/stages/2019/3'
+    assert_redirected_to '/stages/2020/3'
   end
 
   test '#index shows message if stage is not a game stage' do
@@ -40,6 +40,6 @@ class StagesControllerTest < ActionDispatch::IntegrationTest
     get '/stages/2019/4'
 
     assert_response :success
-    assert @response.body.include?('Stage results are not available. Check back later.')
+    assert @response.body.include?('Results should be available shortly.')
   end
 end

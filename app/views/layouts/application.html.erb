@@ -34,8 +34,10 @@
 
     <script>
       function tourSelected(selectedObject) {
-        const year = <%= @year %>;
-        window.location = window.location.replace(year, selectedObject.value);
+        const regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
+        const year = regex.exec(window.location.href).groups.year;
+        const url = window.location.href.replace(year, selectedObject.value); 
+        window.location = url;
       }
     </script>
   </body>
