@@ -6,17 +6,17 @@ class TeamsController < ApplicationController
   end
 
   def index
-    tour = Tour.find_by(year: @year)
+    @tour = Tour.find_by(year: @year)
     @player = Player.find_by(id: params[:player])
 
-    if tour.nil? || @player.nil?
+    if @tour.nil? || @player.nil?
       redirect_to_default
       return
     end
 
-    @overall_results = tour.overall_results.find_by(player_id: params[:player])
+    @overall_results = @tour.overall_results.find_by(player_id: params[:player])
     @players = Registration.where(year: @year).map(&:player).sort { |a, b| a.name <=> b.name }
-    @stages = tour.stages.select(&:game_stage?)
+    @stages = @tour.stages.select(&:game_stage?)
   end
 
   private

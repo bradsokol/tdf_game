@@ -1,0 +1,54 @@
+<div class="table-responsive">
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th/>
+        <th class="text-left">Rider</th>
+        <th class="text-right">Total Points</th>
+        <% stages.each do |stage| %>
+          <th class="text-right"><a href="/stages/<%= @year %>/<%= stage.number %>"><%= "Stage #{stage.number}" %></a></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% overall_results.player_rider_points.order(ordinal: :asc).each_with_index do |result, rider_index| %>
+        <tr>
+          <td class="text-right"><%= result.ordinal %></td>
+          <td class="text-left"><%= result.rider.name %></td>
+          <td class="text-right"><%= result.points %></td>
+          <% stages.each do |stage| %>
+            <% if stage.stage_results.length > 0 %>
+              <td class="text-right"><%= format_points(stage_results_for_player(stage, player).player_rider_stage_points[rider_index].points) %></td>
+            <% else %>
+              <td/>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+      <tr>
+        <td/>
+        <td class="text-left"><strong>Total</strong></td>
+        <td class="text-right"><strong><%= overall_results.points %></strong></td>
+        <% stages.each do |stage| %>
+          <% if stage.stage_results.length > 0 %>
+            <td class="text-right"><strong><%= stage_results_for_player(stage, player).points %></strong></td>
+          <% else %>
+            <td/>
+          <% end %>
+        <% end %>
+      </tr>
+      <tr>
+        <td/>
+        <td class="text-left"><strong>Percentile</strong></td>
+        <td class="text-right"><strong><%= overall_results.percentile %></strong></td>
+        <% stages.each do |stage| %>
+          <% if stage.stage_results.length > 0 %>
+            <td class="text-right"><strong><%= stage_results_for_player(stage, player).percentile %></strong></td>
+          <% else %>
+            <td/>
+          <% end %>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</div>

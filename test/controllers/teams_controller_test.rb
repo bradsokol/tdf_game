@@ -3,15 +3,42 @@
 require 'test_helper'
 
 class TeamsControllerTest < ActionDispatch::IntegrationTest
-  test 'should get default' do
-    get '/teams'
-    assert_response :redirect
+  setup do
+    @tour = tours(:tdf_2019)
+    @first_player = Registration.where(year: @tour.year).joins(:player).order(:name).first.player
   end
 
-  test 'should get index' do
-    tour = tours(:tdf_2019)
-    player = Registration.where(year: tour.year).joins(:player).order(:name).first.player
-    get "/teams/#{tour.year}/#{player.id}"
+  test '#default redirects to the first stage with results in default year' do
+    get '/teams'
+
+    assert_redirected_to "/teams/#{@tour.year}/#{@first_player.id}"
+  end
+
+  test '#index returns response' do
+    get "/teams/#{@tour.year}/#{@first_player.id}"
+
     assert_response :success
+    assert_select 'select[name=team]' do
+      assert_select 'option[selected=selected]', 'Jim Hopper'
+    end
+  end
+
+  test '#index redirects to default when tour not found' do
+    get '/teams/1900/1'
+
+    assert_redirected_to "/teams/#{@tour.year}/#{@first_player.id}"
+  end
+
+  test '#index redirects to default when player not found' do
+    get "/teams/#{@tour.year}/1"
+
+    assert_redirected_to "/teams/#{@tour.year}/#{@first_player.id}"
+  end
+
+  test '#index shows message when results are not available' do
+    get "/teams/2020/#{@first_player.id}"
+
+    assert_response :success
+    assert @response.body.include?('The tour starts on August 29. Check back in 7 days.')
   end
 end
