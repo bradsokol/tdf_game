@@ -6,12 +6,12 @@ class OverallController < ApplicationController
   end
 
   def index
-    tour = Tour.find_by(year: @year)
+    @tour = Tour.find_by(year: @year)
 
-    if tour&.overall_results.blank?
+    if @tour.nil?
       redirect_to_default_year
-    else
-      @overall_results = tour.overall_results.order(points: :desc)
+    elsif @tour.overall_results.present?
+      @overall_results = @tour.overall_results.order(points: :desc)
       @date = @overall_results.first.date
     end
   end

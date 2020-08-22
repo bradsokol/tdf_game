@@ -2,34 +2,8 @@
 
 <h2>Overall Results</h2>
 
-<p>Results up to <%= @date.strftime('%B %e, %Y') %></p>
-
-<table class="table table-striped table-sm">
-  <thead>
-    <tr>
-      <th/>
-      <th class="text-left">Player</th>
-      <th class="text-right">Points</th>
-      <th class="text-right">Points Behind</th>
-      <th class="text-right">Overall Rank</th>
-      <th class="text-right">Previous Rank</th>
-      <th class="text-right">Rank Change</th>
-      <th class="text-right">Points Behind Overall</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% leading_score = @overall_results.first.points %>
-    <% @overall_results.each_with_index do |result, index| %>
-      <tr>
-        <td class="text-right"><%= index + 1 %></td>
-        <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
-        <td class="text-right"><%= result.points %></td>
-        <td class="text-right"><%= leading_score - result.points %></td>
-        <td class="text-right"><%= result.overall_rank %></td>
-        <td class="text-right"><%= result.previous_rank %></td>
-        <td class="text-right"><%= result.previous_rank - result.overall_rank %></td>
-        <td class="text-right"><%= -1 * result.gap %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<% if @overall_results %>
+  <%= render 'index',  overall_results: @overall_results, date: @date %>
+<% else %>
+  <p><%= time_to_tour_results(@tour) %></p>
+<% end %>
