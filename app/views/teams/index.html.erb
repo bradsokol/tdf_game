@@ -3,6 +3,8 @@
 <h2>Team Results</h2>
 <% if @player %>
   <p><%= select_tag('team', options_for_select(options_from_players(@players), @player.id), :onchange => 'playerSelected(this);') %></p>
+<% else %>
+  <p>No players are registered yet.</p>
 <% end %>
 
 <% if @overall_results %>

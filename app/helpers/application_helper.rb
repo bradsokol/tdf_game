@@ -17,7 +17,7 @@ module ApplicationHelper
 
   def time_to_tour_results(tour)
     days = (tour.start_date - Date.today).numerator
-    if days.negative?
+    if days <= 0
       days_to_game_stage = (tour.game_stages.first.date - Date.today).numerator
       if days_to_game_stage <= 0
         'Results should be available shortly.'

@@ -16,8 +16,6 @@ class TeamsController < ApplicationController
 
     if @player.nil?
       @player = first_player(@tour)
-      redirect_to action: 'index', year: @tour.year, player: @player.id
-      return
     end
 
     @overall_results = @tour.overall_results.find_by(player_id: @player.id) if @player
