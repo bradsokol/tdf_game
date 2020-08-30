@@ -1,5 +1,6 @@
 <p>Results up to <%= date.strftime('%B %e, %Y') %></p>
 
+<h3>The Podium</h3>
 <table class="table table-striped table-sm">
   <thead>
     <tr>
@@ -15,7 +16,7 @@
   </thead>
   <tbody>
     <% leading_score = overall_results.first.points %>
-    <% overall_results.each_with_index do |result, index| %>
+    <% overall_results[..2].each_with_index do |result, index| %>
       <tr>
         <td class="text-right"><%= index + 1 %></td>
         <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
@@ -29,3 +30,75 @@
     <% end %>
   </tbody>
 </table>
+
+<h3>The Wannabes</h3>
+
+<% if overall_results.count > 3 %>
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th/>
+        <th class="text-left">Player</th>
+        <th class="text-right">Points</th>
+        <th class="text-right">Points Behind</th>
+        <th class="text-right">Overall Rank</th>
+        <th class="text-right">Previous Rank</th>
+        <th class="text-right">Rank Change</th>
+        <th class="text-right">Points Behind Overall</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% leading_score = overall_results.first.points %>
+      <% overall_results[3..7].each_with_index do |result, index| %>
+        <tr>
+          <td class="text-right"><%= index + 4 %></td>
+          <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
+          <td class="text-right"><%= result.points %></td>
+          <td class="text-right"><%= leading_score - result.points %></td>
+          <td class="text-right"><%= result.overall_rank %></td>
+          <td class="text-right"><%= result.previous_rank %></td>
+          <td class="text-right"><%= result.previous_rank - result.overall_rank %></td>
+          <td class="text-right"><%= -1 * result.gap %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<% if overall_results.count > 8 %>
+  <h3>Everybody Else</h3>
+
+  <table class="table table-striped table-sm">
+    <thead>
+      <tr>
+        <th/>
+        <th class="text-left">Player</th>
+        <th class="text-right">Points</th>
+        <th class="text-right">Points Behind</th>
+        <th class="text-right">Overall Rank</th>
+        <th class="text-right">Previous Rank</th>
+        <th class="text-right">Rank Change</th>
+        <th class="text-right">Points Behind Overall</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% leading_score = overall_results.first.points %>
+      <% overall_results[8..].each_with_index do |result, index| %>
+        <% if index == overall_results.length - 9 %>
+        <tr style="background-color: red;">
+        <% else %>
+        <tr>
+        <% end %>
+          <td class="text-right"><%= index + 9 %></td>
+          <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
+          <td class="text-right"><%= result.points %></td>
+          <td class="text-right"><%= leading_score - result.points %></td>
+          <td class="text-right"><%= result.overall_rank %></td>
+          <td class="text-right"><%= result.previous_rank %></td>
+          <td class="text-right"><%= result.previous_rank - result.overall_rank %></td>
+          <td class="text-right"><%= -1 * result.gap %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
