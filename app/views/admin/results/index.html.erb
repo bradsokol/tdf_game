@@ -1,0 +1,12 @@
+<% flash.each do |type, msg| %>
+  <div class="alert alert-info">
+    <%= msg %>
+  </div>
+<% end %>
+
+<%= form_with(url: admin_results_path) do %>
+  <%= label_tag(:stage, Stage) %>
+  <%= select_tag(:stage, options_from_collection_for_select(@stages, 'id', 'date', @stage_needing_results.id)) %>
+  <p><%= submit_tag('Update results') %></p>
+  <p><%= link_to('Go to site', root_path) %></p>
+<% end %>
