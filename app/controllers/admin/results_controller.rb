@@ -30,8 +30,8 @@ module Admin
 
     def results_available?(stage)
       date_params = { year: stage.date.year, month: stage.date.month, day: stage.date.day }
-      uri = URI(format('https://ifarm.nl/tdf/%<year>04d%<month>02d%<day>02d.html', date_params))
-      response = Net::HTTP.get_response(uri)
+      @results_url = format('https://ifarm.nl/tdf/%<year>04d%<month>02d%<day>02d.html', date_params)
+      response = Net::HTTP.get_response(URI(@results_url))
 
       response.is_a?(Net::HTTPSuccess) && response.body.include?("September #{stage.date.day}")
     end

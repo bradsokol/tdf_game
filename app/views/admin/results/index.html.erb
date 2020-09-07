@@ -4,7 +4,12 @@
   </div>
 <% end %>
 
-<p>Stage results <%= @results_available ? 'are' : 'are not' %> available for <%= @stage_needing_results.date %>.</p>
+<% if @results_available %>
+  <p><%= link_to('Stage results', @results_url) %> are available for <%= @stage_needing_results.date %>.</p>
+<% else %>
+  <p>Stage results are not available for <%= @stage_needing_results.date %>.</p>
+<% end %>
+
 <%= form_with(url: admin_results_path) do %>
   <%= label_tag(:stage, Stage) %>
   <%= select_tag(:stage, options_from_collection_for_select(@stages, 'id', 'date', @stage_needing_results.id)) %>
