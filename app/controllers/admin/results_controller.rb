@@ -6,7 +6,7 @@ module Admin
     before_action :find_tour
 
     def index
-      @stages = @tour.game_stages
+      @stages = @tour.game_stages.reject { |stage| stage.date.future? }
       @stage_needing_results = Stage.need_results.first
     end
 
