@@ -8,6 +8,7 @@ module Admin
     def index
       @stages = @tour.game_stages.reject { |stage| stage.date.future? }
       @stage_needing_results = Stage.need_results.first
+      @results_available = results_available?(@stage_needing_results)
     end
 
     def update
@@ -25,6 +26,14 @@ module Admin
 
     def find_tour
       @tour = Tour.all.order(year: :desc).first
+    end
+
+    def results_available?(stage)
+      date_params = { year: stage.date.year, month: stage.date.month, day: stage.date.day }
+      uri = URI(format('https://ifarm.nl/tdf/%<year>04d%<month>02d%<day>02d.html', date_params))
+      response = Net::HTTP.get_response(uri)
+
+      response.is_a?(Net::HTTPSuccess) && response.body.include?("September #{stage.date.day}")
     end
   end
 end
