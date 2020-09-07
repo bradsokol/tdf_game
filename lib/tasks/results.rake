@@ -1,6 +1,28 @@
 # frozen_string_literal: true
 
 namespace :results do
+  desc 'Delete results for a year'
+  task delete: :environment do
+    abort 'YEAR must be specified' unless ENV['YEAR']
+
+    puts 'YOU ARE ABOUT TO DELETE ALL RESULTS. RE-ENTER THE YEAR TO CONFIRM.'
+    confirm_year = $stdin.gets.chomp
+    abort 'Aborting...' if confirm_year != ENV['YEAR']
+
+    tour = Tour.find_by(year: ENV['YEAR'])
+
+    tour.stages.each do |stage|
+      stage.stage_results.each { |stage_result| stage_result.player_rider_stage_points.destroy_all }
+    end
+    tour.riders.each { |rider| rider.player_rider_points.destroy_all }
+    tour.overall_results.destroy_all
+    tour.riders.destroy_all
+    Registration.where(year: tour.year).destroy_all
+    tour.stages.each { |stage| stage.stage_results.destroy_all }
+    tour.stages.destroy_all
+    tour.destroy!
+  end
+
   desc 'Update results for stage'
   task update: :environment do
     abort 'STAGE number must be specified' unless ENV['STAGE']
