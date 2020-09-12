@@ -10,19 +10,30 @@
       </tr>
     </thead>
     <tbody>
+      <% separator = false %>
+      <% ordinal = 1 %>
+      <% points = -1 %>
       <% @stage_results.each_with_index do |result, index| %>
         <tr>
-          <td class="text-right"><%= index + 1 %></td>
+          <% if result.points != points %>
+            <% if @stage_results.count > 3 && !separator && ordinal > 3 %>
+              <% separator = true %>
+              <tr style="height: 10px !important; background-color: #999999;">
+                <td style="background-color: #999999;" colspan="5">&nbsp;</td>
+              </tr>
+            <% end %>
+
+            <% points = result.points %>
+            <td class="text-right"><%= ordinal %></td>
+          <% else %>
+            <td class="text-right">&nbsp;</td>
+          <% end %>
+          <% ordinal += 1 %>
           <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
           <td class="text-right"><%= result.points %></td>
           <td class="text-right"><%= @winner_points - result.points %></td>
           <td class="text-right"><%= result.overall_rank %></td>
         </tr>
-        <% if index == 2 && @stage_results.count > 3 %>
-          <tr style="height: 10px !important; background-color: #999999;">
-            <td style="background-color: #999999;" colspan="5">&nbsp;</td>
-          </tr>
-        <% end %>
       <% end %>
     </tbody>
   </table>
