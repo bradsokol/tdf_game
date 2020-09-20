@@ -15,10 +15,10 @@
     </tr>
   </thead>
   <tbody>
-    <% leading_score = overall_results.first.points %>
-    <% overall_results[..2].each_with_index do |result, index| %>
+    <% leading_score = @podium.first.points %>
+    <% podium.each_with_index do |result, index| %>
       <tr>
-        <td class="text-right"><%= index + 1 %></td>
+        <td class="text-right"><%= result.ordinal || ' ' %></td>
         <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
         <td class="text-right"><%= result.points %></td>
         <td class="text-right"><%= leading_score - result.points %></td>
@@ -33,7 +33,7 @@
 
 <h3>The Wannabes</h3>
 
-<% if overall_results.count > 3 %>
+<% if wannabees.count > 0 %>
   <table class="table table-striped table-sm">
     <thead>
       <tr>
@@ -48,10 +48,10 @@
       </tr>
     </thead>
     <tbody>
-      <% leading_score = overall_results.first.points %>
-      <% overall_results[3..7].each_with_index do |result, index| %>
+      <% leading_score = podium.first.points %>
+      <% wannabees.each_with_index do |result, index| %>
         <tr>
-          <td class="text-right"><%= index + 4 %></td>
+          <td class="text-right"><%= result.ordinal || ' ' %></td>
           <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
           <td class="text-right"><%= result.points %></td>
           <td class="text-right"><%= leading_score - result.points %></td>
@@ -65,7 +65,7 @@
   </table>
 <% end %>
 
-<% if overall_results.count > 8 %>
+<% if peleton.count > 0 %>
   <h3>The Peloton</h3>
 
   <table class="table table-striped table-sm">
@@ -82,14 +82,14 @@
       </tr>
     </thead>
     <tbody>
-      <% leading_score = overall_results.first.points %>
-      <% overall_results[8..].each_with_index do |result, index| %>
-        <% if index == overall_results.length - 9 %>
+      <% leading_score = podium.first.points %>
+      <% peleton.each_with_index do |result, index| %>
+        <% if index == peleton.count - 1 %>
         <tr style="background-color: red;">
         <% else %>
         <tr>
         <% end %>
-          <td class="text-right"><%= index + 9 %></td>
+          <td class="text-right"><%= result.ordinal %></td>
           <td class="text-left"><a href="/teams/<%= @year %>/<%= result.player.id %>"><%= result.player.name %></a></td>
           <td class="text-right"><%= result.points %></td>
           <td class="text-right"><%= leading_score - result.points %></td>

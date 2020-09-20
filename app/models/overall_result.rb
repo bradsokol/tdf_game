@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class OverallResult < ApplicationRecord
+  attribute :ordinal
+
   belongs_to :player
   belongs_to :tour
   has_many :player_rider_points, class_name: 'PlayerRiderPoints'

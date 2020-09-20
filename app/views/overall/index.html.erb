@@ -2,8 +2,8 @@
 
 <h2>Overall Results</h2>
 
-<% if @overall_results %>
-  <%= render 'index',  overall_results: @overall_results, date: @date %>
+<% if @podium %>
+  <%= render 'index',  podium: @podium, wannabees: @wannabees, peleton: @peleton, date: @date %>
 <% else %>
   <p><%= time_to_tour_results(@tour) %></p>
 <% end %>
