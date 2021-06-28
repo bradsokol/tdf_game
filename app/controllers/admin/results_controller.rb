@@ -33,7 +33,8 @@ module Admin
       @results_url = format('https://ifarm.nl/tdf/%<year>04d%<month>02d%<day>02d.html', date_params)
       response = Net::HTTP.get_response(URI(@results_url))
 
-      response.is_a?(Net::HTTPSuccess) && response.body.include?("September #{stage.date.day}")
+      month = stage.date.month == 6 ? 'June' : 'July'
+      response.is_a?(Net::HTTPSuccess) && response.body.include?("#{month} #{stage.date.day}")
     end
   end
 end
