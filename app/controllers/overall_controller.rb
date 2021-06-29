@@ -16,9 +16,19 @@ class OverallController < ApplicationController
 
       @podium, next_index, next_ordinal = add_ordinals(overall_results, index: 0, ordinal: 1, places: 3)
 
-      @wannabees, next_index, next_ordinal = add_ordinals(overall_results, index: next_index, ordinal: next_ordinal, places: 5)
+      @wannabees, next_index, next_ordinal = add_ordinals(
+        overall_results,
+        index: next_index,
+        ordinal: next_ordinal,
+        places: 5
+      )
 
-      @peleton, = add_ordinals(overall_results, index: next_index, ordinal: next_ordinal, places: overall_results.length - @podium.length - @wannabees.length)
+      @peleton, = add_ordinals(
+        overall_results,
+        index: next_index,
+        ordinal: next_ordinal,
+        places: overall_results.length - @podium.length - @wannabees.length
+      )
     end
   end
 
