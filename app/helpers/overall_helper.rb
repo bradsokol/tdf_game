@@ -8,4 +8,12 @@ module OverallHelper
       ''
     end
   end
+
+  def subtitle(tour, date)
+    if tour.stages.last.date == date
+      'Final results'
+    else
+      "Results up to #{date.strftime('%B %e, %Y')}"
+    end
+  end
 end
