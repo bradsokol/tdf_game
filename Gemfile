@@ -23,6 +23,7 @@ gem 'webpacker'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
+  gem 'debug'
   gem 'pry-byebug'
   gem 'pry-rails'
 end
