@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.4'
+ruby '3.1.2'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clockwork'
@@ -11,9 +11,10 @@ gem 'devise'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma', '~> 5.5'
 gem 'rack-cors'
-gem 'rails', '~> 6.1.5'
+gem 'rails', '~> 7.0.2'
 gem 'react-rails'
 gem 'sidekiq'
+gem 'sprockets-rails'
 gem 'webpacker'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -31,8 +32,8 @@ group :development do
   gem 'railroady'
   gem 'rubocop'
   gem 'rubocop-rails'
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'spring', '~> 3.1.1'
+  gem 'spring-watcher-listen', github: "rails/spring-watcher-listen", branch: "master"
   gem 'web-console'
 end
 
