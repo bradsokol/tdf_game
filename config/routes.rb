@@ -8,8 +8,6 @@ Rails.application.routes.draw do
     post 'results', to: 'results#update'
   end
 
-  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-
   root to: 'overall#index'
 
   get 'overall', to: 'overall#default'
