@@ -8,7 +8,7 @@ module Admin
     def index
       @stages = @tour.game_stages.reject { |stage| stage.date.future? }
       @stage_needing_results = Stage.need_results.first
-      @results_available = results_available?(@stage_needing_results)
+      @results_available = results_available?(@stage_needing_results) if @stage_needing_results.present?
     end
 
     def update
