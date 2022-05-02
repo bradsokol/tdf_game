@@ -123,7 +123,7 @@ class StageResultsUpdaterTest < ActiveSupport::TestCase
     rider = @tour.riders.create!(name: 'P. Sagan')
     overall_result = overall_results(:tdf_2019_jim_hopper)
 
-    overall_result.player_rider_points.create!(ordinal: 1, points: 1, rider: rider)
+    overall_result.player_rider_points.create!(ordinal: 1, points: 1, rider:)
 
     assert_difference -> { PlayerRiderPoints.count } => (@tour.overall_results.count * 15) - 1 do
       StageResultsUpdater.new.perform(@stage.id)

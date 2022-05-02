@@ -9,7 +9,7 @@ class OverallResultsParserTest < ActiveSupport::TestCase
 
   test 'perform parses overall results' do
     html = Nokogiri::HTML(html_fixture('stage_results'))
-    OverallResultsParser.perform(html: html, overall_result: @overall_result)
+    OverallResultsParser.perform(html:, overall_result: @overall_result)
 
     assert_equal 28, @overall_result.overall_rank
     assert_equal 28, @overall_result.previous_rank
@@ -19,7 +19,7 @@ class OverallResultsParserTest < ActiveSupport::TestCase
 
   test 'perform parses overall results from first day' do
     html = Nokogiri::HTML(html_fixture('stage_results_first_day'))
-    OverallResultsParser.perform(html: html, overall_result: @overall_result)
+    OverallResultsParser.perform(html:, overall_result: @overall_result)
 
     assert_equal 77, @overall_result.overall_rank
     assert_nil @overall_result.previous_rank
@@ -35,7 +35,7 @@ class OverallResultsParserTest < ActiveSupport::TestCase
          .with('[OverallResults] Failed to parse overall results:   THIS IS INVALID')
 
     assert_raises do
-      OverallResultsParser.perform(html: html, overall_result: @overall_result)
+      OverallResultsParser.perform(html:, overall_result: @overall_result)
     end
   end
 end

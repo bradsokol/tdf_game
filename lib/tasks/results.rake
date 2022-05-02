@@ -7,9 +7,9 @@ namespace :results do
 
     puts 'YOU ARE ABOUT TO DELETE ALL RESULTS. RE-ENTER THE YEAR TO CONFIRM.'
     confirm_year = $stdin.gets.chomp
-    abort 'Aborting...' if confirm_year != ENV['YEAR']
+    abort 'Aborting...' if confirm_year != ENV.fetch('YEAR', nil)
 
-    tour = Tour.find_by(year: ENV['YEAR'])
+    tour = Tour.find_by(year: ENV.fetch('YEAR', nil))
 
     tour.stages.each do |stage|
       stage.stage_results.each { |stage_result| stage_result.player_rider_stage_points.destroy_all }
@@ -28,8 +28,8 @@ namespace :results do
     abort 'STAGE number must be specified' unless ENV['STAGE']
     abort 'YEAR must be specified' unless ENV['YEAR']
 
-    tour = Tour.find_by!(year: ENV['YEAR'])
-    stage = tour.stages.find_by!(number: ENV['STAGE'])
+    tour = Tour.find_by!(year: ENV.fetch('YEAR', nil))
+    stage = tour.stages.find_by!(number: ENV.fetch('STAGE', nil))
     abort 'Stage must be a game stage' unless stage.game_stage?
 
     stage.update!(results_downloaded_at: nil) if ENV['FORCE']

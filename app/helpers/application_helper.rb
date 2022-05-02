@@ -3,15 +3,15 @@
 module ApplicationHelper
   def time_to_stage_results(stage)
     days = (stage.date - Date.today).numerator
-    if days != 0
-      time_to_tour_results(stage.tour)
-    else
+    if days.zero?
       hours = ((stage.date.to_time + 12.hours) - Time.now) / 3600
       if hours <= 1
         'Results should be available shortly.'
       else
         "Results should be available in about #{pluralize(hours.to_i, 'hour')}."
       end
+    else
+      time_to_tour_results(stage.tour)
     end
   end
 

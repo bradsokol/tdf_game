@@ -16,6 +16,6 @@ module TeamsHelper
   end
 
   def stage_results_for_player(stage, player)
-    stage.stage_results.where(player: player).first
+    stage.stage_results.where(player:).first
   end
 end

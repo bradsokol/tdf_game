@@ -5,7 +5,7 @@ require 'test_helper'
 class TeamResultsParserTest < ActiveSupport::TestCase
   setup do
     html = Nokogiri::HTML(html_fixture('team_results'))
-    @team_results = TeamResultsParser.perform(html: html)
+    @team_results = TeamResultsParser.perform(html:)
     @stage_numbers = Array(3..21)
   end
 
@@ -67,7 +67,7 @@ class TeamResultsParserTest < ActiveSupport::TestCase
          .with('[TeamResults] Failed to parse rider: THIS IS INVALID')
 
     assert_raises do
-      TeamResultsParser.perform(html: html)
+      TeamResultsParser.perform(html:)
     end
   end
 
@@ -79,7 +79,7 @@ class TeamResultsParserTest < ActiveSupport::TestCase
          .with('[TeamResults] Failed to parse point totals: THIS IS INVALID')
 
     assert_raises do
-      TeamResultsParser.perform(html: html)
+      TeamResultsParser.perform(html:)
     end
   end
 
@@ -91,7 +91,7 @@ class TeamResultsParserTest < ActiveSupport::TestCase
          .with('[TeamResults] Failed to parse percentiles: THIS IS INVALID')
 
     assert_raises do
-      TeamResultsParser.perform(html: html)
+      TeamResultsParser.perform(html:)
     end
   end
 

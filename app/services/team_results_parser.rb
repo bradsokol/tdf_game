@@ -54,7 +54,7 @@ class TeamResultsParser
       daily_points = daily_points
                      .gsub(/\s+/m, ' ')
                      .strip
-                     .split(' ')
+                     .split
                      .map { |p| format_points(p) }
 
       Rider.new(

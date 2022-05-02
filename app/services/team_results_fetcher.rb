@@ -7,7 +7,7 @@ class TeamResultsFetcher
       Rails.logger.debug("Fetching team results from: #{url}")
       html = Nokogiri::HTML(URI.parse(url).open)
 
-      TeamResultsParser.perform(html: html)
+      TeamResultsParser.perform(html:)
     end
   end
 end

@@ -34,7 +34,7 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'spring', '~> 3.1.1'
-  gem 'spring-watcher-listen', github: "rails/spring-watcher-listen", branch: "master"
+  gem 'spring-watcher-listen', github: 'rails/spring-watcher-listen', branch: 'master'
   gem 'web-console'
 end
 

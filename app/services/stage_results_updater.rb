@@ -27,8 +27,8 @@ class StageResultsUpdater
     StageResultsFetcher.perform(
       stage_date: stage.date,
       player_name: player.name,
-      overall_result: overall_result,
-      stage_result: stage_result
+      overall_result:,
+      stage_result:
     )
     overall_result.save! if @save_overall
     stage_result.save!
@@ -55,10 +55,10 @@ class StageResultsUpdater
 
     results.riders.each do |rider_results|
       rider = stage.tour.riders.find_or_create_by(name: rider_results.name)
-      player_rider_points = overall_result.player_rider_points.find_or_create_by(rider: rider)
+      player_rider_points = overall_result.player_rider_points.find_or_create_by(rider:)
       player_rider_points.update!(ordinal: rider_results.ordinal, points: rider_results.total_points)
 
-      player_rider_stage_points = stage_result.player_rider_stage_points.find_or_create_by(rider: rider)
+      player_rider_stage_points = stage_result.player_rider_stage_points.find_or_create_by(rider:)
       player_rider_stage_points.update!(points: rider_results.stage_points[stage.number])
     end
 

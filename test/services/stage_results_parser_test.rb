@@ -23,7 +23,7 @@ class StageResultsParserTest < ActiveSupport::TestCase
          .with('[StageResults] Failed to parse stage results:   THIS IS INVALID')
 
     assert_raises do
-      StageResultsParser.perform(html: html, stage_result: @stage_result)
+      StageResultsParser.perform(html:, stage_result: @stage_result)
     end
   end
 end

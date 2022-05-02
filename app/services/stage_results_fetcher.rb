@@ -12,8 +12,8 @@ class StageResultsFetcher
       overall_result.date = stage_date
 
       PlayerResults.new(
-        OverallResultsParser.perform(html: html, overall_result: overall_result),
-        StageResultsParser.perform(html: html, stage_result: stage_result),
+        OverallResultsParser.perform(html:, overall_result:),
+        StageResultsParser.perform(html:, stage_result:),
       )
     end
   end
