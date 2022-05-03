@@ -36,4 +36,16 @@ namespace :results do
 
     StageResultsUpdater.new.perform(stage.id)
   end
+
+  desc 'Update results for all stages in a tour'
+  task update_all: :environment do
+    abort 'YEAR must be specified' unless ENV['YEAR']
+
+    tour = Tour.find_by!(year: ENV.fetch('YEAR', nil))
+    tour.stages.each do |stage|
+      stage.update!(results_downloaded_at: nil) if ENV['FORCE']
+
+      StageResultsUpdater.new.perform(stage.id)
+    end
+  end
 end
