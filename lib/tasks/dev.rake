@@ -1,6 +1,28 @@
 # frozen_string_literal: true
 
 namespace :dev do
+  namespace :players do
+    desc 'Dump all players for a tour'
+    task dump: :environment do
+      abort 'YEAR must be specified' unless ENV['YEAR']
+
+      year = ENV.fetch('YEAR')
+
+      json = {
+        year: year,
+      }
+
+      json[:players] = Registration
+        .includes(:player)
+        .where(year:)
+        .map { |registration| registration.player.name }
+        .sort
+        .map { |name| { name: name } }
+
+      File.write(Rails.root.join('db', 'data', "players-#{year}.json"), JSON.pretty_generate(json))
+    end
+  end
+
   namespace :results do
     desc 'Clear all results'
     task clear: :environment do
