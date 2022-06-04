@@ -1,0 +1,238 @@
+{
+  "year": 2021,
+  "start_date": "2021-06-26",
+  "finish_date": "2021-07-18",
+  "stages": [
+    {
+      "number": 1,
+      "date": "2021-06-26",
+      "start_town": "Brest",
+      "start_country": "France",
+      "finish_town": "Landerneau",
+      "finish_country": "France",
+      "distance": 198,
+      "stage_type": "rolling",
+      "game_stage": false
+    },
+    {
+      "number": 2,
+      "date": "2021-06-27",
+      "start_town": "Perros-Guirec",
+      "start_country": "France",
+      "finish_town": "Mûr-de-Bretagne Guerlédan",
+      "finish_country": "France",
+      "distance": 184,
+      "stage_type": "rolling",
+      "game_stage": false
+    },
+    {
+      "number": 3,
+      "date": "2021-06-28",
+      "start_town": "Lorient",
+      "start_country": "France",
+      "finish_town": "Pontivy",
+      "finish_country": "France",
+      "distance": 183,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 4,
+      "date": "2021-06-29",
+      "start_town": "Redon",
+      "start_country": "France",
+      "finish_town": "Fougères",
+      "finish_country": "France",
+      "distance": 150,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 5,
+      "date": "2021-06-30",
+      "start_town": "Changé",
+      "start_country": "France",
+      "finish_town": "Laval Espace Mayenne",
+      "finish_country": "France",
+      "distance": 27,
+      "stage_type": "itt",
+      "game_stage": true
+    },
+    {
+      "number": 6,
+      "date": "2021-07-01",
+      "start_town": "Tours",
+      "start_country": "France",
+      "finish_town": "Châteauroux",
+      "finish_country": "France",
+      "distance": 161,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 7,
+      "date": "2021-07-02",
+      "start_town": "Vierzon",
+      "start_country": "France",
+      "finish_town": "Le Creusot",
+      "finish_country": "France",
+      "distance": 249,
+      "stage_type": "rolling",
+      "game_stage": true
+    },
+    {
+      "number": 8,
+      "date": "2021-07-03",
+      "start_town": "Oyonnax",
+      "start_country": "France",
+      "finish_town": "Le Grand-Bornand",
+      "finish_country": "France",
+      "distance": 151,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 9,
+      "date": "2021-07-04",
+      "start_town": "Cluses",
+      "start_country": "France",
+      "finish_town": "Tignes",
+      "finish_country": "France",
+      "distance": 145,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 10,
+      "date": "2021-07-06",
+      "start_town": "Albertville",
+      "start_country": "France",
+      "finish_town": "Valence",
+      "finish_country": "France",
+      "distance": 191,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 11,
+      "date": "2021-07-07",
+      "start_town": "Sorgues",
+      "start_country": "France",
+      "finish_town": "Malaucène",
+      "finish_country": "France",
+      "distance": 199,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 12,
+      "date": "2021-07-08",
+      "start_town": "Saint-Paul-Trois-Châteaux",
+      "start_country": "France",
+      "finish_town": "Nîmes",
+      "finish_country": "France",
+      "distance": 159,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 13,
+      "date": "2021-07-09",
+      "start_town": "Nîmes",
+      "start_country": "France",
+      "finish_town": "Carcassonne",
+      "finish_country": "France",
+      "distance": 220,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 14,
+      "date": "2021-07-10",
+      "start_town": "Carcassonne",
+      "start_country": "France",
+      "finish_town": "Quillan",
+      "finish_country": "France",
+      "distance": 184,
+      "stage_type": "rolling",
+      "game_stage": true
+    },
+    {
+      "number": 15,
+      "date": "2021-07-11",
+      "start_town": "Céret",
+      "start_country": "France",
+      "finish_town": "Andorre-la-Vieille",
+      "finish_country": "France",
+      "distance": 191,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 16,
+      "date": "2021-07-13",
+      "start_town": "Pas de la Case",
+      "start_country": "France",
+      "finish_town": "Saint-Gaudens",
+      "finish_country": "France",
+      "distance": 169,
+      "stage_type": "rolling",
+      "game_stage": true
+    },
+    {
+      "number": 17,
+      "date": "2021-07-14",
+      "start_town": "Muret",
+      "start_country": "France",
+      "finish_town": "Saint-Lary-Soulan Col du Portet",
+      "finish_country": "France",
+      "distance": 178,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 18,
+      "date": "2021-07-15",
+      "start_town": "Pau",
+      "start_country": "France",
+      "finish_town": "Luz Ardiden",
+      "finish_country": "France",
+      "distance": 130,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 19,
+      "date": "2021-07-16",
+      "start_town": "Mourenx",
+      "start_country": "France",
+      "finish_town": "Libourne",
+      "finish_country": "France",
+      "distance": 207,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 20,
+      "date": "2021-07-17",
+      "start_town": "Libourne",
+      "start_country": "France",
+      "finish_town": "Saint-Emilion",
+      "finish_country": "France",
+      "distance": 31,
+      "stage_type": "itt",
+      "game_stage": true
+    },
+    {
+      "number": 21,
+      "date": "2021-07-18",
+      "start_town": "Chatou",
+      "start_country": "France",
+      "finish_town": "Paris Champs-Élysées",
+      "finish_country": "France",
+      "distance": 108,
+      "stage_type": "flat",
+      "game_stage": true
+    }
+  ]
+}

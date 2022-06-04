@@ -48,4 +48,24 @@ namespace :dev do
       time.in_time_zone(Time.zone.name).strftime('%Y-%m-%d %H:%M:%S')
     end
   end
+
+  namespace :stages do
+    desc 'Dump all stages for a tour'
+    task dump: :environment do
+      abort 'YEAR must be specified' unless ENV['YEAR']
+
+      year = ENV.fetch('YEAR')
+
+      tour = Tour.find_by!(year:)
+      json = tour.as_json
+      %w[id created_at updated_at].each { |key| json.delete(key) }
+      json['stages'] = tour.stages.order(:number).map do |stage|
+        stage = stage.as_json
+        %w[id created_at updated_at tour_id results_downloaded_at].each { |key| stage.delete(key) }
+        stage
+      end
+
+      File.write(Rails.root.join('db', 'data', "stages-#{year}.json"), JSON.pretty_generate(json))
+    end
+  end
 end
