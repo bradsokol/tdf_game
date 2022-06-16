@@ -31,7 +31,15 @@ module Admin
     def results_available?(stage)
       date_params = { year: stage.date.year, month: stage.date.month, day: stage.date.day }
       @results_url = format('https://ifarm.nl/tdf/%<year>04d%<month>02d%<day>02d.html', date_params)
-      response = Net::HTTP.get_response(URI(@results_url))
+      uri = URI(@results_url)
+      request = Net::HTTP::Get.new(uri.path)
+      response = Net::HTTP.start(
+        uri.host,
+        uri.port,
+        use_ssl: uri.scheme == 'https',
+        verify_mode: OpenSSL::SSL::VERIFY_NONE) do |https|
+        https.request(request)
+      end
 
       month = stage.date.month == 6 ? 'June' : 'July'
       response.is_a?(Net::HTTPSuccess) && response.body.include?("#{month} #{stage.date.day}")
