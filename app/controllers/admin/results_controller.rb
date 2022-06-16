@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 module Admin
-  class ResultsController < ApplicationController
-    before_action :authenticate_user!
+  class ResultsController < AuthenticatedController
     before_action :find_tour
 
     def index
