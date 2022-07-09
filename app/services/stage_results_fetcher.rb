@@ -8,7 +8,20 @@ class StageResultsFetcher
       query_date = stage_date.strftime('%Y%m%d')
       url = "https://ifarm.nl/cgi-bin/getlines.cgi?DATE=#{query_date}&SEARCH=#{CGI.escape(player_name)}"
       Rails.logger.debug("Fetching stage results from: #{url}")
-      html = Nokogiri::HTML(URI.parse(url).open)
+      uri = URI(url)
+      request = Net::HTTP::Get.new(uri)
+      response = Net::HTTP.start(
+        uri.host,
+        uri.port,
+        use_ssl: uri.scheme == 'https',
+        verify_mode: OpenSSL::SSL::VERIFY_NONE
+      ) do |https|
+        https.request(request)
+      end
+
+      raise response.message unless response.is_a?(Net::HTTPSuccess)
+
+      html = Nokogiri::HTML(response.body)
       overall_result.date = stage_date
 
       PlayerResults.new(
