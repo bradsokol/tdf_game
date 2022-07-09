@@ -34,7 +34,7 @@
       "finish_country": "Denmark",
       "distance": 182,
       "stage_type": "flat",
-      "game_stage": true
+      "game_stage": false
     },
     {
       "number": 4,
