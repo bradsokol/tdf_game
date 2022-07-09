@@ -26,7 +26,7 @@ namespace :dev do
     task load: :environment do
       abort 'YEAR must be specified' unless ENV['YEAR']
 
-      year = ENV.fetch('YEAR').to_i
+      year = ENV.fetch('YEAR')
 
       data = JSON.parse(File.read(Rails.root.join('db', 'data', "players-#{year}.json")))
 
