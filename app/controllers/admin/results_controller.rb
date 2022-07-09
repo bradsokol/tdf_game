@@ -36,7 +36,8 @@ module Admin
         uri.host,
         uri.port,
         use_ssl: uri.scheme == 'https',
-        verify_mode: OpenSSL::SSL::VERIFY_NONE) do |https|
+        verify_mode: OpenSSL::SSL::VERIFY_NONE
+      ) do |https|
         https.request(request)
       end
 
