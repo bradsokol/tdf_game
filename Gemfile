@@ -14,6 +14,7 @@ gem 'rack-cors'
 gem 'rails', '~> 7.0.3'
 gem 'react-rails'
 gem 'sidekiq'
+gem 'sorbet-runtime'
 gem 'sprockets-rails'
 gem 'webpacker'
 
@@ -34,8 +35,10 @@ group :development do
   gem 'rubocop'
   gem 'rubocop-rails'
   gem 'solargraph'
+  gem 'sorbet'
   gem 'spring', '~> 3.1.1'
   gem 'spring-watcher-listen', github: 'rails/spring-watcher-listen', branch: 'master'
+  gem 'tapioca', require: false
   gem 'web-console'
 end
 
