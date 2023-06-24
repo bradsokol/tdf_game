@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.1.2'
+ruby '3.2.2'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clockwork'
@@ -14,6 +14,7 @@ gem 'rack-cors'
 gem 'rails', '~> 7.0.3'
 gem 'react-rails'
 gem 'sidekiq'
+gem 'sorbet-runtime'
 gem 'sprockets-rails'
 gem 'webpacker'
 
@@ -33,8 +34,11 @@ group :development do
   gem 'railroady'
   gem 'rubocop'
   gem 'rubocop-rails'
+  gem 'solargraph'
+  gem 'sorbet'
   gem 'spring', '~> 3.1.1'
   gem 'spring-watcher-listen', github: 'rails/spring-watcher-listen', branch: 'master'
+  gem 'tapioca', require: false
   gem 'web-console'
 end
 
