@@ -82,7 +82,9 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
+    backport (1.2.0)
     bcrypt (3.1.17)
+    benchmark (0.2.1)
     bindex (0.8.1)
     bootsnap (1.12.0)
       msgpack (~> 1.2)
@@ -106,7 +108,9 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.5.0)
     digest (3.1.0)
+    e2mmap (0.1.0)
     erubi (1.10.0)
     execjs (2.8.1)
     ffi (1.15.5)
@@ -118,7 +122,12 @@ GEM
     io-console (0.5.11)
     irb (1.4.1)
       reline (>= 0.3.0)
+    jaro_winkler (1.5.6)
     json (2.6.2)
+    kramdown (2.4.0)
+      rexml
+    kramdown-parser-gfm (1.1.0)
+      kramdown (~> 2.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
       rb-inotify (~> 0.9, >= 0.9.10)
@@ -221,6 +230,8 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    reverse_markdown (2.1.1)
+      nokogiri
     rexml (3.2.5)
     rubocop (1.31.2)
       json (~> 2.3)
@@ -244,6 +255,21 @@ GEM
       connection_pool (>= 2.2.2)
       rack (~> 2.0)
       redis (>= 4.2.0)
+    solargraph (0.48.0)
+      backport (~> 1.2)
+      benchmark
+      bundler (>= 1.17.2)
+      diff-lcs (~> 1.4)
+      e2mmap
+      jaro_winkler (~> 1.5)
+      kramdown (~> 2.3)
+      kramdown-parser-gfm (~> 1.1)
+      parser (~> 3.0)
+      reverse_markdown (>= 1.0.5, < 3)
+      rubocop (>= 0.52)
+      thor (~> 1.0)
+      tilt (~> 2.0)
+      yard (~> 0.9, >= 0.9.24)
     spring (3.1.1)
     sprockets (4.0.3)
       concurrent-ruby (~> 1.0)
@@ -278,6 +304,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    yard (0.9.34)
     zeitwerk (2.5.4)
 
 PLATFORMS
@@ -303,6 +330,7 @@ DEPENDENCIES
   rubocop
   rubocop-rails
   sidekiq
+  solargraph
   spring (~> 3.1.1)
   spring-watcher-listen!
   sprockets-rails

@@ -33,6 +33,7 @@ group :development do
   gem 'railroady'
   gem 'rubocop'
   gem 'rubocop-rails'
+  gem 'solargraph'
   gem 'spring', '~> 3.1.1'
   gem 'spring-watcher-listen', github: 'rails/spring-watcher-listen', branch: 'master'
   gem 'web-console'
