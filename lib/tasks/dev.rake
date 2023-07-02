@@ -19,7 +19,7 @@ namespace :dev do
                        .sort
                        .map { |name| { name: } }
 
-      File.write(Rails.root.join('db', 'data', "players-#{year}.json"), JSON.pretty_generate(json))
+      Rails.root.join('db', 'data', "players-#{year}.json").write(JSON.pretty_generate(json))
     end
 
     desc 'Load all players for a tour'
@@ -28,7 +28,7 @@ namespace :dev do
 
       year = ENV.fetch('YEAR')
 
-      data = JSON.parse(File.read(Rails.root.join('db', 'data', "players-#{year}.json")))
+      data = JSON.parse(Rails.root.join('db', 'data', "players-#{year}.json").read)
 
       abort 'Year mismatch' if data['year'] != year
 
@@ -52,7 +52,7 @@ namespace :dev do
       tour.riders.delete_all
       tour.overall_results.each { |result| result.player_rider_points.each(&:delete) }
       tour.overall_results.delete_all
-      tour.stages.update_all(results_downloaded_at: nil)
+      tour.stages.update_all(results_downloaded_at: nil) # rubocop:disable Rails/SkipsModelValidations
 
       OverallResult.where(tour: nil).delete_all
     end
@@ -61,7 +61,9 @@ namespace :dev do
     task reload: :environment do
       abort 'YEAR must be specified' unless ENV['YEAR']
 
+      # rubocop:disable Rails/SkipsModelValidations
       Tour.find_by!(year: ENV.fetch('YEAR', nil)).stages.update_all(results_downloaded_at: nil)
+      # rubocop:enable Rails/SkipsModelValidations
     end
 
     desc 'Show result syncing status'
@@ -103,7 +105,7 @@ namespace :dev do
         stage
       end
 
-      File.write(Rails.root.join('db', 'data', "stages-#{year}.json"), JSON.pretty_generate(json))
+      Rails.root.join('db', 'data', "stages-#{year}.json").write(JSON.pretty_generate(json))
     end
 
     desc 'Load all stages for a tour'
@@ -112,7 +114,7 @@ namespace :dev do
 
       year = ENV.fetch('YEAR').to_i
 
-      data = JSON.parse(File.read(Rails.root.join('db', 'data', "stages-#{year}.json")))
+      data = JSON.parse(Rails.root.join('db', 'data', "stages-#{year}.json").read)
 
       abort 'Year mismatch' if data['year'] != year
 

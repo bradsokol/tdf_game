@@ -7,7 +7,7 @@ class StageResultsFetcher
     def perform(stage_date:, player_name:, overall_result:, stage_result:)
       query_date = stage_date.strftime('%Y%m%d')
       url = "https://ifarm.nl/cgi-bin/getlines.cgi?DATE=#{query_date}&SEARCH=#{CGI.escape(player_name)}"
-      Rails.logger.debug("Fetching stage results from: #{url}")
+      Rails.logger.debug { "Fetching stage results from: #{url}" }
       uri = URI(url)
       request = Net::HTTP::Get.new(uri)
       response = Net::HTTP.start(

@@ -12,7 +12,7 @@ class ScheduleStageResultsFetchJob < ApplicationJob
   private
 
   def stages_needing_results
-    today = Date.today
+    today = Time.zone.today
     Stage.need_results.select do |stage|
       if stage.date > today
         false

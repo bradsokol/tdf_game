@@ -1,3 +1,6 @@
+require:
+  - rubocop-rails
+
 AllCops:
   Exclude:
     - 'bin/**/*'
@@ -23,6 +26,12 @@ Metrics/ClassLength:
   Enabled: false
 
 Metrics/MethodLength:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
+
+Rails/RefuteMethods:
   Enabled: false
 
 Style/Documentation:

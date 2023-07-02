@@ -98,7 +98,7 @@ class TeamResultsParserTest < ActiveSupport::TestCase
   private
 
   def fixture_with_invalid_line(pattern)
-    file_path = Rails.root.join('test', 'fixtures', 'html', 'team_results.html')
+    file_path = Rails.root.join('test/fixtures/html/team_results.html')
     data = File.read(file_path).gsub(pattern, 'THIS IS INVALID')
     Nokogiri::HTML(data)
   end

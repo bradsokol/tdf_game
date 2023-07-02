@@ -3,7 +3,7 @@
 class StageResult < ApplicationRecord
   belongs_to :player
   belongs_to :stage
-  has_many :player_rider_stage_points, class_name: 'PlayerRiderStagePoints'
+  has_many :player_rider_stage_points, class_name: 'PlayerRiderStagePoints', dependent: :restrict_with_exception
 
   validates :overall_rank,
             presence: true,

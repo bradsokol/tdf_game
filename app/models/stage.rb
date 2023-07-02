@@ -3,7 +3,7 @@
 class Stage < ApplicationRecord
   belongs_to :tour
 
-  has_many :stage_results
+  has_many :stage_results, dependent: :restrict_with_exception
 
   enum stage_type: {
     flat: 'flat',

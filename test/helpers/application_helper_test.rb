@@ -27,7 +27,7 @@ class ApplicationHelperTest < ActionView::TestCase
   end
 
   test 'time_to_tour_results returns string when tour starts in the future' do
-    @tour.start_date = Date.today + 7.days
+    @tour.start_date = Time.zone.today + 7.days
 
     expected_string = "The tour starts on #{@tour.start_date.strftime('%B %e')}. Check back in 7 days."
     assert_equal expected_string, time_to_tour_results(@tour)

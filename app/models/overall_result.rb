@@ -5,7 +5,7 @@ class OverallResult < ApplicationRecord
 
   belongs_to :player
   belongs_to :tour
-  has_many :player_rider_points, class_name: 'PlayerRiderPoints'
+  has_many :player_rider_points, class_name: 'PlayerRiderPoints', dependent: :restrict_with_exception
 
   validates :overall_rank,
             presence: true,
