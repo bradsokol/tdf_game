@@ -8,6 +8,10 @@
     "@rails/webpacker": "5.4.3",
     "turbolinks": "^5.2.0"
   },
+  "engines": {
+    "node": "16.20.1",
+    "yarn": "1.22.19"
+  },
   "version": "0.1.0",
   "devDependencies": {
     "webpack-dev-server": "^4.9.3"
