@@ -28,7 +28,7 @@ group :development, :test do
 end
 
 group :development do
-  gem 'listen', '>= 3.0.5', '< 3.8'
+  gem 'listen'
   gem 'railroady'
   gem 'rubocop'
   gem 'rubocop-performance'
