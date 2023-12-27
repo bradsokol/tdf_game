@@ -24,7 +24,7 @@ module Admin
     private
 
     def find_tour
-      @tour = Tour.all.order(year: :desc).first
+      @tour = Tour.order(year: :desc).first
     end
 
     def results_available?(stage)

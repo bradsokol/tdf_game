@@ -55,6 +55,6 @@ class OverallController < ApplicationController
   end
 
   def redirect_to_default_year
-    redirect_to action: 'index', year: Tour.all.order(:year).last.year
+    redirect_to action: 'index', year: Tour.order(:year).last.year
   end
 end

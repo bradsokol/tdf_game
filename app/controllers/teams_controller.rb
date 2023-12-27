@@ -28,7 +28,7 @@ class TeamsController < ApplicationController
   end
 
   def redirect_to_default
-    tour = Tour.all.order(:year).last
+    tour = Tour.order(:year).last
     player = first_player(tour)
     if player
       redirect_to action: 'index', year: tour.year, player: player.id

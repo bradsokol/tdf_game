@@ -11,7 +11,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
   test '#default redirects to the first stage with results in most recent year' do
     get '/teams'
 
-    most_recent_tour = Tour.all.order(:year).last
+    most_recent_tour = Tour.order(:year).last
     assert_redirected_to "/teams/#{most_recent_tour.year}/#{@first_player.id}"
   end
 
@@ -27,7 +27,7 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
   test '#index redirects to most recent when tour not found' do
     get '/teams/1900/1'
 
-    most_recent_tour = Tour.all.order(:year).last
+    most_recent_tour = Tour.order(:year).last
     assert_redirected_to "/teams/#{most_recent_tour.year}/#{@first_player.id}"
   end
 

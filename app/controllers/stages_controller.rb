@@ -34,7 +34,7 @@ class StagesController < ApplicationController
   end
 
   def redirect_to_default
-    tour = Tour.all.order(:year).last
+    tour = Tour.order(:year).last
     stage = first_game_stage(tour)
     redirect_to action: 'index', year: tour.year, stage: stage.number
   end
