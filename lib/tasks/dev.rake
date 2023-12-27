@@ -107,12 +107,14 @@ namespace :dev do
 
       year = ENV.fetch('YEAR')
 
+      stage_keys = %w[id created_at updated_at tour_id results_downloaded_at]
+
       tour = Tour.find_by!(year:)
       json = tour.as_json
       %w[id created_at updated_at].each { |key| json.delete(key) }
       json['stages'] = tour.stages.order(:number).map do |stage|
         stage = stage.as_json
-        %w[id created_at updated_at tour_id results_downloaded_at].each { |key| stage.delete(key) }
+        stage_keys.each { |key| stage.delete(key) }
         stage
       end
 

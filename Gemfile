@@ -31,6 +31,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.8'
   gem 'railroady'
   gem 'rubocop'
+  gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'solargraph'
   gem 'sorbet'

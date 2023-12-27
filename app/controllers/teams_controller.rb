@@ -17,7 +17,7 @@ class TeamsController < ApplicationController
     @player = first_player(@tour) if @player.nil?
 
     @overall_results = @tour.overall_results.find_by(player_id: @player.id) if @player
-    @players = Registration.where(year: @year).map(&:player).sort { |a, b| a.name <=> b.name }
+    @players = Registration.where(year: @year).map(&:player).sort_by(&:name)
     @stages = @tour.stages.select(&:game_stage?)
   end
 

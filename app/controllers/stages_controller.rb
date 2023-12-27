@@ -30,7 +30,7 @@ class StagesController < ApplicationController
   private
 
   def first_game_stage(tour)
-    tour.stages.order(:number).select(&:game_stage?).first
+    tour.stages.order(:number).find(&:game_stage?)
   end
 
   def redirect_to_default

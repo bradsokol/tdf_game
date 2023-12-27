@@ -17,6 +17,6 @@ class ApplicationController < ActionController::Base
   end
 
   def most_recent_tour_with_results
-    Tour.all.order(year: :desc).select { |tour| tour.overall_results.present? }.first
+    Tour.all.order(year: :desc).find { |tour| tour.overall_results.present? }
   end
 end
