@@ -38,7 +38,5 @@ module TdfGame
     config.time_zone = 'Eastern Time (US & Canada)'
 
     config.active_job.queue_adapter = :sidekiq
-
-    config.active_record.legacy_connection_handling = false
   end
 end
