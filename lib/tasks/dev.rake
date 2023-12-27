@@ -57,6 +57,17 @@ namespace :dev do
       OverallResult.where(tour: nil).delete_all
     end
 
+    desc 'Load all results for a tour'
+    task load: :environment do
+      abort 'YEAR must be specified' unless ENV['YEAR']
+
+      year = ENV.fetch('YEAR', nil)
+      Tour.find_by!(year:).stages.where(results_downloaded_at: nil).order(:date).each do |stage|
+        puts "Loading #{year} Stage #{stage.number} #{stage.date}"
+        StageResultsUpdater.new.perform(stage.id)
+      end
+    end
+
     desc 'Force reload of all results'
     task reload: :environment do
       abort 'YEAR must be specified' unless ENV['YEAR']
