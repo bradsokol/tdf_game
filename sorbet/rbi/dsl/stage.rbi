@@ -141,10 +141,11 @@ class Stage
         load: T.untyped,
         error_on_ignore: T.untyped,
         order: Symbol,
+        use_ranges: T.untyped,
         block: T.nilable(T.proc.params(object: PrivateRelation).void)
       ).returns(T.nilable(::ActiveRecord::Batches::BatchEnumerator))
     end
-    def in_batches(of: 1000, start: nil, finish: nil, load: false, error_on_ignore: nil, order: :asc, &block); end
+    def in_batches(of: 1000, start: nil, finish: nil, load: false, error_on_ignore: nil, order: :asc, use_ranges: nil, &block); end
 
     sig { params(record: T.untyped).returns(T::Boolean) }
     def include?(record); end
@@ -443,6 +444,9 @@ class Stage
     def not_ttt(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def null_relation?(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def offset(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
@@ -468,6 +472,9 @@ class Stage
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def references(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def regroup(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def reorder(*args, &blk); end
@@ -527,6 +534,9 @@ class Stage
     def where(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
+    def with(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateAssociationRelation) }
     def without(*args, &blk); end
   end
 
@@ -555,8 +565,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def created_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_in_database; end
@@ -564,8 +574,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def created_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def created_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def created_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at_previously_was; end
@@ -600,8 +610,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Date), T.nilable(::Date)])) }
     def date_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def date_changed?; end
+    sig { params(from: T.nilable(::Date), to: T.nilable(::Date)).returns(T::Boolean) }
+    def date_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Date)) }
     def date_in_database; end
@@ -609,8 +619,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Date), T.nilable(::Date)])) }
     def date_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def date_previously_changed?; end
+    sig { params(from: T.nilable(::Date), to: T.nilable(::Date)).returns(T::Boolean) }
+    def date_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Date)) }
     def date_previously_was; end
@@ -645,8 +655,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def distance_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def distance_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def distance_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def distance_in_database; end
@@ -654,8 +664,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def distance_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def distance_previously_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def distance_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def distance_previously_was; end
@@ -690,8 +700,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def finish_country_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def finish_country_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def finish_country_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def finish_country_in_database; end
@@ -699,8 +709,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def finish_country_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def finish_country_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def finish_country_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def finish_country_previously_was; end
@@ -735,8 +745,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def finish_town_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def finish_town_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def finish_town_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def finish_town_in_database; end
@@ -744,8 +754,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def finish_town_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def finish_town_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def finish_town_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def finish_town_previously_was; end
@@ -780,8 +790,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(T::Boolean), T.nilable(T::Boolean)])) }
     def game_stage_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def game_stage_changed?; end
+    sig { params(from: T.nilable(T::Boolean), to: T.nilable(T::Boolean)).returns(T::Boolean) }
+    def game_stage_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(T::Boolean)) }
     def game_stage_in_database; end
@@ -789,8 +799,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(T::Boolean), T.nilable(T::Boolean)])) }
     def game_stage_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def game_stage_previously_changed?; end
+    sig { params(from: T.nilable(T::Boolean), to: T.nilable(T::Boolean)).returns(T::Boolean) }
+    def game_stage_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(T::Boolean)) }
     def game_stage_previously_was; end
@@ -825,8 +835,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def id_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_in_database; end
@@ -834,11 +844,56 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def id_previously_changed?; end
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def id_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_value; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def id_value=(value); end
+
+    sig { returns(T::Boolean) }
+    def id_value?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_value_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def id_value_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def id_value_came_from_user?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_value_change; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_value_change_to_be_saved; end
+
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_value_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_value_in_database; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def id_value_previous_change; end
+
+    sig { params(from: ::Integer, to: ::Integer).returns(T::Boolean) }
+    def id_value_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_value_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def id_value_was; end
+
+    sig { void }
+    def id_value_will_change!; end
 
     sig { returns(T.nilable(::Integer)) }
     def id_was; end
@@ -870,8 +925,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def number_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def number_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def number_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def number_in_database; end
@@ -879,8 +934,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def number_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def number_previously_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def number_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def number_previously_was; end
@@ -911,6 +966,9 @@ class Stage
 
     sig { void }
     def restore_id!; end
+
+    sig { void }
+    def restore_id_value!; end
 
     sig { void }
     def restore_number!; end
@@ -957,8 +1015,13 @@ class Stage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def results_downloaded_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def results_downloaded_at_changed?; end
+    sig do
+      params(
+        from: T.nilable(::ActiveSupport::TimeWithZone),
+        to: T.nilable(::ActiveSupport::TimeWithZone)
+      ).returns(T::Boolean)
+    end
+    def results_downloaded_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def results_downloaded_at_in_database; end
@@ -966,8 +1029,13 @@ class Stage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def results_downloaded_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def results_downloaded_at_previously_changed?; end
+    sig do
+      params(
+        from: T.nilable(::ActiveSupport::TimeWithZone),
+        to: T.nilable(::ActiveSupport::TimeWithZone)
+      ).returns(T::Boolean)
+    end
+    def results_downloaded_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def results_downloaded_at_previously_was; end
@@ -1019,6 +1087,12 @@ class Stage
 
     sig { returns(T::Boolean) }
     def saved_change_to_id?; end
+
+    sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
+    def saved_change_to_id_value; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_id_value?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_number; end
@@ -1086,8 +1160,13 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def stage_type_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def stage_type_changed?; end
+    sig do
+      params(
+        from: T.nilable(T.any(::String, ::Symbol)),
+        to: T.nilable(T.any(::String, ::Symbol))
+      ).returns(T::Boolean)
+    end
+    def stage_type_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def stage_type_in_database; end
@@ -1095,8 +1174,13 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def stage_type_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def stage_type_previously_changed?; end
+    sig do
+      params(
+        from: T.nilable(T.any(::String, ::Symbol)),
+        to: T.nilable(T.any(::String, ::Symbol))
+      ).returns(T::Boolean)
+    end
+    def stage_type_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def stage_type_previously_was; end
@@ -1131,8 +1215,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def start_country_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def start_country_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def start_country_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def start_country_in_database; end
@@ -1140,8 +1224,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def start_country_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def start_country_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def start_country_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def start_country_previously_was; end
@@ -1176,8 +1260,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def start_town_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def start_town_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def start_town_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def start_town_in_database; end
@@ -1185,8 +1269,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
     def start_town_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def start_town_previously_changed?; end
+    sig { params(from: T.nilable(::String), to: T.nilable(::String)).returns(T::Boolean) }
+    def start_town_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::String)) }
     def start_town_previously_was; end
@@ -1221,8 +1305,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def tour_id_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def tour_id_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def tour_id_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def tour_id_in_database; end
@@ -1230,8 +1314,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def tour_id_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def tour_id_previously_changed?; end
+    sig { params(from: T.nilable(::Integer), to: T.nilable(::Integer)).returns(T::Boolean) }
+    def tour_id_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::Integer)) }
     def tour_id_previously_was; end
@@ -1266,8 +1350,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_change_to_be_saved; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_in_database; end
@@ -1275,8 +1359,8 @@ class Stage
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def updated_at_previous_change; end
 
-    sig { returns(T::Boolean) }
-    def updated_at_previously_changed?; end
+    sig { params(from: ::ActiveSupport::TimeWithZone, to: ::ActiveSupport::TimeWithZone).returns(T::Boolean) }
+    def updated_at_previously_changed?(from: T.unsafe(nil), to: T.unsafe(nil)); end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at_previously_was; end
@@ -1307,6 +1391,9 @@ class Stage
 
     sig { returns(T::Boolean) }
     def will_save_change_to_id?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_id_value?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_number?; end
@@ -1437,6 +1524,9 @@ class Stage
     def not_ttt(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def null_relation?(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def offset(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
@@ -1462,6 +1552,9 @@ class Stage
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def references(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def regroup(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def reorder(*args, &blk); end
@@ -1503,6 +1596,9 @@ class Stage
     def where(*args, &blk); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
+    def with(*args, &blk); end
+
+    sig { params(args: T.untyped, blk: T.untyped).returns(PrivateRelation) }
     def without(*args, &blk); end
   end
 
@@ -1511,6 +1607,9 @@ class Stage
     include GeneratedAssociationRelationMethods
 
     Elem = type_member { { fixed: ::Stage } }
+
+    sig { returns(T::Array[::Stage]) }
+    def to_a; end
 
     sig { returns(T::Array[::Stage]) }
     def to_ary; end
@@ -1604,6 +1703,9 @@ class Stage
     def target; end
 
     sig { returns(T::Array[::Stage]) }
+    def to_a; end
+
+    sig { returns(T::Array[::Stage]) }
     def to_ary; end
   end
 
@@ -1612,6 +1714,9 @@ class Stage
     include GeneratedRelationMethods
 
     Elem = type_member { { fixed: ::Stage } }
+
+    sig { returns(T::Array[::Stage]) }
+    def to_a; end
 
     sig { returns(T::Array[::Stage]) }
     def to_ary; end

@@ -6,8 +6,12 @@
 
 class ScheduleStageResultsFetchJob
   class << self
-    sig { returns(T.any(ScheduleStageResultsFetchJob, FalseClass)) }
-    def perform_later; end
+    sig do
+      params(
+        block: T.nilable(T.proc.params(job: ScheduleStageResultsFetchJob).void)
+      ).returns(T.any(ScheduleStageResultsFetchJob, FalseClass))
+    end
+    def perform_later(&block); end
 
     sig { returns(T.untyped) }
     def perform_now; end

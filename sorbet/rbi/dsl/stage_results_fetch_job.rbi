@@ -6,8 +6,13 @@
 
 class StageResultsFetchJob
   class << self
-    sig { params(stage_id: T.untyped).returns(T.any(StageResultsFetchJob, FalseClass)) }
-    def perform_later(stage_id); end
+    sig do
+      params(
+        stage_id: T.untyped,
+        block: T.nilable(T.proc.params(job: StageResultsFetchJob).void)
+      ).returns(T.any(StageResultsFetchJob, FalseClass))
+    end
+    def perform_later(stage_id, &block); end
 
     sig { params(stage_id: T.untyped).returns(T.untyped) }
     def perform_now(stage_id); end
