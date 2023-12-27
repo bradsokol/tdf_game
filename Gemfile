@@ -3,7 +3,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '3.2.2'
+ruby '3.3.0'
 
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clockwork'
@@ -35,8 +35,8 @@ group :development do
   gem 'rubocop-rails'
   gem 'solargraph'
   gem 'sorbet'
-  gem 'spring', '~> 3.1.1'
-  gem 'spring-watcher-listen', github: 'rails/spring-watcher-listen', branch: 'master'
+  gem 'spring'
+  gem 'spring-watcher-listen'
   gem 'tapioca', require: false
   gem 'web-console'
 end
