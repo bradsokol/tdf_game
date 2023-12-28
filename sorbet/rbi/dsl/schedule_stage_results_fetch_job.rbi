@@ -13,7 +13,7 @@ class ScheduleStageResultsFetchJob
     end
     def perform_later(&block); end
 
-    sig { returns(T.untyped) }
+    sig { void }
     def perform_now; end
   end
 end

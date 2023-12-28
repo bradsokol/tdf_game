@@ -35,6 +35,7 @@ group :development do
   gem 'rubocop-rails'
   gem 'rubocop-sorbet'
   gem 'sorbet'
+  gem 'spidr'
   gem 'spring'
   gem 'spring-watcher-listen'
   gem 'tapioca', require: false
