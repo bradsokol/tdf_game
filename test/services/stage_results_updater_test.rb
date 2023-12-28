@@ -1,8 +1,11 @@
+# typed: false
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class StageResultsUpdaterTest < ActiveSupport::TestCase
+  extend T::Sig
+
   setup do
     stub_stage_results
     stub_team_results
@@ -174,6 +177,7 @@ class StageResultsUpdaterTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(date: String).void }
   def stub_stage_results(date: '20190709')
     stub_request(:get, "https://ifarm.nl/cgi-bin/getlines.cgi?DATE=#{date}&SEARCH=Jim%20Hopper")
       .to_return(status: 200, body: html_fixture('stage_results'))
@@ -181,6 +185,7 @@ class StageResultsUpdaterTest < ActiveSupport::TestCase
       .to_return(status: 200, body: html_fixture('stage_results'))
   end
 
+  sig { void }
   def stub_team_results
     stub_request(:get, 'https://ifarm.nl/cgi-bin/getpart.cgi?SEARCH=Jim%20Hopper&YEAR=2019')
       .to_return(status: 200, body: html_fixture('team_results'))

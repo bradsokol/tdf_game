@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class StageTest < ActiveSupport::TestCase
+  extend T::Sig
+
   test '.new creates stage' do
     stage = Stage.new(stage_input)
 
@@ -97,6 +100,7 @@ class StageTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(inputs: T::Hash[Symbol, T.untyped]).returns(T::Hash[Symbol, T.untyped]) }
   def stage_input(inputs = {})
     {
       tour: tours(:tdf_2019),

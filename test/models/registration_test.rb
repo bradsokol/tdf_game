@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class RegistrationTest < ActiveSupport::TestCase
+  extend T::Sig
+
   test '.new creates registration' do
     registration = Registration.new(registration_input)
 
@@ -29,6 +32,7 @@ class RegistrationTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(inputs: T::Hash[Symbol, T.untyped]).returns(T::Hash[Symbol, T.untyped]) }
   def registration_input(inputs = {})
     {
       player: Player.new(name: 'Bob Newman'),

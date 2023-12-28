@@ -1,10 +1,15 @@
+# typed: true
 # frozen_string_literal: true
 
 class StagesController < ApplicationController
+  extend T::Sig
+
+  sig { void }
   def default
     redirect_to_default
   end
 
+  sig { void }
   def index
     tour = Tour.find_by(year: @year)
     @stage = tour.stages.find_by(number: params[:stage]) if tour.present?
@@ -29,10 +34,12 @@ class StagesController < ApplicationController
 
   private
 
+  sig { params(tour: Tour).returns(Stage) }
   def first_game_stage(tour)
     tour.stages.order(:number).find(&:game_stage?)
   end
 
+  sig { void }
   def redirect_to_default
     tour = Tour.order(:year).last
     stage = first_game_stage(tour)

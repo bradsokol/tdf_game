@@ -1,18 +1,22 @@
+# typed: true
 # frozen_string_literal: true
 
 class OverallController < ApplicationController
+  extend T::Sig
+
   def default
     redirect_to_default_year
   end
 
+  sig { void }
   def index
     @tour = Tour.find_by(year: @year)
 
     if @tour.nil?
       redirect_to_default_year
     elsif @tour.overall_results.present?
-      overall_results = @tour.overall_results.order(points: :desc)
-      @date = overall_results.first.date
+      overall_results = @tour.overall_results.order(points: :desc).to_a
+      @date = T.must(overall_results.first).date
 
       @podium, next_index, next_ordinal = add_ordinals(overall_results, index: 0, ordinal: 1, places: 3)
 
@@ -34,16 +38,25 @@ class OverallController < ApplicationController
 
   private
 
+  sig do
+    params(
+      results: T::Array[OverallResult],
+      index: Integer,
+      ordinal: Integer,
+      places: Integer
+    )
+      .returns([T::Array[OverallResult], Integer, Integer])
+  end
   def add_ordinals(results, index:, ordinal:, places:)
     place = ordinal
     last_points = -1
-    partition = results[index..].select do |result|
+    slice = results[index..] || []
+    partition = slice.select do |result|
       if place > (ordinal + places - 1)
         false
       else
         if result.points != last_points
-
-          last_points = result.points
+          last_points = T.must(result.points)
           result.ordinal = place
         end
         place += 1

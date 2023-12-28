@@ -1,8 +1,11 @@
+# typed: false
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class ApplicationHelperTest < ActionView::TestCase
+  extend T::Sig
+
   setup do
     @tour = tours(:tdf_2019)
     @stage = @tour.game_stages.first

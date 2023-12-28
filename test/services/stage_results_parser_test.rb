@@ -1,8 +1,11 @@
+# typed: false
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class StageResultsParserTest < ActiveSupport::TestCase
+  extend T::Sig
+
   setup do
     @html = Nokogiri::HTML(html_fixture('stage_results'))
     @stage_result = StageResult.new

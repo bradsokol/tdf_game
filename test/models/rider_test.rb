@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class RiderTest < ActiveSupport::TestCase
+  extend T::Sig
+
   test '.new creates a rider' do
     rider = Rider.new(rider_input)
 
@@ -17,6 +20,7 @@ class RiderTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(inputs: T::Hash[Symbol, T.untyped]).returns(T::Hash[Symbol, T.untyped]) }
   def rider_input(inputs = {})
     {
       name: 'E. Merckx'

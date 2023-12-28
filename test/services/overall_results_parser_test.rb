@@ -1,8 +1,11 @@
+# typed: false
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class OverallResultsParserTest < ActiveSupport::TestCase
+  extend T::Sig
+
   setup do
     @overall_result = OverallResult.new
   end

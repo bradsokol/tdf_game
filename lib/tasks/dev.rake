@@ -1,4 +1,7 @@
+# typed: true
 # frozen_string_literal: true
+
+T.bind(self, T.all(Rake::DSL, Object))
 
 namespace :dev do
   namespace :players do

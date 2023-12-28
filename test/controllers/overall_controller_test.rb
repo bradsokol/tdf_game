@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class OverallControllerTest < ActionDispatch::IntegrationTest
+  extend T::Sig
+
   test '#default redirects to the most recent year' do
     get '/overall'
 

@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class PlayerTest < ActiveSupport::TestCase
+  extend T::Sig
+
   test '.new creates player' do
     player = Player.new(name: 'Bob Newman')
 

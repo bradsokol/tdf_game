@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class StageResultTest < ActiveSupport::TestCase
+  extend T::Sig
+
   test '.new creates stage result' do
     stage_result = StageResult.new(stage_result_input)
 
@@ -85,6 +88,7 @@ class StageResultTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(inputs: T::Hash[Symbol, T.untyped]).returns(T::Hash[Symbol, T.untyped]) }
   def stage_result_input(inputs = {})
     {
       player: players(:jim_hopper),

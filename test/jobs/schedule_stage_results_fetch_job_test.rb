@@ -1,8 +1,11 @@
+# typed: false
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class ScheduleStageResultsFetchJobTest < ActiveJob::TestCase
+  extend T::Sig
+
   test 'perform queues stage results fetch job if stage does not have results' do
     StageResultsFetchJob.expects(:perform_later).with(stages(:tdf_2019_4).id)
     StageResultsFetchJob.expects(:perform_later).with(stages(:tdf_2019_5).id)

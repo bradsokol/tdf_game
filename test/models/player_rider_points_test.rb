@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class PlayerRiderPointsTest < ActiveSupport::TestCase
+  extend T::Sig
+
   setup do
     @overall_result = overall_results(:tdf_2019_jim_hopper)
     @rider = riders(:e_merckx)
@@ -70,6 +73,7 @@ class PlayerRiderPointsTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(input: T::Hash[Symbol, T.untyped]).returns(T::Hash[Symbol, T.untyped]) }
   def player_rider_points_input(input = {})
     {
       overall_result: @overall_result,

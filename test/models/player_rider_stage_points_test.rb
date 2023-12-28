@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class PlayerRiderStagePointsTest < ActiveSupport::TestCase
+  extend T::Sig
+
   setup do
     @rider = riders(:e_merckx)
     @stage_result = stage_results(:tdf_2019_3_jim_hopper)
@@ -34,6 +37,7 @@ class PlayerRiderStagePointsTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(input: T::Hash[Symbol, T.untyped]).returns(T::Hash[Symbol, T.untyped]) }
   def player_rider_stage_points_input(input = {})
     {
       stage_result: @stage_result,

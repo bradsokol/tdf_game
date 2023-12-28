@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class StageResult < ApplicationRecord
+  extend T::Sig
+
   belongs_to :player
   belongs_to :stage
   has_many :player_rider_stage_points, class_name: 'PlayerRiderStagePoints', dependent: :restrict_with_exception
@@ -18,10 +21,11 @@ class StageResult < ApplicationRecord
 
   private
 
+  sig { void }
   def one_result_per_stage_and_player
     return unless new_record?
     return unless player && stage
-    return unless StageResult.default_scoped.exists?(player_id: player.id, stage_id: stage.id)
+    return unless StageResult.default_scoped.exists?(player_id: T.must(player).id, stage_id: T.must(stage).id)
 
     errors.add(:base, 'One stage result per player and stage')
   end

@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 ENV['RAILS_ENV'] ||= 'test'
@@ -8,6 +9,8 @@ require 'webmock/minitest'
 
 module ActiveSupport
   class TestCase
+    extend T::Sig
+
     # Run tests in parallel with specified workers
     parallelize(workers: :number_of_processors)
 
@@ -16,6 +19,7 @@ module ActiveSupport
 
     private
 
+    sig { params(name: String).returns(String) }
     def html_fixture(name)
       file_path = Rails.root.join('test', 'fixtures', 'html', "#{name}.html")
       File.read(file_path)

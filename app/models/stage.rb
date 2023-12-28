@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class Stage < ApplicationRecord
+  extend T::Sig
+
   belongs_to :tour
 
   has_many :stage_results, dependent: :restrict_with_exception

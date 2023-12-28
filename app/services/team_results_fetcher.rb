@@ -1,7 +1,13 @@
+# typed: true
 # frozen_string_literal: true
 
 class TeamResultsFetcher
+  extend T::Sig
+
   class << self
+    extend T::Sig
+
+    sig { params(year: Integer, player_name: String).returns(TeamResultsParser::TeamResults) }
     def perform(year:, player_name:)
       url = "https://ifarm.nl/cgi-bin/getpart.cgi?SEARCH=#{CGI.escape(player_name)}&YEAR=#{year}"
       Rails.logger.debug { "Fetching team results from: #{url}" }

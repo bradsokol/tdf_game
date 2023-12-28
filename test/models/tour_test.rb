@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class TourTest < ActiveSupport::TestCase
+  extend T::Sig
+
   test '.new creates tour' do
     tour = Tour.new(tour_input)
 
@@ -47,6 +50,7 @@ class TourTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(inputs: T::Hash[Symbol, T.untyped]).returns(T::Hash[Symbol, T.untyped]) }
   def tour_input(inputs = {})
     {
       year: 2018,

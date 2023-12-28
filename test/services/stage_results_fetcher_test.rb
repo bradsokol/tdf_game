@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class StageResultsFetcherTest < ActiveSupport::TestCase
+  extend T::Sig
+
   setup do
     @overall_result = OverallResult.new
     @stage_result = StageResult.new
@@ -40,10 +43,12 @@ class StageResultsFetcherTest < ActiveSupport::TestCase
 
   private
 
+  sig { returns(Date) }
   def date
     @date ||= Date.new(2020, 2, 26)
   end
 
+  sig { void }
   def stub_stage_results
     stub_request(:get, 'https://ifarm.nl/cgi-bin/getlines.cgi?DATE=20200226&SEARCH=Eddie%20Merckx')
       .to_return(status: 200, body: html_fixture('stage_results'))

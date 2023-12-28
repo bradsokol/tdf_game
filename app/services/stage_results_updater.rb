@@ -1,8 +1,12 @@
+# typed: true
 # frozen_string_literal: true
 
 class StageResultsUpdater
+  extend T::Sig
+
   attr_reader :stage
 
+  sig { params(stage_id: Integer).void }
   def perform(stage_id)
     @stage = Stage.find(stage_id)
 
@@ -17,16 +21,18 @@ class StageResultsUpdater
 
   private
 
+  sig { params(player: Player, stage: Stage).void }
   def update_stage_result(player, stage)
-    overall_result = OverallResult.find_or_create_by(player_id: player.id, tour_id: stage.tour.id)
+    overall_result = OverallResult.find_or_create_by(player_id: player.id, tour_id: T.must(stage.tour).id)
+    stage_date = T.must(stage.date)
 
     # TODO: Fix this hack
-    @save_overall = overall_result.new_record? || stage.date > overall_result.date
+    @save_overall = overall_result.new_record? || stage_date > overall_result.date
 
     stage_result = StageResult.find_or_create_by(player_id: player.id, stage_id: stage.id)
     StageResultsFetcher.perform(
-      stage_date: stage.date,
-      player_name: player.name,
+      stage_date:,
+      player_name: T.must(player.name),
       overall_result:,
       stage_result:
     )
@@ -36,6 +42,7 @@ class StageResultsUpdater
     update_team_result(player, stage_result, overall_result)
   end
 
+  sig { params(players: T::Array[Player], stage: Stage).returns(T::Boolean) }
   def update_stage_results(players, stage)
     StageResult.transaction do
       players.each do |player|
@@ -46,12 +53,13 @@ class StageResultsUpdater
     end
     true
   rescue StandardError => e
-    Rails.logger.error("Failed to update stage result: #{e.message}\n#{e.backtrace.join("\n")}")
+    Rails.logger.error("Failed to update stage result: #{e.message}\n#{T.must(e.backtrace).join("\n")}")
     false
   end
 
+  sig { params(player: Player, stage_result: StageResult, overall_result: OverallResult).void }
   def update_team_result(player, stage_result, overall_result)
-    results = TeamResultsFetcher.perform(year: stage.tour.year, player_name: player.name)
+    results = TeamResultsFetcher.perform(year: stage.tour.year, player_name: T.must(player.name))
 
     results.riders.each do |rider_results|
       rider = stage.tour.riders.find_or_create_by(name: rider_results.name)

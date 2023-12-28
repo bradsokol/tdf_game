@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class TeamsControllerTest < ActionDispatch::IntegrationTest
+  extend T::Sig
+
   setup do
     @tour = tours(:tdf_2019)
     @first_player = Registration.where(year: @tour.year).joins(:player).order(:name).first.player

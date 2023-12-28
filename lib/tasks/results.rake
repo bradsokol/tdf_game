@@ -1,4 +1,7 @@
+# typed: true
 # frozen_string_literal: true
+
+T.bind(self, T.all(Rake::DSL, Object))
 
 namespace :results do
   desc 'Delete results for a year'
@@ -10,6 +13,7 @@ namespace :results do
     abort 'Aborting...' if confirm_year != ENV.fetch('YEAR', nil)
 
     tour = Tour.find_by(year: ENV.fetch('YEAR', nil))
+    return if tour.nil?
 
     tour.stages.each do |stage|
       stage.stage_results.each { |stage_result| stage_result.player_rider_stage_points.destroy_all }

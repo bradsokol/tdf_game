@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class PlayerRiderStagePoints < ApplicationRecord
+  extend T::Sig
+
   belongs_to :stage_result
   belongs_to :rider
 

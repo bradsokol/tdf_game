@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class StagesControllerTest < ActionDispatch::IntegrationTest
+  extend T::Sig
+
   test '#default redirects to the first stage with results in default year' do
     get '/stages'
 

@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class OverallResult < ApplicationRecord
+  extend T::Sig
+
   attribute :ordinal
 
   belongs_to :player
@@ -27,10 +30,11 @@ class OverallResult < ApplicationRecord
 
   private
 
+  sig { void }
   def one_result_per_tour_and_player
     return unless new_record?
     return unless player && tour
-    return unless OverallResult.default_scoped.exists?(player_id: player.id, tour_id: tour.id)
+    return unless OverallResult.default_scoped.exists?(player_id: T.must(player).id, tour_id: T.must(tour).id)
 
     errors.add(:base, 'One overall result per player and tour')
   end

@@ -1,6 +1,9 @@
+# typed: true
 # frozen_string_literal: true
 
 class PlayerRiderPoints < ApplicationRecord
+  extend T::Sig
+
   belongs_to :overall_result
   belongs_to :rider
 

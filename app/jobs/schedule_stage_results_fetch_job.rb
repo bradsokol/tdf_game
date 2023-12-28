@@ -1,8 +1,12 @@
+# typed: true
 # frozen_string_literal: true
 
 class ScheduleStageResultsFetchJob < ApplicationJob
+  extend T::Sig
+
   queue_as :default
 
+  sig { void }
   def perform
     stages_needing_results.each do |stage|
       ::StageResultsFetchJob.perform_later(stage.id)
@@ -11,6 +15,7 @@ class ScheduleStageResultsFetchJob < ApplicationJob
 
   private
 
+  sig { returns(T::Array[Stage]) }
   def stages_needing_results
     today = Time.zone.today
     Stage.need_results.select do |stage|
@@ -21,6 +26,6 @@ class ScheduleStageResultsFetchJob < ApplicationJob
       else
         Time.now.utc.hour >= 16
       end
-    end
+    end.to_a
   end
 end

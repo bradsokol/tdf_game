@@ -1,8 +1,11 @@
+# typed: false
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class TeamResultsParserTest < ActiveSupport::TestCase
+  extend T::Sig
+
   setup do
     html = Nokogiri::HTML(html_fixture('team_results'))
     @team_results = TeamResultsParser.perform(html:)
@@ -97,6 +100,7 @@ class TeamResultsParserTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(pattern: Regexp).returns(Nokogiri::HTML::Document) }
   def fixture_with_invalid_line(pattern)
     file_path = Rails.root.join('test/fixtures/html/team_results.html')
     data = File.read(file_path).gsub(pattern, 'THIS IS INVALID')

@@ -1,10 +1,16 @@
+# typed: true
 # frozen_string_literal: true
 
 class TeamResultsParser
+  extend T::Sig
+
   Rider = Struct.new(:ordinal, :name, :total_points, :stage_points)
   TeamResults = Struct.new(:riders, :total_points, :stage_points, :overall_percentile, :stage_percentiles)
 
   class << self
+    extend T::Sig
+
+    sig { params(html: Nokogiri::HTML::Document).returns(TeamResults) }
     def perform(html:)
       data = html.xpath('//pre').text.split("\n")[5..22]
 
@@ -15,14 +21,15 @@ class TeamResultsParser
       TeamResults.new(
         riders,
         points[0],
-        stage_numbers.zip(points[1..]).to_h,
+        stage_numbers.zip(T.must(points[1..])).to_h,
         percentiles[0],
-        stage_numbers.zip(percentiles[1..]).to_h
+        stage_numbers.zip(T.must(percentiles[1..])).to_h
       )
     end
 
     private
 
+    sig { params(points: String).returns(T.nilable(Integer)) }
     def format_points(points)
       case points
       when '.'
@@ -34,32 +41,35 @@ class TeamResultsParser
       end
     end
 
+    sig { params(line: String).returns(T::Array[Integer]) }
     def parse_percentiles(line)
-      /^.*Percentiles: *(.+)$/.match(line).to_a[1].split.map(&:to_i)
+      T.must(/^.*Percentiles: *(.+)$/.match(line).to_a[1]).split.map(&:to_i)
     rescue StandardError
       Rails.logger.error("[TeamResults] Failed to parse percentiles: #{line}")
       raise
     end
 
+    sig { params(line: String).returns(T::Array[Integer]) }
     def parse_points(line)
-      /^.*Points: *(.+)$/.match(line).to_a[1].split.map(&:to_i)
+      T.must(/^.*Points: *(.+)$/.match(line).to_a[1]).split.map(&:to_i)
     rescue StandardError
       Rails.logger.error("[TeamResults] Failed to parse point totals: #{line}")
       raise
     end
 
+    sig { params(stage_numbers: T::Array[Integer], line: String).returns(Rider) }
     def parse_rider(stage_numbers, line)
       ordinal, name, total_points, daily_points = /^ *(\d+)\. ([^\d]+)(\d+) (.+)$/.match(line).to_a[1..]
 
-      daily_points = daily_points
-                     .gsub(/\s+/m, ' ')
-                     .strip
-                     .split
-                     .map { |p| format_points(p) }
+      daily_points = T.must(daily_points)
+                      .gsub(/\s+/m, ' ')
+                      .strip
+                      .split
+                      .map { |p| format_points(p) }
 
       Rider.new(
         ordinal.to_i,
-        name.strip,
+        T.must(name).strip,
         total_points.to_i,
         stage_numbers.zip(daily_points).to_h,
       )
@@ -68,8 +78,9 @@ class TeamResultsParser
       raise
     end
 
+    sig { params(line: String).returns(T::Array[Integer]) }
     def parse_stage_numbers(line)
-      /^ +tot +(.+)$/.match(line).to_a[1].split.map(&:to_i)
+      T.must(/^ +tot +(.+)$/.match(line).to_a[1]).split.map(&:to_i)
     rescue StandardError
       Rails.logger.error("[TeamResults] Failed to parse stage numbers: #{line}")
       raise

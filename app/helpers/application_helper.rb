@@ -1,10 +1,14 @@
+# typed: false
 # frozen_string_literal: true
 
 module ApplicationHelper
+  extend T::Sig
+
+  sig { params(stage: Stage).returns(String) }
   def time_to_stage_results(stage)
-    days = (stage.date - Time.zone.today).numerator
+    days = T.let(T.must(stage.date) - Time.zone.today, Rational).numerator
     if days.zero?
-      hours = ((stage.date.to_time + 12.hours) - Time.zone.now) / 3600
+      hours = ((T.must(stage.date).to_time + 12.hours) - Time.zone.now) / 3600
       if hours <= 1
         'Results should be available shortly.'
       else
@@ -15,8 +19,9 @@ module ApplicationHelper
     end
   end
 
+  sig { params(tour: Tour).returns(String) }
   def time_to_tour_results(tour)
-    days = (tour.start_date - Time.zone.today).numerator
+    days = (T.must(tour.start_date) - Time.zone.today).numerator
     if days <= 0
       days_to_game_stage = (tour.game_stages.first.date - Time.zone.today).numerator
       if days_to_game_stage <= 0

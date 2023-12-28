@@ -1,8 +1,11 @@
+# typed: true
 # frozen_string_literal: true
 
 require 'test_helper'
 
 class OverallResultTest < ActiveSupport::TestCase
+  extend T::Sig
+
   test '.new creates overall result' do
     overall_result = OverallResult.new(overall_result_input)
 
@@ -107,6 +110,7 @@ class OverallResultTest < ActiveSupport::TestCase
 
   private
 
+  sig { params(inputs: T::Hash[Symbol, T.untyped]).returns(T::Hash[Symbol, T.untyped]) }
   def overall_result_input(inputs = {})
     {
       player: players(:jim_hopper),

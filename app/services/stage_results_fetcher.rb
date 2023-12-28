@@ -1,9 +1,23 @@
+# typed: true
 # frozen_string_literal: true
 
 class StageResultsFetcher
+  extend T::Sig
+
   PlayerResults = Struct.new(:overall_result, :stage_result)
 
   class << self
+    extend T::Sig
+
+    sig do
+      params(
+        stage_date: Date,
+        player_name: String,
+        overall_result: OverallResult,
+        stage_result: StageResult
+      )
+        .returns(PlayerResults)
+    end
     def perform(stage_date:, player_name:, overall_result:, stage_result:)
       query_date = stage_date.strftime('%Y%m%d')
       url = "https://ifarm.nl/cgi-bin/getlines.cgi?DATE=#{query_date}&SEARCH=#{CGI.escape(player_name)}"
