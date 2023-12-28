@@ -18,7 +18,7 @@ namespace :dev do
       json[:players] = Registration
                        .includes(:player)
                        .where(year:)
-                       .map { |registration| registration.player.name }
+                       .map { |registration| T.must(registration.player).name }
                        .sort
                        .map { |name| { name: } }
 

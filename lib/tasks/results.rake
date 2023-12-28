@@ -38,7 +38,7 @@ namespace :results do
 
     stage.update!(results_downloaded_at: nil) if ENV['FORCE']
 
-    StageResultsUpdater.new.perform(stage.id)
+    StageResultsUpdater.new.perform(T.must(stage.id))
   end
 
   desc 'Update results for all stages in a tour'
