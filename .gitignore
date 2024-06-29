@@ -6,7 +6,6 @@
 
 backups/
 doc/
-static/
 
 # Ignore bundler config.
 /.bundle
