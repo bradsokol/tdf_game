@@ -476,7 +476,7 @@
 <script>
   function playerSelected(selectedObject) {
     const year = 2022;
-    window.location = `/teams/${year}/${selectedObject.value}`;
+    window.location = `/tdf_game/teams/${year}/${selectedObject.value}`;
   }
 </script>
 
@@ -485,7 +485,8 @@
     <script>
       function tourSelected(selectedObject) {
         if (window.location.href.endsWith("overall.html")) {
-          window.location = "/overall/" + selectedObject.value + ".html";
+          // This condition only happens in the static version of the site
+          window.location = "/tdf_game/overall/" + selectedObject.value + ".html";
         } else {
           const regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
           const year = regex.exec(window.location.href).groups.year;
