@@ -6,7 +6,7 @@ extend T::Sig # rubocop:disable Style/MixinUsage
 T.bind(self, T.all(Rake::DSL, Object))
 
 URL_BASE = 'http://localhost:3000'
-STATIC_DIR = 'static'
+STATIC_DIR = 'docs'
 
 namespace :static do
   desc 'Crawl the site and build a static copy'
