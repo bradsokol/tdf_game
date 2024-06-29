@@ -34,6 +34,7 @@ group :development do
   gem 'rubocop-performance'
   gem 'rubocop-rails'
   gem 'rubocop-sorbet'
+  gem 'ruby-lsp'
   gem 'sorbet'
   gem 'spidr'
   gem 'spring'
