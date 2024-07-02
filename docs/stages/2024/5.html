@@ -1,0 +1,84 @@
+<! DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/tdf_game/assets/application-44f5f828871bb11cde19abf6bfa70b8ff0817690af2bd0f75ec43588f9342a63.css" media="all" />
+    <title>Stage Results</title>
+  </head>
+  <body>
+    <nav class="navbar-brand fixed-top flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/tdf_game/overall.html">Avondale Tour de France Pool</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <ul class="nav flex-column col-md-2 d-done d-md-block bg-light sidebar">
+          <li class="nav-item" style="padding: 10px 16px 10px 16px;">
+            <select name="tour" id="tour" onchange="tourSelected(this);"><option selected="selected" value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
+<option value="2020">2020</option>
+<option value="2019">2019</option></select>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/overall/2024.html">Overall</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/stages/2024.html">Stages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/teams/2024.html">Teams</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      
+<h2>Stage Results</h2>
+<p><select name="stage" id="stage" onchange="stageSelected(this);"><option value="3.html">Stage 3 - July  1 - Plaisance to Turin - 231 km - Flat</option>
+<option value="4.html">Stage 4 - July  2 - Pinerolo to Valloire - 140 km - Mountain</option>
+<option selected="selected" value="5">Stage 5 - July  3 - Saint-Jean-de-Maurienne to Saint-Vulbas - 177 km - Flat</option>
+<option value="6.html">Stage 6 - July  4 - Macon to Dijon - 164 km - Flat</option>
+<option value="7.html">Stage 7 - July  5 - Nuits-Saint-Georges to Gevrey-Chambertin - 25 km - Time Trial</option>
+<option value="8.html">Stage 8 - July  6 - Semur-en-Auxois to Colombey-les-deux-Eglises - 183 km - Flat</option>
+<option value="9.html">Stage 9 - July  7 - Troyes to Troyes - 199 km - Rolling</option>
+<option value="10.html">Stage 10 - July  9 - Orleans to Saint-Amand-Montrond - 187 km - Flat</option>
+<option value="11.html">Stage 11 - July 10 - Evaux-les-Bains to Le Lioran - 211 km - Mountain</option>
+<option value="12.html">Stage 12 - July 11 - Aurillac to Villeneuve-sur-Lot - 204 km - Flat</option>
+<option value="13.html">Stage 13 - July 12 - Agen to Pau - 165 km - Flat</option>
+<option value="14.html">Stage 14 - July 13 - Pau to Saint-Lary-Soulan-Pla D&#39;Adet - 152 km - Mountain</option>
+<option value="15.html">Stage 15 - July 14 - Loudenvielle to Plateua de Beille - 198 km - Mountain</option>
+<option value="16.html">Stage 16 - July 16 - Gruissan to Nimes - 189 km - Flat</option>
+<option value="17.html">Stage 17 - July 17 - Saint-Paul-Trois-Chateaux to Superdevoluy - 178 km - Mountain</option>
+<option value="18.html">Stage 18 - July 18 - Gap to Barcelonnette - 180 km - Rolling</option>
+<option value="19.html">Stage 19 - July 19 - Embrun to Isola 2000 - 145 km - Mountain</option>
+<option value="20.html">Stage 20 - July 20 - Nice to Col del la Couillole - 133 km - Mountain</option>
+<option value="21.html">Stage 21 - July 21 - Monaco to Nice - 34 km - Time Trial</option></select></p>
+
+    <p>Results should be available shortly.</p>
+
+<script>
+  function stageSelected(selectObject) {
+    const year = 2024;
+    window.location = `/stages/${year}/${selectObject.value}`;
+  }
+</script>
+
+    </main>
+
+    <script>
+      function tourSelected(selectedObject) {
+        if (window.location.href.endsWith("overall.html")) {
+          // This condition only happens in the static version of the site
+          window.location = "/overall/" + selectedObject.value + ".html";
+        } else {
+          const regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
+          const year = regex.exec(window.location.href).groups.year;
+          const url = window.location.href.replace(year, selectedObject.value);
+          window.location = url;
+        }
+      }
+    </script>
+  </body>
+</html>
