@@ -11,7 +11,7 @@ STATIC_DIR = 'docs'
 namespace :static do
   desc 'Crawl the site and build a static copy'
   task build: :environment do
-    years = (2019..2023).to_a
+    years = (2019..2024).to_a
 
     stages_fixups = {}
     years.each do |year|
@@ -42,7 +42,12 @@ namespace :static do
 
     from_file_name = file_name(url: "#{URL_BASE}/overall/#{years.last}", html: true)
     to_file_name = file_name(url: "#{URL_BASE}/overall", html: true)
+    index_file_name = file_name(url: "#{URL_BASE}/index", html: true)
     `cp #{from_file_name} #{to_file_name}`
+    `cp #{from_file_name} #{index_file_name}`
+
+    `find docs -name "*.html" -exec sed -i '' 's@href="[^h]@href="/tdf_game/@' {} \\;`
+    `find docs -name "*.html" -exec sed -i '' 's@window\.location = "@window.location = "/tdf_game@' {} \\;`
   end
 
   sig { params(html: String).returns(String) }
