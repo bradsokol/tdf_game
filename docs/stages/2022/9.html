@@ -193,8 +193,14 @@
           // This condition only happens in the static version of the site
           window.location = "/tdf_game/overall/" + selectedObject.value + ".html";
         } else {
-          const regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
-          const year = regex.exec(window.location.href).groups.year;
+          var regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
+          var match = regex.exec(window.location.href);
+          if (match == null) {
+            // Hosting static site on GitHub Pages
+            regex = /https?:\/\/[^/]+\/tdf_game\/[^/]+\/(?<year>[0-9]{4})/;
+            match = regex.exec(window.location.href);
+          }
+          const year = match.groups.year;
           const url = window.location.href.replace(year, selectedObject.value);
           window.location = url;
         }

@@ -56,7 +56,7 @@
 <option value="20.html">Stage 20 - July 20 - Nice to Col del la Couillole - 133 km - Mountain</option>
 <option value="21.html">Stage 21 - July 21 - Monaco to Nice - 34 km - Time Trial</option></select></p>
 
-    <p>Results should be available in about 1 hour.</p>
+    <p>Results should be available shortly.</p>
 
 <script>
   function stageSelected(selectObject) {
@@ -73,8 +73,14 @@
           // This condition only happens in the static version of the site
           window.location = "/tdf_game/overall/" + selectedObject.value + ".html";
         } else {
-          const regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
-          const year = regex.exec(window.location.href).groups.year;
+          var regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
+          var match = regex.exec(window.location.href);
+          if (match == null) {
+            // Hosting static site on GitHub Pages
+            regex = /https?:\/\/[^/]+\/tdf_game\/[^/]+\/(?<year>[0-9]{4})/;
+            match = regex.exec(window.location.href);
+          }
+          const year = match.groups.year;
           const url = window.location.href.replace(year, selectedObject.value);
           window.location = url;
         }
