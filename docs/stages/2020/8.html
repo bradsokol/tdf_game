@@ -207,7 +207,11 @@
 <script>
   function stageSelected(selectObject) {
     const year = 2020;
-    window.location = `/stages/${year}/${selectObject.value}`;
+    if (window.location.href.includes("tdf_game")) {
+      window.location = `/tdf_game/stages/${year}/${selectObject.value}`;
+    } else {
+      window.location = `/stages/${year}/${selectObject.value}`;
+    }
   }
 </script>
 
