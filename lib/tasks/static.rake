@@ -42,12 +42,7 @@ namespace :static do
 
     from_file_name = file_name(url: "#{URL_BASE}/overall/#{years.last}", html: true)
     to_file_name = file_name(url: "#{URL_BASE}/overall", html: true)
-    index_file_name = file_name(url: "#{URL_BASE}/index", html: true)
     `cp #{from_file_name} #{to_file_name}`
-    `cp #{from_file_name} #{index_file_name}`
-
-    `mv docs/tdf_game/assets docs/`
-    `rmdir docs/tdf_game`
   end
 
   sig { params(html: String).returns(String) }
