@@ -499,7 +499,11 @@
 <script>
   function playerSelected(selectedObject) {
     const year = 2019;
-    window.location = `/teams/${year}/${selectedObject.value}`;
+    if (window.location.href.includes("tdf_game")) {
+      window.location = `/tdf_game/teams/${year}/${selectedObject.value}`;
+    } else {
+      window.location = `/teams/${year}/${selectedObject.value}`;
+    }
   }
 </script>
 
