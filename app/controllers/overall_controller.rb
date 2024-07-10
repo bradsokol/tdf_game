@@ -53,7 +53,13 @@ class OverallController < ApplicationController
     slice = results[index..] || []
     partition = slice.select do |result|
       if place > (ordinal + places - 1)
-        false
+        if result.points == last_points
+          # Last results in the group are tied
+          place += 1
+          true
+        else
+          false
+        end
       else
         if result.points != last_points
           last_points = T.must(result.points)
