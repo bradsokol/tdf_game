@@ -46,6 +46,9 @@ namespace :results do
     abort 'YEAR must be specified' unless ENV['YEAR']
 
     tour = Tour.find_by!(year: ENV.fetch('YEAR', nil))
+    tour.overall_results.each do |overall_result|
+      overall_result.update!(date: tour.start_date)
+    end
     tour.stages.each do |stage|
       stage.update!(results_downloaded_at: nil) if ENV['FORCE']
 
