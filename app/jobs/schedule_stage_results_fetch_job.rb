@@ -9,7 +9,7 @@ class ScheduleStageResultsFetchJob < ApplicationJob
   sig { void }
   def perform
     stages_needing_results.each do |stage|
-      ::StageResultsFetchJob.perform_later(stage.id)
+      ::StageResultsFetchJob.perform_later(T.must(stage.id))
     end
   end
 
