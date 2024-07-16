@@ -1,6 +1,8 @@
 <% content_for :title, 'Team Results' %>
 
 <h2>Team Results</h2>
+<p>We've found a bug that in rare cases causes the scores to be shown in the wrong row i.e. attributed to the wrong rider.
+The totals are correct as are the stage and overall pages. We're working to correct this problem.</p>
 <% if @player %>
   <p><%= select_tag('team', options_for_select(options_from_players(@players), @player.id), :onchange => 'playerSelected(this);') %></p>
 <% else %>
