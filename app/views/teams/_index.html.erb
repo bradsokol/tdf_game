@@ -18,7 +18,7 @@
           <td class="text-right"><%= result.points %></td>
           <% stages.each do |stage| %>
             <% if stage.stage_results.length > 0 %>
-              <td class="text-right"><%= format_points(stage_results_for_player(stage, player).player_rider_stage_points[rider_index].points) %></td>
+              <td class="text-right"><%= format_points(stage_results_for_player(stage, player).player_rider_stage_points.select { |prsp| prsp.rider_id == result.rider.id }.first.points) %></td>
             <% else %>
               <td/>
             <% end %>
