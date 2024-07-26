@@ -9,8 +9,8 @@
     "turbolinks": "^5.2.0"
   },
   "engines": {
-    "node": "16.20.1",
-    "yarn": "1.22.19"
+    "node": "^22.5.1",
+    "yarn": "^1.22.22"
   },
   "version": "0.1.0",
   "devDependencies": {
