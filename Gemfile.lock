@@ -98,7 +98,7 @@ GEM
       rexml
     crass (1.0.6)
     date (3.3.4)
-    debug (1.9.1)
+    debug (1.9.2)
       irb (~> 1.10)
       reline (>= 0.3.8)
     devise (4.9.3)
@@ -117,10 +117,10 @@ GEM
     hashdiff (1.1.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
-    io-console (0.7.1)
-    irb (1.11.0)
-      rdoc
-      reline (>= 0.3.8)
+    io-console (0.7.2)
+    irb (1.14.0)
+      rdoc (>= 4.0.0)
+      reline (>= 0.4.2)
     json (2.7.1)
     language_server-protocol (3.17.0.3)
     listen (3.8.0)
@@ -223,7 +223,7 @@ GEM
       sorbet-runtime (>= 0.5.9204)
     rbs (3.5.2)
       logger
-    rdoc (6.6.3.1)
+    rdoc (6.7.0)
       psych (>= 4.0.0)
     react-rails (3.1.1)
       babel-transpiler (>= 0.7.0)
@@ -234,7 +234,7 @@ GEM
     redis-client (0.19.1)
       connection_pool
     regexp_parser (2.8.3)
-    reline (0.4.1)
+    reline (0.5.9)
       io-console (~> 0.5)
     responders (3.1.1)
       actionpack (>= 5.2)
