@@ -17,7 +17,7 @@ class StagesControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select 'select[name=stage]' do
-      assert_select 'option[selected=selected]', 'Stage 3 - July  8 - Binche to Épernay - 215 km - Rolling'
+      assert_select 'option[selected=selected]', 'Stage 3 - July 8 - Binche to Épernay - 215 km - Rolling'
     end
   end
 
