@@ -1,0 +1,203 @@
+{
+  "year": 2025,
+  "start_date": "2025-07-05",
+  "finish_date": "2025-07-27",
+  "stages": [
+    {
+      "number": 1,
+      "date": "2025-07-05",
+      "start_town": "Lille Métropole",
+      "start_country": "France",
+      "finish_town": "Lille Métropole",
+      "finish_country": "France",
+      "distance": 185,
+      "stage_type": "flat",
+      "game_stage": false
+    },
+    {
+      "number": 2,
+      "date": "2025-07-06",
+      "start_town": "Lauwin-Planque",
+      "start_country": "France",
+      "finish_town": "Boulogne-sur-Mer",
+      "finish_country": "France",
+      "distance": 212,
+      "stage_type": "rolling",
+      "game_stage": false
+    },
+    {
+      "number": 3,
+      "date": "2025-07-07",
+      "start_town": "Valenciennes",
+      "start_country": "France",
+      "finish_town": "Dunkerque",
+      "finish_country": "France",
+      "distance": 178,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 4,
+      "date": "2025-07-08",
+      "start_town": "Amiens Métropole",
+      "start_country": "France",
+      "finish_town": "Rouen",
+      "distance": 173,
+      "stage_type": "rolling",
+      "game_stage": true
+    },
+    {
+      "number": 5,
+      "date": "2025-07-09",
+      "start_town": "Caen",
+      "finish_town": "Caen",
+      "distance": 33,
+      "stage_type": "itt",
+      "game_stage": true
+    },
+    {
+      "number": 6,
+      "date": "2025-07-10",
+      "start_town": "Bayeux",
+      "finish_town": "Vire Normandie",
+      "distance": 201,
+      "stage_type": "rolling",
+      "game_stage": true
+    },
+    {
+      "number": 7,
+      "date": "2025-07-11",
+      "start_town": "Saint-Malo",
+      "finish_town": "Mur-de-Bretagne Guerlédan",
+      "distance": 194,
+      "stage_type": "rolling",
+      "game_stage": true
+    },
+    {
+      "number": 8,
+      "date": "2025-07-12",
+      "start_town": "Saint-Méen-le-Grand",
+      "finish_town": "Laval Espace Mayenne",
+      "distance": 174,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 9,
+      "date": "2025-07-13",
+      "start_town": "Chinon",
+      "finish_town": "Châteauroux",
+      "distance": 170,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 10,
+      "date": "2025-07-14",
+      "start_town": "Ennezat",
+      "finish_town": "Le Mont-Dore Puy de Sancy",
+      "distance": 163,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 11,
+      "date": "2025-07-16",
+      "start_town": "Toulouse",
+      "finish_town": "Toulouse",
+      "distance": 154,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 12,
+      "date": "2025-07-17",
+      "start_town": "Auch",
+      "finish_town": "Hautacam",
+      "distance": 181,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 13,
+      "date": "2025-07-18",
+      "start_town": "Loudenvielle",
+      "finish_town": "Peyragudes",
+      "distance": 11,
+      "stage_type": "itt",
+      "game_stage": true
+    },
+    {
+      "number": 14,
+      "date": "2025-07-19",
+      "start_town": "Pau",
+      "finish_town": "Luchon-Superbagnères",
+      "distance": 183,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 15,
+      "date": "2025-07-20",
+      "start_town": "Muret",
+      "finish_town": "Carcassonne",
+      "distance": 169,
+      "stage_type": "rolling",
+      "game_stage": true
+    },
+    {
+      "number": 16,
+      "date": "2025-07-22",
+      "start_town": "Montpellier",
+      "finish_town": "Mount Ventoux",
+      "distance": 172,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 17,
+      "date": "2025-07-23",
+      "start_town": "Bollène",
+      "finish_town": "Valence",
+      "distance": 161,
+      "stage_type": "flat",
+      "game_stage": true
+    },
+    {
+      "number": 18,
+      "date": "2025-07-24",
+      "start_town": "Vif",
+      "finish_town": "Courchevel Col de la Loze",
+      "distance": 171,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 19,
+      "date": "2025-07-25",
+      "start_town": "Albertville",
+      "finish_town": "La Plagne",
+      "distance": 130,
+      "stage_type": "mountain",
+      "game_stage": true
+    },
+    {
+      "number": 20,
+      "date": "2025-07-26",
+      "start_town": "Nantua",
+      "finish_town": "Pontarlier",
+      "distance": 185,
+      "stage_type": "rolling",
+      "game_stage": true
+    },
+    {
+      "number": 21,
+      "date": "2025-07-27",
+      "start_town": "Mantes-la-Ville",
+      "finish_town": "Paris",
+      "distance": 120,
+      "stage_type": "flat",
+      "game_stage": true
+    }
+  ]
+}
