@@ -1,15 +1,15 @@
-require:
+plugins:
   - rubocop-performance
   - rubocop-rails
   - rubocop-sorbet
 
 AllCops:
   Exclude:
-    - 'bin/**/*'
-    - 'db/**/*'
-    - 'node_modules/**/*'
-    - 'public/**/*'
-    - 'tmp/**/*'
+    - "bin/**/*"
+    - "db/**/*"
+    - "node_modules/**/*"
+    - "public/**/*"
+    - "tmp/**/*"
   NewCops: enable
 
 Layout/LineLength:
