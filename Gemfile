@@ -8,6 +8,7 @@ ruby '3.4.4'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'clockwork'
 gem 'devise'
+gem 'ostruct'
 gem 'pg', '>= 0.18', '< 2.0'
 gem 'puma'
 gem 'rack-cors'
