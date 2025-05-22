@@ -8,7 +8,7 @@ class Stage < ApplicationRecord
 
   has_many :stage_results, dependent: :restrict_with_exception
 
-  enum stage_type: {
+  enum :stage_type, {
     flat: 'flat',
     itt: 'itt',
     mountain: 'mountain',
