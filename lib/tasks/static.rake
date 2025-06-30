@@ -11,7 +11,7 @@ STATIC_DIR = 'docs'
 namespace :static do
   desc 'Crawl the site and build a static copy'
   task build: :environment do
-    years = (2019..2024).to_a
+    years = (2019..2025).to_a
 
     stages_fixups = {}
     years.each do |year|
