@@ -1,0 +1,96 @@
+<!-- BEGIN app/views/layouts/application.html.erb --><! DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/tdf_game/assets/application-44f5f828871bb11cde19abf6bfa70b8ff0817690af2bd0f75ec43588f9342a63.css" media="all" />
+    <title>Stage Results</title>
+  </head>
+  <body>
+    <nav class="navbar-brand fixed-top flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/tdf_game/overall.html">Avondale Tour de France Pool</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <ul class="nav flex-column col-md-2 d-done d-md-block bg-light sidebar">
+          <li class="nav-item" style="padding: 10px 16px 10px 16px;">
+            <select name="tour" id="tour" onchange="tourSelected(this);"><option selected="selected" value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
+<option value="2020">2020</option>
+<option value="2019">2019</option></select>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/overall/2025.html">Overall</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/stages/2025.html">Stages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/teams/2025.html">Teams</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <!-- BEGIN app/views/stages/index.html.erb -->
+<h2>Stage Results</h2>
+<p><select name="stage" id="stage" onchange="stageSelected(this);"><option selected="selected" value="3">Stage 3 - July  7 - Valenciennes to Dunkerque - 178 km - Flat</option>
+<option value="4.html">Stage 4 - July  8 - Amiens Métropole to Rouen - 173 km - Rolling</option>
+<option value="5.html">Stage 5 - July  9 - Caen to Caen - 33 km - Time Trial</option>
+<option value="6.html">Stage 6 - July 10 - Bayeux to Vire Normandie - 201 km - Rolling</option>
+<option value="7.html">Stage 7 - July 11 - Saint-Malo to Mur-de-Bretagne Guerlédan - 194 km - Rolling</option>
+<option value="8.html">Stage 8 - July 12 - Saint-Méen-le-Grand to Laval Espace Mayenne - 174 km - Flat</option>
+<option value="9.html">Stage 9 - July 13 - Chinon to Châteauroux - 170 km - Flat</option>
+<option value="10.html">Stage 10 - July 14 - Ennezat to Le Mont-Dore Puy de Sancy - 163 km - Mountain</option>
+<option value="11.html">Stage 11 - July 16 - Toulouse to Toulouse - 154 km - Flat</option>
+<option value="12.html">Stage 12 - July 17 - Auch to Hautacam - 181 km - Mountain</option>
+<option value="13.html">Stage 13 - July 18 - Loudenvielle to Peyragudes - 11 km - Time Trial</option>
+<option value="14.html">Stage 14 - July 19 - Pau to Luchon-Superbagnères - 183 km - Mountain</option>
+<option value="15.html">Stage 15 - July 20 - Muret to Carcassonne - 169 km - Rolling</option>
+<option value="16.html">Stage 16 - July 22 - Montpellier to Mount Ventoux - 172 km - Mountain</option>
+<option value="17.html">Stage 17 - July 23 - Bollène to Valence - 161 km - Flat</option>
+<option value="18.html">Stage 18 - July 24 - Vif to Courchevel Col de la Loze - 171 km - Mountain</option>
+<option value="19.html">Stage 19 - July 25 - Albertville to La Plagne - 130 km - Mountain</option>
+<option value="20.html">Stage 20 - July 26 - Nantua to Pontarlier - 185 km - Rolling</option>
+<option value="21.html">Stage 21 - July 27 - Mantes-la-Ville to Paris - 120 km - Flat</option></select></p>
+
+    <p>The tour starts on July  5. Check back in 6 days.</p>
+
+<script>
+  function stageSelected(selectObject) {
+    const year = 2025;
+    if (window.location.href.includes("tdf_game")) {
+      window.location = `/tdf_game/stages/${year}/${selectObject.value}`;
+    } else {
+      window.location = `/stages/${year}/${selectObject.value}`;
+    }
+  }
+</script>
+<!-- END app/views/stages/index.html.erb -->
+    </main>
+
+    <script>
+      function tourSelected(selectedObject) {
+        if (window.location.href.endsWith("overall.html")) {
+          // This condition only happens in the static version of the site
+          window.location = "/tdf_game/overall/" + selectedObject.value + ".html";
+        } else {
+          var regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
+          var match = regex.exec(window.location.href);
+          if (match == null) {
+            // Hosting static site on GitHub Pages
+            regex = /https?:\/\/[^/]+\/tdf_game\/[^/]+\/(?<year>[0-9]{4})/;
+            match = regex.exec(window.location.href);
+          }
+          const year = match == null ? '2024' : match.groups.year;
+          const url = window.location.href.replace(year, selectedObject.value);
+          window.location = url;
+        }
+      }
+    </script>
+  </body>
+</html>
+<!-- END app/views/layouts/application.html.erb -->

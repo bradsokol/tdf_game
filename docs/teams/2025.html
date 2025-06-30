@@ -1,0 +1,78 @@
+<!-- BEGIN app/views/layouts/application.html.erb --><! DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="/tdf_game/assets/application-44f5f828871bb11cde19abf6bfa70b8ff0817690af2bd0f75ec43588f9342a63.css" media="all" />
+    <title>Team Results</title>
+  </head>
+  <body>
+    <nav class="navbar-brand fixed-top flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/tdf_game/overall.html">Avondale Tour de France Pool</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <ul class="nav flex-column col-md-2 d-done d-md-block bg-light sidebar">
+          <li class="nav-item" style="padding: 10px 16px 10px 16px;">
+            <select name="tour" id="tour" onchange="tourSelected(this);"><option selected="selected" value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
+<option value="2020">2020</option>
+<option value="2019">2019</option></select>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/overall/2025.html">Overall</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/stages/2025.html">Stages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/teams/2025.html">Teams</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <!-- BEGIN app/views/teams/index.html.erb -->
+<h2>Team Results</h2>
+  <p>No players are registered yet.</p>
+
+  <p>The tour starts on July  5. Check back in 6 days.</p>
+
+<script>
+  function playerSelected(selectedObject) {
+    const year = 2025;
+    if (window.location.href.includes("tdf_game")) {
+      window.location = `/tdf_game/teams/${year}/${selectedObject.value}`;
+    } else {
+      window.location = `/teams/${year}/${selectedObject.value}`;
+    }
+  }
+</script>
+<!-- END app/views/teams/index.html.erb -->
+    </main>
+
+    <script>
+      function tourSelected(selectedObject) {
+        if (window.location.href.endsWith("overall.html")) {
+          // This condition only happens in the static version of the site
+          window.location = "/tdf_game/overall/" + selectedObject.value + ".html";
+        } else {
+          var regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
+          var match = regex.exec(window.location.href);
+          if (match == null) {
+            // Hosting static site on GitHub Pages
+            regex = /https?:\/\/[^/]+\/tdf_game\/[^/]+\/(?<year>[0-9]{4})/;
+            match = regex.exec(window.location.href);
+          }
+          const year = match == null ? '2024' : match.groups.year;
+          const url = window.location.href.replace(year, selectedObject.value);
+          window.location = url;
+        }
+      }
+    </script>
+  </body>
+</html>
+<!-- END app/views/layouts/application.html.erb -->
