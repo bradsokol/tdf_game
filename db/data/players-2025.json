@@ -1,8 +1,41 @@
 {
-  "year": "2024",
+  "year": "2025",
   "players": [
     {
+      "name": "Bill Mac"
+    },
+    {
       "name": "Brad Sokol"
+    },
+    {
+      "name": "Brian Power"
+    },
+    {
+      "name": "Edward Quan"
+    },
+    {
+      "name": "Eli Lee"
+    },
+    {
+      "name": "Gordon Coutts"
+    },
+    {
+      "name": "Kevin Blick"
+    },
+    {
+      "name": "Malcolm Owen"
+    },
+    {
+      "name": "Marc Tohir"
+    },
+    {
+      "name": "Nancy and Andre"
+    },
+    {
+      "name": "Peter Zoras"
+    },
+    {
+      "name": "Roger Partington"
     }
   ]
 }
