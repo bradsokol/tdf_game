@@ -62,16 +62,13 @@ class TeamResultsParserTest < ActiveSupport::TestCase
     assert_equal expected_stage_points, rider.stage_points
   end
 
-  test 'perform logs an error if parsing riders fails' do
+  test 'perform skips rider if parsing fails' do
     html = fixture_with_invalid_line(/^ 1. P. Sagan.*$/)
 
-    Rails.logger
-         .expects(:error)
-         .with('[TeamResults] Failed to parse rider: THIS IS INVALID')
+    results = TeamResultsParser.perform(html:)
 
-    assert_raises do
-      TeamResultsParser.perform(html:)
-    end
+    assert_equal 14, results.riders.length
+    assert_empty(results.riders.select { |r| r.name == 'P. Sagan' })
   end
 
   test 'perform logs an error if parsing total points fails' do
