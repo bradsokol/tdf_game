@@ -37,7 +37,7 @@ namespace :dev do
 
       data['players'].each do |player_data|
         player = Player.find_or_create_by!(name: player_data['name'])
-        player.registrations.create!(year:)
+        player.registrations.create!(year:) unless player.registrations.exists?(year:)
       end
     end
   end
