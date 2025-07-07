@@ -15,7 +15,7 @@ class TeamResultsParser
       data = html.xpath('//pre').text.split("\n")[5..22]
 
       stage_numbers = parse_stage_numbers(data[0])
-      riders = data[1..15].map { |rider_line| parse_rider(stage_numbers, rider_line) }
+      riders = data[1..15].map { |rider_line| parse_rider(stage_numbers, rider_line) }.compact
       points = parse_points(data[16])
       percentiles = parse_percentiles(data[17])
       TeamResults.new(
@@ -57,9 +57,10 @@ class TeamResultsParser
       raise
     end
 
-    sig { params(stage_numbers: T::Array[Integer], line: String).returns(Rider) }
+    sig { params(stage_numbers: T::Array[Integer], line: String).returns(T.nilable(Rider)) }
     def parse_rider(stage_numbers, line)
       ordinal, name, total_points, daily_points = /^ *(\d+)\. ([^\d]+)(\d+) (.+)$/.match(line).to_a[1..]
+      return nil unless name.present?
 
       daily_points = T.must(daily_points)
                       .gsub(/\s+/m, ' ')

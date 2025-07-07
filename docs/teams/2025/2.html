@@ -37,7 +37,7 @@
     <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
       <!-- BEGIN app/views/teams/index.html.erb -->
 <h2>Team Results</h2>
-  <p><select name="team" id="team" onchange="playerSelected(this);"><option selected="selected" value="29">Bill Mac</option>
+  <p><select name="team" id="team" onchange="playerSelected(this);"><option value="29.html">Bill Mac</option>
 <option value="1.html">Brad Sokol</option>
 <option value="3.html">Brian Power</option>
 <option value="20.html">Edward Quan</option>
@@ -49,7 +49,7 @@
 <option value="17.html">Marc Tohir</option>
 <option value="25.html">Nancy and Andre</option>
 <option value="8.html">Peter Zoras</option>
-<option value="2.html">Roger Partington</option>
+<option selected="selected" value="2">Roger Partington</option>
 <option value="10.html">Ross Woolford</option></select></p>
 
   <!-- BEGIN app/views/teams/_index.html.erb --><div class="table-responsive">
@@ -83,9 +83,9 @@
     <tbody>
         <tr>
           <td class="text-right">1</td>
-          <td class="text-left">J. Philipsen</td>
+          <td class="text-left">T. Pogacar</td>
           <td class="text-right">0</td>
-              <td class="text-right">-</td>
+              <td class="text-right"></td>
               <td/>
               <td/>
               <td/>
@@ -107,7 +107,7 @@
         </tr>
         <tr>
           <td class="text-right">2</td>
-          <td class="text-left">T. Pogacar</td>
+          <td class="text-left">J. Vingegaard</td>
           <td class="text-right">0</td>
               <td class="text-right"></td>
               <td/>
@@ -155,9 +155,9 @@
         </tr>
         <tr>
           <td class="text-right">4</td>
-          <td class="text-left">J. Vingegaard</td>
+          <td class="text-left">J. Philipsen</td>
           <td class="text-right">0</td>
-              <td class="text-right"></td>
+              <td class="text-right">-</td>
               <td/>
               <td/>
               <td/>
@@ -179,30 +179,6 @@
         </tr>
         <tr>
           <td class="text-right">5</td>
-          <td class="text-left">B. Girmay</td>
-          <td class="text-right">11</td>
-              <td class="text-right">11</td>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-        </tr>
-        <tr>
-          <td class="text-right">6</td>
           <td class="text-left">R. Evenepoel</td>
           <td class="text-right">0</td>
               <td class="text-right"></td>
@@ -226,7 +202,7 @@
               <td/>
         </tr>
         <tr>
-          <td class="text-right">7</td>
+          <td class="text-right">6</td>
           <td class="text-left">M. van der Poel</td>
           <td class="text-right">0</td>
               <td class="text-right"></td>
@@ -250,56 +226,8 @@
               <td/>
         </tr>
         <tr>
-          <td class="text-right">8</td>
-          <td class="text-left">J. Almeida</td>
-          <td class="text-right">0</td>
-              <td class="text-right"></td>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-        </tr>
-        <tr>
-          <td class="text-right">9</td>
-          <td class="text-left">T. Merlier</td>
           <td class="text-right">7</td>
-              <td class="text-right">7</td>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-        </tr>
-        <tr>
-          <td class="text-right">10</td>
-          <td class="text-left">M. Skjelmose</td>
+          <td class="text-left">K. Vauquelin</td>
           <td class="text-right">0</td>
               <td class="text-right"></td>
               <td/>
@@ -322,79 +250,7 @@
               <td/>
         </tr>
         <tr>
-          <td class="text-right">11</td>
-          <td class="text-left">W. Van Aert</td>
-          <td class="text-right">0</td>
-              <td class="text-right"></td>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-        </tr>
-        <tr>
-          <td class="text-right">12</td>
-          <td class="text-left">P. Roglic</td>
-          <td class="text-right">0</td>
-              <td class="text-right"></td>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-        </tr>
-        <tr>
-          <td class="text-right">13</td>
-          <td class="text-left">S. Waerenskjold</td>
-          <td class="text-right">3</td>
-              <td class="text-right">3</td>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-              <td/>
-        </tr>
-        <tr>
-          <td class="text-right">14</td>
+          <td class="text-right">8</td>
           <td class="text-left">F. Lipowitz</td>
           <td class="text-right">0</td>
               <td class="text-right"></td>
@@ -418,10 +274,154 @@
               <td/>
         </tr>
         <tr>
-          <td class="text-right">15</td>
-          <td class="text-left">J. Meeus</td>
+          <td class="text-right">9</td>
+          <td class="text-left">B. Girmay</td>
+          <td class="text-right">7</td>
+              <td class="text-right">7</td>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+        </tr>
+        <tr>
+          <td class="text-right">10</td>
+          <td class="text-left">W. Van Aert</td>
           <td class="text-right">0</td>
               <td class="text-right"></td>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+        </tr>
+        <tr>
+          <td class="text-right">11</td>
+          <td class="text-left">R. Gregoire</td>
+          <td class="text-right">0</td>
+              <td class="text-right"></td>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+        </tr>
+        <tr>
+          <td class="text-right">12</td>
+          <td class="text-left">M. Hirschi</td>
+          <td class="text-right">0</td>
+              <td class="text-right"></td>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+        </tr>
+        <tr>
+          <td class="text-right">13</td>
+          <td class="text-left">C. Rodriguez Cano</td>
+          <td class="text-right">0</td>
+              <td class="text-right"></td>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+        </tr>
+        <tr>
+          <td class="text-right">14</td>
+          <td class="text-left">J. Alaphilippe</td>
+          <td class="text-right">0</td>
+              <td class="text-right"></td>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+              <td/>
+        </tr>
+        <tr>
+          <td class="text-right">15</td>
+          <td class="text-left">T. Merlier</td>
+          <td class="text-right">1</td>
+              <td class="text-right">1</td>
               <td/>
               <td/>
               <td/>
@@ -444,8 +444,8 @@
       <tr>
         <td/>
         <td class="text-left"><strong>Total</strong></td>
-        <td class="text-right"><strong>34</strong></td>
-            <td class="text-right"><strong>34</strong></td>
+        <td class="text-right"><strong>21</strong></td>
+            <td class="text-right"><strong>21</strong></td>
             <td/>
             <td/>
             <td/>
@@ -468,8 +468,8 @@
       <tr>
         <td/>
         <td class="text-left"><strong>Percentile</strong></td>
-        <td class="text-right"><strong>84</strong></td>
-            <td class="text-right"><strong>84</strong></td>
+        <td class="text-right"><strong>39</strong></td>
+            <td class="text-right"><strong>39</strong></td>
             <td/>
             <td/>
             <td/>
