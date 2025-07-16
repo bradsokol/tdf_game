@@ -31,6 +31,10 @@ namespace :static do
           name = file_name(url: page.url, html: page.html?)
           save(content:, file_name: name)
         end
+
+        spider.every_failed_url do |url|
+          abort "Failed to crawl #{url}"
+        end
       end
 
       stages_fixups.each do |from, to|
