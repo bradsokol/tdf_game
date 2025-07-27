@@ -26,7 +26,7 @@
             <a class="nav-link" href="/tdf_game/overall/2022.html">Overall</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/tdf_game/stages/2022.html">Stages</a>
+            <a class="nav-link" href="/tdf_game/stages/2022/21.html">Stages</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/tdf_game/teams/2022.html">Teams</a>
@@ -501,7 +501,9 @@
             regex = /https?:\/\/[^/]+\/tdf_game\/[^/]+\/(?<year>[0-9]{4})/;
             match = regex.exec(window.location.href);
           }
-          const year = match == null ? '2025' : match.groups.year;
+
+          var currentYear = new Date().getFullYear();
+          const year = match == null ? currentYear.toString() : match.groups.year;
           const url = window.location.href.replace(year, selectedObject.value);
           window.location = url;
         }

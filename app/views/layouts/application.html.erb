@@ -20,7 +20,7 @@
             <a class="nav-link" href="/overall/<%= @year %>">Overall</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/stages/<%= @year %>">Stages</a>
+            <a class="nav-link" href="/stages/<%= @year %>/<%= @year_stages[@year.to_i] %>">Stages</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/teams/<%= @year %>">Teams</a>
