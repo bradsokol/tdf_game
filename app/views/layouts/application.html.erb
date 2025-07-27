@@ -45,7 +45,9 @@
             regex = /https?:\/\/[^/]+\/tdf_game\/[^/]+\/(?<year>[0-9]{4})/;
             match = regex.exec(window.location.href);
           }
-          const year = match == null ? '2025' : match.groups.year;
+
+          var currentYear = new Date().getFullYear();
+          const year = match == null ? currentYear.toString() : match.groups.year;
           const url = window.location.href.replace(year, selectedObject.value);
           window.location = url;
         }
