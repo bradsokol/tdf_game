@@ -20,7 +20,7 @@ class StagesController < ApplicationController
     end
 
     if @stage.nil?
-      @stage = first_game_stage(tour)
+      @stage = most_recent_stage_with_results(tour) || first_game_stage(tour)
       redirect_to action: 'index', year: tour.year, stage: @stage.number
       return
     end
@@ -34,6 +34,15 @@ class StagesController < ApplicationController
 
   private
 
+  sig { params(tour: Tour).returns(T.nilable(Stage)) }
+  def most_recent_stage_with_results(tour)
+    tour.stages
+        .joins(:stage_results)
+        .where(game_stage: true)
+        .order(date: :desc)
+        .first
+  end
+
   sig { params(tour: Tour).returns(Stage) }
   def first_game_stage(tour)
     tour.stages.order(:number).find(&:game_stage?)
@@ -42,7 +51,7 @@ class StagesController < ApplicationController
   sig { void }
   def redirect_to_default
     tour = Tour.order(:year).last
-    stage = first_game_stage(tour)
+    stage = most_recent_stage_with_results(tour) || first_game_stage(tour)
     redirect_to action: 'index', year: tour.year, stage: stage.number
   end
 end
