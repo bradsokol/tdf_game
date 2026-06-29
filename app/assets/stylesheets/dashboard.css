@@ -1,107 +1,331 @@
+/* ============================================================
+ * Avondale Tour de France Pool — "Modern Broadcast" theme
+ * A live-race-tracker look built on the Tour's jersey palette.
+ * All styling is CSS-only so it propagates to every generated
+ * page; the markup is the stock Bootstrap dashboard template.
+ * ============================================================ */
+
+:root {
+  --tdf-yellow:      #ffd400;   /* maillot jaune (GC) */
+  --tdf-yellow-deep: #e8b400;   /* shadows / borders on yellow */
+  --tdf-green:       #18a673;   /* maillot vert (points) */
+  --tdf-red:         #d6282b;   /* pois rouges / lanterne rouge */
+  --tdf-blue:        #2c6fb3;   /* young-rider white-jersey accent */
+  --tdf-ink:         #16130f;   /* near-black text + dark surfaces */
+
+  --bg:    #f4f4f1;             /* warm page background */
+  --card:  #ffffff;
+  --line:  #e8e6e0;
+  --muted: #8c887f;
+
+  --shadow-sm: 0 1px 2px rgba(22, 19, 15, .06);
+  --shadow-md: 0 1px 3px rgba(22, 19, 15, .07), 0 10px 24px -12px rgba(22, 19, 15, .22);
+
+  --head-h: 58px;
+}
+
+/* ---------- base ---------- */
+
 body {
-  font-size: .875rem;
+  background: var(--bg);
+  color: var(--tdf-ink);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: .9rem;
+  -webkit-font-smoothing: antialiased;
 }
 
-.feather {
-  width: 16px;
-  height: 16px;
-  vertical-align: text-bottom;
+::selection { background: var(--tdf-yellow); color: var(--tdf-ink); }
+
+a { color: var(--tdf-blue); }
+a:hover { color: var(--tdf-ink); }
+
+.feather { width: 16px; height: 16px; vertical-align: text-bottom; }
+
+/* ============================================================
+ * Header bar (nav.navbar-brand.fixed-top)
+ * ============================================================ */
+
+nav.navbar-brand.fixed-top {
+  height: var(--head-h);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  background: var(--tdf-yellow);
+  box-shadow: 0 2px 0 var(--tdf-yellow-deep), 0 6px 18px rgba(22, 19, 15, .16);
+  border: 0;
+  overflow: visible;
 }
 
-/*
- * Sidebar
- */
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 100; /* Behind the navbar */
-  padding: 48px 0 0; /* Height of navbar */
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+/* black "race number" block on the far left */
+nav.navbar-brand.fixed-top::before {
+  content: "";
+  align-self: stretch;
+  width: 10px;
+  background: var(--tdf-ink);
 }
 
-.sidebar-sticky {
-  position: relative;
-  top: 0;
-  height: calc(100vh - 48px);
-  padding-top: .5rem;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+/* four-jersey colour stripe running under the header */
+nav.navbar-brand.fixed-top::after {
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 4px;
+  background: linear-gradient(90deg,
+    var(--tdf-yellow) 0 25%,
+    var(--tdf-green)  25% 50%,
+    var(--tdf-red)    50% 75%,
+    var(--tdf-blue)   75% 100%);
 }
 
-@supports ((position: -webkit-sticky) or (position: sticky)) {
-  .sidebar-sticky {
-    position: -webkit-sticky;
-    position: sticky;
-  }
-}
-
-.sidebar .nav-link {
-  font-weight: 500;
-  color: #333;
-}
-
-.sidebar .nav-link .feather {
-  margin-right: 4px;
-  color: #999;
-}
-
-.sidebar .nav-link.active {
-  color: #007bff;
-}
-
-.sidebar .nav-link:hover .feather,
-.sidebar .nav-link.active .feather {
-  color: inherit;
-}
-
-.sidebar-heading {
-  font-size: .75rem;
+/* the brand link — free it from the cramped bootstrap grid widths */
+nav.navbar-brand.fixed-top a.navbar-brand {
+  width: auto !important;
+  max-width: none;
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0 1rem 0 1.1rem;
+  color: var(--tdf-ink);
+  font-family: "Barlow Condensed", "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 1.45rem;
+  line-height: 1;
+  letter-spacing: .03em;
   text-transform: uppercase;
 }
 
-/*
- * Content
- */
+nav.navbar-brand.fixed-top a.navbar-brand:hover { color: var(--tdf-ink); }
 
-[role="main"] {
-  padding-top: 133px; /* Space for fixed navbar */
+/* ============================================================
+ * Sidebar (ul.sidebar)
+ * ============================================================ */
+
+.sidebar {
+  position: fixed;
+  top: 0; bottom: 0; left: 0;
+  z-index: 100;
+  padding: calc(var(--head-h) + 1rem) .75rem 1rem;
+  background: var(--card);
+  box-shadow: inset -1px 0 0 var(--line);
 }
+
+.sidebar .nav-item { margin: 2px 0; }
+
+.sidebar .nav-link {
+  display: block;
+  padding: .5rem .75rem;
+  border-radius: 8px;
+  color: var(--tdf-ink);
+  font-weight: 600;
+  letter-spacing: .01em;
+  transition: background .12s ease, color .12s ease;
+}
+
+.sidebar .nav-link:hover {
+  background: #fff6cc;            /* pale jersey-yellow wash */
+  color: var(--tdf-ink);
+}
+
+.sidebar .nav-link.active {
+  background: var(--tdf-yellow);
+  color: var(--tdf-ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.sidebar-heading { font-size: .72rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+
+/* ============================================================
+ * Form controls (year + stage selects)
+ * ============================================================ */
+
+select.form-control,
+.sidebar select,
+main select {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  padding: .5rem 2rem .5rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background-color: var(--card);
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--tdf-ink) 50%),
+    linear-gradient(135deg, var(--tdf-ink) 50%, transparent 50%);
+  background-position: calc(100% - 16px) 50%, calc(100% - 11px) 50%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  color: var(--tdf-ink);
+  font-weight: 600;
+  font-size: .9rem;
+  cursor: pointer;
+}
+
+select.form-control:focus,
+main select:focus {
+  outline: none;
+  border-color: var(--tdf-yellow-deep);
+  box-shadow: 0 0 0 3px rgba(255, 212, 0, .35);
+}
+
+main select { max-width: 320px; margin-bottom: 1.25rem; }
+
+/* ============================================================
+ * Main content
+ * ============================================================ */
+
+[role="main"] { padding-top: calc(var(--head-h) + 2.25rem); padding-bottom: 3rem; }
 
 @media (min-width: 768px) {
-  [role="main"] {
-    padding-top: 48px; /* Space for fixed navbar */
-  }
+  [role="main"] { padding-top: calc(var(--head-h) + 1.5rem); }
 }
 
-/*
- * Navbar
- */
-
-.navbar-brand {
-  padding-top: .75rem;
-  padding-bottom: .75rem;
-  font-size: 1rem;
-  background-color: rgba(255, 255, 0, 1.0);
-  color: rgba(0, 0, 0, 1.0);
-  box-shadow: inset -1px 0 0 rgba(0, 0, 0, .25);
+/* page title */
+main h2 {
+  font-family: "Barlow Condensed", "Inter", sans-serif;
+  font-weight: 800;
+  font-size: 2.1rem;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  margin-bottom: .35rem;
+}
+main h2::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 5px;
+  margin-top: .5rem;
+  border-radius: 3px;
+  background: var(--tdf-yellow);
 }
 
-.navbar .form-control {
-  padding: .75rem 1rem;
-  border-width: 0;
-  border-radius: 0;
+/* subtitle / helper paragraphs */
+main > p,
+main p { color: var(--muted); }
+
+/* section headings — jersey-coloured tab */
+main h3 {
+  position: relative;
+  font-family: "Barlow Condensed", "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 1.4rem;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  margin: 2.25rem 0 .9rem;
+  padding-left: .85rem;
+}
+main h3::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 6px; height: 1.25em;
+  border-radius: 3px;
+  background: var(--tdf-yellow);     /* default */
+}
+/* Overall page: Podium / Wannabes / Peloton get their own colours */
+body.page-overall main h3:nth-of-type(1)::before { background: var(--tdf-yellow); }
+body.page-overall main h3:nth-of-type(2)::before { background: var(--tdf-green); }
+body.page-overall main h3:nth-of-type(3)::before {
+  background:
+    radial-gradient(circle at 50% 25%, #fff 1.4px, transparent 1.6px),
+    radial-gradient(circle at 50% 75%, #fff 1.4px, transparent 1.6px),
+    var(--tdf-red);
+  background-size: 6px 12px;
 }
 
-.form-control-dark {
+/* ============================================================
+ * Tables — the standings as broadcast cards
+ * ============================================================ */
+
+main table.table {
+  width: 100%;
+  margin-bottom: 2rem;
+  background: var(--card);
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  font-size: .9rem;
+}
+
+main table.table thead th {
+  background: var(--tdf-ink);
   color: #fff;
-  background-color: rgba(255, 255, 255, .1);
-  border-color: rgba(255, 255, 255, .1);
+  font-family: "Barlow Condensed", "Inter", sans-serif;
+  font-weight: 600;
+  font-size: .82rem;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  border: 0;
+  padding: .7rem 1rem;
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
-.form-control-dark:focus {
-  border-color: transparent;
-  box-shadow: 0 0 0 3px rgba(255, 255, 255, .25);
+main table.table tbody td {
+  padding: .7rem 1rem;
+  border: 0;
+  border-top: 1px solid var(--line);
+  vertical-align: middle;
+  font-variant-numeric: tabular-nums;
+}
+main table.table tbody tr:first-child td { border-top: 0; }
+
+/* zebra + hover (override bootstrap's default striping) */
+main table.table.table-striped tbody tr:nth-of-type(odd) td { background: #faf9f6; }
+main table.table tbody tr:hover td { background: #fff7d6; }
+
+/* column hierarchy:
+   1 rank · 2 player · 3 points · 4 behind · 5-8 secondary ranks */
+main table.table tbody td:first-child {
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--muted);
+  width: 2.5rem;
+}
+main table.table tbody td:nth-child(2) a {
+  color: var(--tdf-ink);
+  font-weight: 700;
+  text-decoration: none;
+}
+main table.table tbody td:nth-child(2) a:hover {
+  box-shadow: inset 0 -2px 0 var(--tdf-yellow);
+}
+main table.table tbody td:nth-child(3) {
+  font-weight: 800;
+  font-size: 1.02rem;
+}
+main table.table tbody td:nth-child(n+4) { color: var(--muted); font-size: .84rem; }
+
+/* podium medals: Overall page only, top three of the standings */
+body.page-overall main table.table:first-of-type tbody tr:nth-child(1) td:first-child { color: #c79a00; }
+body.page-overall main table.table:first-of-type tbody tr:nth-child(2) td:first-child { color: #9aa0a6; }
+body.page-overall main table.table:first-of-type tbody tr:nth-child(3) td:first-child { color: #b5703a; }
+
+/* ---------- Lanterne Rouge: restyle the inline red last row ---------- */
+main table.table tbody tr[style*="red"] td {
+  background: #fdeceb !important;
+  color: var(--tdf-red);
+}
+main table.table tbody tr[style*="red"] td:first-child {
+  box-shadow: inset 4px 0 0 var(--tdf-red);
+  color: var(--tdf-red);
+}
+main table.table tbody tr[style*="red"] td:nth-child(2) a { color: var(--tdf-red); }
+
+/* ---------- Stages "top-3 cut" divider (the grey #999 separator row) ---------- */
+main table.table tbody tr[style*="#999"] { height: auto !important; }
+main table.table tbody tr[style*="#999"] td {
+  height: 8px !important;
+  padding: 0 !important;
+  border-top: 1px solid var(--line);
+  background:
+    repeating-linear-gradient(135deg,
+      var(--tdf-yellow) 0 10px,
+      var(--tdf-ink) 10px 20px) !important;
+}
+
+/* small screens: let wide standings tables scroll instead of squashing */
+@media (max-width: 575px) {
+  main table.table { display: block; overflow-x: auto; }
 }
