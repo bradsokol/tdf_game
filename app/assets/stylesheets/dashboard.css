@@ -314,16 +314,31 @@ main table.table tbody tr[style*="red"] td:first-child {
 }
 main table.table tbody tr[style*="red"] td:nth-child(2) a { color: var(--tdf-red); }
 
-/* ---------- Stages "top-3 cut" divider (the grey #999 separator row) ---------- */
+/* ---------- Stages "top-3 cut" divider: maillot-jaune rule ---------- */
 main table.table tbody tr[style*="#999"] { height: auto !important; }
 main table.table tbody tr[style*="#999"] td {
-  height: 8px !important;
+  position: relative;
+  height: 24px !important;
   padding: 0 !important;
-  border-top: 1px solid var(--line);
-  background:
-    repeating-linear-gradient(135deg,
-      var(--tdf-yellow) 0 10px,
-      var(--tdf-ink) 10px 20px) !important;
+  border: 0 !important;
+  background: var(--card) !important;
+}
+main table.table tbody tr[style*="#999"] td::before {   /* the rule */
+  content: "";
+  position: absolute; left: 0; right: 0; top: 50%;
+  height: 3px; transform: translateY(-50%);
+  background: var(--tdf-yellow);
+  box-shadow: 0 1px 0 var(--tdf-yellow-deep);
+}
+main table.table tbody tr[style*="#999"] td::after {    /* the chip */
+  content: "PODIUM";
+  position: absolute; left: 50%; top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 0 12px;
+  background: var(--card);
+  font: 700 .6rem/1 "Inter", sans-serif;
+  letter-spacing: .16em;
+  color: var(--muted);
 }
 
 /* small screens: let wide standings tables scroll instead of squashing */
