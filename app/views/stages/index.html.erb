@@ -3,6 +3,14 @@
 <h2>Stage Results</h2>
 <p><%= select_tag('stage', options_for_select(options_from_stages(@stages), @stage.number), :onchange => 'stageSelected(this);') %></p>
 
+<%# Crawlable links so the static-site builder can enumerate every stage. %>
+<%# The dropdown above navigates via JavaScript, which the crawler cannot follow. %>
+<nav class="sr-only" aria-label="All stages">
+  <% @stages.each do |stage| %>
+    <a href="/stages/<%= @year %>/<%= stage.number %>">Stage <%= stage.number %></a>
+  <% end %>
+</nav>
+
 <% if @stage.game_stage? %>
   <% if @stage_results.present? %>
     <%= render partial: 'stage_results', locals: { stage_results: @stage_results, winner_points: @winner_points } %>
