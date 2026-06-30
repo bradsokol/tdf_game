@@ -1,0 +1,86 @@
+<!-- BEGIN app/views/layouts/application.html.erb
+--><! DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="/tdf_game/assets/application-84921c959979768d5907e7a9c53c6d19c809f20aac1ecc95bede16770095d432.css" media="all" />
+    <title>Team Results</title>
+  </head>
+  <body class="page-teams">
+    <nav class="navbar-brand fixed-top flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/tdf_game/overall.html">Avondale Tour de France Pool</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <ul class="nav flex-column col-md-2 d-done d-md-block bg-light sidebar">
+          <li class="nav-item" style="padding: 10px 16px 10px 16px;">
+            <select name="tour" id="tour" onchange="tourSelected(this);"><option selected="selected" value="2026">2026</option>
+<option value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
+<option value="2020">2020</option>
+<option value="2019">2019</option></select>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/overall/2026.html">Overall</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/stages/2026.html">Stages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/teams/2026.html">Teams</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <!-- BEGIN app/views/teams/index.html.erb
+-->
+<h2>Team Results</h2>
+  <p>No players are registered yet.</p>
+
+  <p>The tour starts on July  4. Check back in 4 days.</p>
+
+<script>
+  function playerSelected(selectedObject) {
+    const year = 2026;
+    if (window.location.href.includes("tdf_game")) {
+      window.location = `/tdf_game/teams/${year}/${selectedObject.value}`;
+    } else {
+      window.location = `/teams/${year}/${selectedObject.value}`;
+    }
+  }
+</script>
+<!-- END app/views/teams/index.html.erb -->
+    </main>
+
+    <script>
+      function tourSelected(selectedObject) {
+        if (window.location.href.endsWith("overall.html")) {
+          // This condition only happens in the static version of the site
+          window.location = "/tdf_game/overall/" + selectedObject.value + ".html";
+        } else {
+          var regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
+          var match = regex.exec(window.location.href);
+          if (match == null) {
+            // Hosting static site on GitHub Pages
+            regex = /https?:\/\/[^/]+\/tdf_game\/[^/]+\/(?<year>[0-9]{4})/;
+            match = regex.exec(window.location.href);
+          }
+
+          var currentYear = new Date().getFullYear();
+          const year = match == null ? currentYear.toString() : match.groups.year;
+          const url = window.location.href.replace(year, selectedObject.value);
+          window.location = url;
+        }
+      }
+    </script>
+  </body>
+</html>
+<!-- END app/views/layouts/application.html.erb -->

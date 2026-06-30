@@ -1,0 +1,126 @@
+<!-- BEGIN app/views/layouts/application.html.erb
+--><! DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+    <link rel="stylesheet" href="/tdf_game/assets/application-84921c959979768d5907e7a9c53c6d19c809f20aac1ecc95bede16770095d432.css" media="all" />
+    <title>Stage Results</title>
+  </head>
+  <body class="page-stages">
+    <nav class="navbar-brand fixed-top flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/tdf_game/overall.html">Avondale Tour de France Pool</a>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <ul class="nav flex-column col-md-2 d-done d-md-block bg-light sidebar">
+          <li class="nav-item" style="padding: 10px 16px 10px 16px;">
+            <select name="tour" id="tour" onchange="tourSelected(this);"><option selected="selected" value="2026">2026</option>
+<option value="2025">2025</option>
+<option value="2024">2024</option>
+<option value="2023">2023</option>
+<option value="2022">2022</option>
+<option value="2021">2021</option>
+<option value="2020">2020</option>
+<option value="2019">2019</option></select>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/overall/2026.html">Overall</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/stages/2026.html">Stages</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/tdf_game/teams/2026.html">Teams</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+      <!-- BEGIN app/views/stages/index.html.erb
+-->
+<h2>Stage Results</h2>
+<p><select name="stage" id="stage" onchange="stageSelected(this);"><option value="3.html">Stage 3 - July  6 - Granollers to Les Angles - 196 km - Mountain</option>
+<option value="4.html">Stage 4 - July  7 - Carcassonne to Foix - 182 km - Rolling</option>
+<option value="5.html">Stage 5 - July  8 - Lannemezan to Pau - 158 km - Flat</option>
+<option value="6.html">Stage 6 - July  9 - Pau to Gavarnie-Gèdre - 186 km - Mountain</option>
+<option value="7.html">Stage 7 - July 10 - Hagetmau to Bordeaux - 175 km - Flat</option>
+<option value="8.html">Stage 8 - July 11 - Périgueux to Bergerac - 180 km - Flat</option>
+<option value="9.html">Stage 9 - July 12 - Malemort to Ussel - 186 km - Rolling</option>
+<option value="10.html">Stage 10 - July 14 - Aurillac to Le Lioran - 167 km - Mountain</option>
+<option value="11.html">Stage 11 - July 15 - Vichy to Nevers - 161 km - Flat</option>
+<option value="12.html">Stage 12 - July 16 - Magny-Cours to Chalon-sur-Saône - 179 km - Flat</option>
+<option value="13.html">Stage 13 - July 17 - Dole to Belfort - 206 km - Rolling</option>
+<option value="14.html">Stage 14 - July 18 - Mulhouse to Le Markstein - 155 km - Mountain</option>
+<option value="15.html">Stage 15 - July 19 - Champagnole to Plateau de Solaison - 184 km - Mountain</option>
+<option value="16.html">Stage 16 - July 21 - Évian-les-Bains to Thonon-les-Bains - 26 km - Time Trial</option>
+<option selected="selected" value="17">Stage 17 - July 22 - Chambéry to Voiron - 175 km - Flat</option>
+<option value="18.html">Stage 18 - July 23 - Voiron to Orcières-Merlette - 185 km - Mountain</option>
+<option value="19.html">Stage 19 - July 24 - Gap to Alpe d&#39;Huez - 128 km - Mountain</option>
+<option value="20.html">Stage 20 - July 25 - Le Bourg-d&#39;Oisans to Alpe d&#39;Huez - 171 km - Mountain</option>
+<option value="21.html">Stage 21 - July 26 - Thoiry to Paris - 133 km - Flat</option></select></p>
+
+<nav class="sr-only" aria-label="All stages">
+    <a href="/tdf_game/stages/2026/3.html">Stage 3</a>
+    <a href="/tdf_game/stages/2026/4.html">Stage 4</a>
+    <a href="/tdf_game/stages/2026/5.html">Stage 5</a>
+    <a href="/tdf_game/stages/2026/6.html">Stage 6</a>
+    <a href="/tdf_game/stages/2026/7.html">Stage 7</a>
+    <a href="/tdf_game/stages/2026/8.html">Stage 8</a>
+    <a href="/tdf_game/stages/2026/9.html">Stage 9</a>
+    <a href="/tdf_game/stages/2026/10.html">Stage 10</a>
+    <a href="/tdf_game/stages/2026/11.html">Stage 11</a>
+    <a href="/tdf_game/stages/2026/12.html">Stage 12</a>
+    <a href="/tdf_game/stages/2026/13.html">Stage 13</a>
+    <a href="/tdf_game/stages/2026/14.html">Stage 14</a>
+    <a href="/tdf_game/stages/2026/15.html">Stage 15</a>
+    <a href="/tdf_game/stages/2026/16.html">Stage 16</a>
+    <a href="/tdf_game/stages/2026/17.html">Stage 17</a>
+    <a href="/tdf_game/stages/2026/18.html">Stage 18</a>
+    <a href="/tdf_game/stages/2026/19.html">Stage 19</a>
+    <a href="/tdf_game/stages/2026/20.html">Stage 20</a>
+    <a href="/tdf_game/stages/2026/21.html">Stage 21</a>
+</nav>
+
+    <p>The tour starts on July  4. Check back in 4 days.</p>
+
+<script>
+  function stageSelected(selectObject) {
+    const year = 2026;
+    if (window.location.href.includes("tdf_game")) {
+      window.location = `/tdf_game/stages/${year}/${selectObject.value}`;
+    } else {
+      window.location = `/stages/${year}/${selectObject.value}`;
+    }
+  }
+</script>
+<!-- END app/views/stages/index.html.erb -->
+    </main>
+
+    <script>
+      function tourSelected(selectedObject) {
+        if (window.location.href.endsWith("overall.html")) {
+          // This condition only happens in the static version of the site
+          window.location = "/tdf_game/overall/" + selectedObject.value + ".html";
+        } else {
+          var regex = /https?:\/\/[^/]+\/[^/]+\/(?<year>[0-9]{4})/;
+          var match = regex.exec(window.location.href);
+          if (match == null) {
+            // Hosting static site on GitHub Pages
+            regex = /https?:\/\/[^/]+\/tdf_game\/[^/]+\/(?<year>[0-9]{4})/;
+            match = regex.exec(window.location.href);
+          }
+
+          var currentYear = new Date().getFullYear();
+          const year = match == null ? currentYear.toString() : match.groups.year;
+          const url = window.location.href.replace(year, selectedObject.value);
+          window.location = url;
+        }
+      }
+    </script>
+  </body>
+</html>
+<!-- END app/views/layouts/application.html.erb -->
