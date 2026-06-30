@@ -15,7 +15,7 @@ namespace :static do
 
     stages_fixups = {}
     years.each do |year|
-      Spidr.start_at("#{URL_BASE}/overall/#{year}") do |spider|
+      Spidr.start_at("#{URL_BASE}/overall/#{year}", host: 'localhost') do |spider|
         spider.every_page do |page|
           next unless page.url.to_s.start_with?(URL_BASE)
 
