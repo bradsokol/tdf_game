@@ -43,9 +43,22 @@
       <!-- BEGIN app/views/teams/index.html.erb
 -->
 <h2>Team Results</h2>
-  <p>No players are registered yet.</p>
+  <p><select name="team" id="team" onchange="playerSelected(this);"><option value="1.html">Brad Sokol</option>
+<option selected="selected" value="5">Bill Mackenzie</option>
+<option value="3.html">Brian Power</option>
+<option value="20.html">Edward Quan</option>
+<option value="9.html">Eli Lee</option>
+<option value="28.html">Gordon Coutts</option>
+<option value="6.html">Keven Fitzpatrick</option>
+<option value="14.html">Kevin Blick</option>
+<option value="11.html">Malcolm Owen</option>
+<option value="17.html">Marc Tohir</option>
+<option value="25.html">Nancy and Andre</option>
+<option value="8.html">Peter Zoras</option>
+<option value="2.html">Roger Partington</option>
+<option value="10.html">Ross Woolford</option></select></p>
 
-  <p>The tour starts on July  4. Check back in 4 days.</p>
+  <p>Results should be available shortly.</p>
 
 <script>
   function playerSelected(selectedObject) {
