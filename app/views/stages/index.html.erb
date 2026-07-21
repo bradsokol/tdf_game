@@ -17,6 +17,7 @@
   <% else %>
     <p><%= time_to_stage_results(@stage) %></p>
   <% end %>
+  <%= render 'shared/main_site_link', url: stage_main_site_url(@stage) %>
 <% else %>
   <p>This stage is not part of the game.</p>
 <% end %>

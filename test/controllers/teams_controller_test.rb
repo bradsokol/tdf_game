@@ -27,6 +27,16 @@ class TeamsControllerTest < ActionDispatch::IntegrationTest
     end
   end
 
+  test '#index links to the main site for the team' do
+    get "/teams/#{@tour.year}/#{@first_player.id}"
+
+    assert_select(
+      'a[href=?]',
+      "https://ifarm.nl/cgi-bin/getpart.cgi?SEARCH=#{CGI.escape(@first_player.name)}&YEAR=#{@tour.year}",
+      'Results on the main site'
+    )
+  end
+
   test '#index redirects to most recent when tour not found' do
     get '/teams/1900/1'
 

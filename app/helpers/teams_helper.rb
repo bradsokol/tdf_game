@@ -15,6 +15,11 @@ module TeamsHelper
     end
   end
 
+  sig { params(year: T.any(Integer, String), player: Player).returns(String) }
+  def team_main_site_url(year, player)
+    "https://ifarm.nl/cgi-bin/getpart.cgi?SEARCH=#{CGI.escape(T.must(player.name))}&YEAR=#{year}"
+  end
+
   sig { params(players: T::Array[Player]).returns(T::Array[[String, Integer]]) }
   def options_from_players(players)
     players.map { |player| [T.must(player.name), T.must(player.id)] }

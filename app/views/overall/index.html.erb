@@ -4,6 +4,7 @@
 
 <% if @podium %>
   <%= render 'index',  podium: @podium, wannabees: @wannabees, peleton: @peleton, date: @date, tour: @tour %>
+  <%= render 'shared/main_site_link', url: overall_main_site_url(@date) %>
 <% else %>
   <p><%= time_to_tour_results(@tour) %></p>
 <% end %>

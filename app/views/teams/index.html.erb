@@ -13,6 +13,10 @@
   <p><%= time_to_tour_results(@tour) %></p>
 <% end %>
 
+<% if @player %>
+  <%= render 'shared/main_site_link', url: team_main_site_url(@year, @player) %>
+<% end %>
+
 <script>
   function playerSelected(selectedObject) {
     const year = <%= @year %>;

@@ -13,6 +13,11 @@ module OverallHelper
     end
   end
 
+  sig { params(date: Date).returns(String) }
+  def overall_main_site_url(date)
+    "https://ifarm.nl/tdf/#{date.strftime('%Y%m%d')}t.html"
+  end
+
   sig { params(tour: Tour, date: Date).returns(String) }
   def subtitle(tour, date)
     if tour.stages.last.date == date

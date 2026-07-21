@@ -9,6 +9,11 @@ module StagesHelper
     date.strftime('%B %e')
   end
 
+  sig { params(stage: Stage).returns(String) }
+  def stage_main_site_url(stage)
+    "https://ifarm.nl/tdf/#{T.must(stage.date).strftime('%Y%m%d')}.html"
+  end
+
   sig { params(stages: T::Array[Stage]).returns(T::Array[[String, T.nilable(Integer)]]) }
   def options_from_stages(stages)
     stages.map { |stage| [stage_description(stage), stage.number] }

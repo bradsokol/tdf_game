@@ -21,6 +21,10 @@ class OverallHelperTest < ActionView::TestCase
     assert_equal '22', rank_change(@result)
   end
 
+  test '#overall_main_site_url builds the main site overall url' do
+    assert_equal 'https://ifarm.nl/tdf/20190711t.html', overall_main_site_url(Date.new(2019, 7, 11))
+  end
+
   test '#subtitle returns date if not last stage' do
     date = @tour.stages.last.date - 1.day
     assert_equal 'Results up to July  9, 2019', subtitle(@tour, date)

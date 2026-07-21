@@ -39,6 +39,18 @@ class StagesControllerTest < ActionDispatch::IntegrationTest
     assert_select 'p', 'This stage is not part of the game.'
   end
 
+  test '#index links to the main site on a game stage' do
+    get '/stages/2019/3'
+
+    assert_select 'a[href=?]', 'https://ifarm.nl/tdf/20190708.html', 'Results on the main site'
+  end
+
+  test '#index does not link to the main site on a non-game stage' do
+    get '/stages/2019/1'
+
+    assert_select 'a', text: 'Results on the main site', count: 0
+  end
+
   test '#index shows messages when results are not available' do
     get '/stages/2019/4'
 
