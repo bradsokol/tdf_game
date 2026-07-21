@@ -57,13 +57,13 @@ namespace :static do
   sig { params(html: String).returns(String) }
   def adjust_links(html:)
     html
-      .gsub(/<a ?.* href="[^"]*/, '\0.html')
-      .gsub(/(<option value="[\d]{1,3})"/, '\1.html"')
+      .gsub(%r{<a ?.* href="/[^"]*}, '\0.html')
+      .gsub(/(<option value="\d{1,3})"/, '\1.html"')
   end
 
   sig { params(url: T.any(String, URI::HTTP), html: T::Boolean).returns(String) }
   def file_name(url:, html:)
-    Rails.root.join("#{STATIC_DIR}/#{url.to_s.gsub(URL_BASE, '').gsub(%r{^/}, '')}#{html ? '.html' : ''}").to_s
+    Rails.root.join("#{STATIC_DIR}/#{url.to_s.gsub(URL_BASE, '').gsub(%r{^/}, '')}#{'.html' if html}").to_s
   end
 
   sig { params(content: String, file_name: String).void }
