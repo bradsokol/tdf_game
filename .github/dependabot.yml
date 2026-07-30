@@ -3,4 +3,10 @@ updates:
   - package-ecosystem: "bundler"
     directory: "/"
     schedule:
+
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
       interval: "weekly"
+    ignore:
+      - dependency-name: "*"
