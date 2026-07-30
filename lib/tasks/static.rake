@@ -55,19 +55,19 @@ namespace :static do
   end
 
   sig { params(html: String).returns(String) }
-  def adjust_links(html:)
+  define_method(:adjust_links) do |html:|
     html
       .gsub(%r{<a ?.* href="/[^"]*}, '\0.html')
       .gsub(/(<option value="\d{1,3})"/, '\1.html"')
   end
 
   sig { params(url: T.any(String, URI::HTTP), html: T::Boolean).returns(String) }
-  def file_name(url:, html:)
+  define_method(:file_name) do |url:, html:|
     Rails.root.join("#{STATIC_DIR}/#{url.to_s.gsub(URL_BASE, '').gsub(%r{^/}, '')}#{'.html' if html}").to_s
   end
 
   sig { params(content: String, file_name: String).void }
-  def save(content:, file_name:)
+  define_method(:save) do |content:, file_name:|
     FileUtils.mkdir_p(File.dirname(file_name))
 
     # puts file_name

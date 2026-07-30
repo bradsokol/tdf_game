@@ -96,7 +96,7 @@ namespace :dev do
       end
     end
 
-    def format_time(time)
+    define_method(:format_time) do |time|
       return time unless time
 
       time.in_time_zone(Time.zone.name).strftime('%Y-%m-%d %H:%M:%S')
